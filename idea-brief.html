@@ -1,0 +1,1237 @@
+<title>AI 상담 사각지대</title>
+<style>
+  /* ── 팔레트: 관공서 문서 용지(냉한 회청) + 인주(印朱) 적색 플래그 ───────── */
+  :root {
+    --paper:      #EEF1F5;
+    --surface:    #FFFFFF;
+    --surface-2:  #F7F9FB;
+    --ink:        #16202A;
+    --ink-2:      #55636F;
+    --ink-3:      #8593A0;
+    --rule:       #D5DCE4;
+    --rule-soft:  #E4E9EF;
+    --seal:       #B03A2B;
+    --seal-bg:    #FBEEEC;
+    --verify:     #1D5B78;
+    --verify-bg:  #E9F1F5;
+    --amber:      #8A6111;
+    --amber-bg:   #FAF2E0;
+    --shadow:     0 1px 2px rgba(22,32,42,.05), 0 8px 24px -16px rgba(22,32,42,.28);
+
+    --display: "AppleMyungjo", "Nanum Myeongjo", "Noto Serif KR", "Batang", serif;
+    --body: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard Variable",
+            Pretendard, "Malgun Gothic", "Noto Sans KR", "Helvetica Neue", sans-serif;
+    --mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0F151B; --surface:#161F27; --surface-2:#1B252E;
+      --ink:#E3E9EE; --ink-2:#97A5B1; --ink-3:#6C7B88;
+      --rule:#2A353F; --rule-soft:#222C35;
+      --seal:#E2796A; --seal-bg:#2B1B18;
+      --verify:#74B6D6; --verify-bg:#14262F;
+      --amber:#D6A445; --amber-bg:#2A2214;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0F151B; --surface:#161F27; --surface-2:#1B252E;
+    --ink:#E3E9EE; --ink-2:#97A5B1; --ink-3:#6C7B88;
+    --rule:#2A353F; --rule-soft:#222C35;
+    --seal:#E2796A; --seal-bg:#2B1B18;
+    --verify:#74B6D6; --verify-bg:#14262F;
+    --amber:#D6A445; --amber-bg:#2A2214;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.7);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--body); font-size: 16px; line-height: 1.75;
+    -webkit-font-smoothing: antialiased; word-break: keep-all;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px 120px; }
+
+  /* ── 표제부 ───────────────────────────────────────────────── */
+  .masthead { padding: 80px 0 36px; border-bottom: 2px solid var(--ink); }
+  .docmeta {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em;
+    color: var(--ink-3); display: flex; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 32px;
+  }
+  .docmeta span { white-space: nowrap; }
+  .docmeta .rev { color: var(--seal); }
+  h1 {
+    font-family: var(--display); font-size: clamp(40px, 7vw, 72px);
+    line-height: 1.08; letter-spacing: -.02em; margin: 0 0 22px;
+    text-wrap: balance; font-weight: 400;
+  }
+  .thesis { font-size: clamp(17px, 2.2vw, 20px); line-height: 1.6; color: var(--ink-2); max-width: 42ch; margin: 0; }
+  .thesis strong { color: var(--ink); font-weight: 600; }
+
+  /* ── 요약 + 목차 ──────────────────────────────────────────── */
+  .tldr {
+    background: var(--surface); border: 1px solid var(--rule);
+    border-top: 3px solid var(--ink); border-radius: 0 0 3px 3px;
+    padding: 26px 28px; margin: 28px 0 0; box-shadow: var(--shadow);
+  }
+  .tldr h4 {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em;
+    color: var(--ink-3); margin: 0 0 16px; font-weight: 500;
+  }
+  .tldr ol { margin: 0; padding-left: 22px; }
+  .tldr li { margin-bottom: 10px; font-size: 15.5px; }
+  .tldr li:last-child { margin-bottom: 0; }
+  .tldr b { font-weight: 650; }
+
+  nav.toc {
+    display: flex; flex-wrap: wrap; gap: 6px 8px;
+    padding: 24px 0 0; font-family: var(--mono); font-size: 11.5px;
+  }
+  nav.toc a {
+    text-decoration: none; color: var(--ink-2);
+    border: 1px solid var(--rule); border-radius: 2px;
+    padding: 5px 11px; letter-spacing: .04em; background: var(--surface);
+  }
+  nav.toc a:hover { border-color: var(--ink-3); color: var(--ink); }
+  nav.toc a.hot { color: var(--seal); border-color: color-mix(in srgb, var(--seal) 35%, transparent); }
+
+  /* ── 섹션 + 여백 레일 ──────────────────────────────────────── */
+  section { padding: 56px 0; border-bottom: 1px solid var(--rule); scroll-margin-top: 20px; }
+  .grid { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 40px; }
+  .rail {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .12em;
+    color: var(--ink-3); padding-top: 9px;
+  }
+  .rail b { display: block; color: var(--ink); font-weight: 600; letter-spacing: .06em; }
+  .rail.alert b { color: var(--seal); }
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: 1fr; gap: 14px; }
+    .rail { padding-top: 0; }
+    .rail b { display: inline; margin-right: 10px; }
+  }
+
+  h2 { font-size: clamp(24px, 3.4vw, 32px); line-height: 1.3; letter-spacing: -.015em; margin: 0 0 8px; font-weight: 700; text-wrap: balance; }
+  .dek { color: var(--ink-2); margin: 0 0 32px; max-width: 62ch; }
+  h3 { font-size: 16px; font-weight: 700; margin: 36px 0 12px; letter-spacing: -.005em; }
+  h4.sub { font-size: 13.5px; font-weight: 650; margin: 24px 0 10px; color: var(--ink-2); letter-spacing: .01em; }
+  p { max-width: 66ch; margin: 0 0 16px; }
+  .body-col > p:last-child { margin-bottom: 0; }
+  a { color: var(--verify); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  a:focus-visible, summary:focus-visible { outline: 2px solid var(--verify); outline-offset: 3px; border-radius: 2px; }
+
+  /* ── 경고 배너 ─────────────────────────────────────────────── */
+  .alarm {
+    background: var(--seal-bg); border: 1px solid color-mix(in srgb, var(--seal) 30%, transparent);
+    border-left: 4px solid var(--seal); border-radius: 0 3px 3px 0;
+    padding: 22px 24px; margin: 0 0 28px;
+  }
+  .alarm .tag {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em;
+    color: var(--seal); font-weight: 600; display: block; margin-bottom: 10px;
+  }
+  .alarm p { margin: 0; max-width: none; font-size: 15.5px; }
+  .alarm p + p { margin-top: 10px; }
+  .alarm strong { color: var(--seal); }
+
+  /* ── 조문 인용 ─────────────────────────────────────────────── */
+  .statute {
+    background: var(--surface-2); border: 1px solid var(--rule);
+    border-radius: 3px; padding: 20px 24px; margin: 20px 0;
+  }
+  .statute .cite {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .08em;
+    color: var(--ink-3); display: block; margin-bottom: 8px;
+  }
+  .statute p { margin: 0; max-width: none; font-size: 15.5px; line-height: 1.8; }
+  .statute p + .cite { margin-top: 18px; }
+  .statute mark {
+    background: color-mix(in srgb, var(--seal) 16%, transparent);
+    color: inherit; padding: 1px 3px; border-radius: 2px; font-weight: 650;
+  }
+
+  /* ── 채널 비대칭 도해 ──────────────────────────────────────── */
+  .diagram { border: 1px solid var(--rule); background: var(--surface); border-radius: 3px; overflow: hidden; box-shadow: var(--shadow); }
+  .dg-head, .dg-row { display: grid; grid-template-columns: 1.15fr .8fr 1.3fr auto; align-items: center; gap: 18px; padding: 14px 20px; }
+  .dg-head { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; color: var(--ink-3); background: var(--surface-2); border-bottom: 1px solid var(--rule); }
+  .dg-row + .dg-row { border-top: 1px solid var(--rule-soft); }
+  .dg-row .ch { font-weight: 600; }
+  .dg-row .act { color: var(--ink-2); font-size: 14.5px; }
+  .ctrl { font-size: 14px; padding: 6px 12px; border-radius: 2px; background: var(--verify-bg); color: var(--verify); border: 1px solid color-mix(in srgb, var(--verify) 26%, transparent); display: inline-block; }
+  .ctrl.absent { background: transparent; color: var(--seal); border: 1px dashed var(--seal); letter-spacing: .04em; }
+  .flag { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; white-space: nowrap; color: var(--verify); }
+  .dg-row.gap { background: var(--seal-bg); }
+  .dg-row.gap .flag { color: var(--seal); font-weight: 600; }
+  .dg-row.gap .ch { color: var(--seal); }
+  @media (max-width: 700px) {
+    .dg-head { display: none; }
+    .dg-row { grid-template-columns: 1fr; gap: 8px; padding: 18px 20px; }
+    .dg-row .act::before { content: "판매행위 · "; color: var(--ink-3); }
+  }
+  figcaption { font-size: 13px; color: var(--ink-2); margin-top: 12px; max-width: 66ch; }
+
+  /* ── 제품 화면 목업 ────────────────────────────────────────── */
+  .mock {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 3px;
+    box-shadow: var(--shadow); overflow: hidden; margin: 22px 0;
+  }
+  .mock-bar {
+    background: var(--surface-2); border-bottom: 1px solid var(--rule);
+    padding: 10px 18px; font-family: var(--mono); font-size: 10.5px;
+    letter-spacing: .12em; color: var(--ink-3);
+  }
+  .mock-body { padding: 20px 22px; }
+  .chat { display: grid; gap: 12px; margin-bottom: 6px; }
+  .bubble { font-size: 14.5px; line-height: 1.7; padding: 12px 15px; border-radius: 3px; max-width: 92%; }
+  .bubble.me { background: var(--surface-2); border: 1px solid var(--rule-soft); justify-self: end; }
+  .bubble.bot { background: var(--verify-bg); border: 1px solid color-mix(in srgb, var(--verify) 20%, transparent); }
+  .bubble .who { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: var(--ink-3); display: block; margin-bottom: 5px; }
+
+  .checks { display: grid; gap: 0; margin: 4px 0 0; }
+  .chk {
+    display: grid; grid-template-columns: 22px 1fr auto; gap: 12px;
+    align-items: start; padding: 13px 0; border-top: 1px solid var(--rule-soft);
+  }
+  .chk:first-child { border-top: none; }
+  .chk .mk { font-family: var(--mono); font-weight: 700; font-size: 15px; line-height: 1.5; }
+  .chk.miss .mk { color: var(--seal); }
+  .chk.ok   .mk { color: var(--verify); }
+  .chk.warn .mk { color: var(--amber); }
+  .chk.hold .mk { color: var(--ink-3); }
+  .chk .name { font-weight: 600; font-size: 14.5px; }
+  .chk .why { font-size: 13.5px; color: var(--ink-2); margin-top: 5px; line-height: 1.65; }
+  .chk .why q { font-style: italic; color: var(--ink); }
+  .chk .law {
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+    margin-top: 6px; display: block;
+  }
+  .chk .st {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em;
+    white-space: nowrap; padding-top: 3px;
+  }
+  .chk.miss .st { color: var(--seal); }
+  .chk.ok   .st { color: var(--verify); }
+  .chk.warn .st { color: var(--amber); }
+  .chk.hold .st { color: var(--ink-3); }
+  .mock-foot {
+    border-top: 1px solid var(--rule); background: var(--surface-2);
+    padding: 12px 22px; font-size: 12.5px; color: var(--ink-3);
+  }
+
+  /* ── 좌우 비교 ─────────────────────────────────────────────── */
+  .versus { display: grid; gap: 16px; margin: 24px 0; }
+  @media (min-width: 800px) { .versus { grid-template-columns: 1fr 1fr; } }
+  .vs-card { border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); overflow: hidden; }
+  .vs-card > h5 {
+    margin: 0; padding: 12px 18px; font-size: 12px; font-family: var(--mono);
+    letter-spacing: .1em; border-bottom: 1px solid var(--rule); background: var(--surface-2);
+    font-weight: 500; color: var(--ink-2);
+  }
+  .vs-card .in { padding: 18px; }
+  .vs-card p { max-width: none; font-size: 14px; margin: 0 0 10px; }
+  .vs-card .verdict {
+    margin: 14px 0 0; padding-top: 14px; border-top: 1px solid var(--rule-soft);
+    font-weight: 700; font-size: 15px;
+  }
+  .vs-card.old { border-color: color-mix(in srgb, var(--verify) 30%, var(--rule)); }
+  .vs-card.old .verdict { color: var(--verify); }
+  .vs-card.new { border-color: color-mix(in srgb, var(--seal) 35%, var(--rule)); }
+  .vs-card.new > h5 { color: var(--seal); }
+  .vs-card.new .verdict { color: var(--seal); }
+  .qa { font-size: 14px; line-height: 1.7; }
+  .qa .q { color: var(--ink-2); }
+  .qa .a { display: block; margin-top: 6px; padding-left: 14px; border-left: 2px solid var(--rule); font-style: italic; }
+
+  /* ── 경쟁 매트릭스 ─────────────────────────────────────────── */
+  .matrix { margin: 24px 0; overflow-x: auto; }
+  .mx { display: grid; grid-template-columns: 92px 1fr 1fr; min-width: 560px; border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; background: var(--surface); }
+  .mx > div { padding: 16px 18px; border-right: 1px solid var(--rule-soft); border-bottom: 1px solid var(--rule-soft); }
+  .mx > div:nth-child(3n) { border-right: none; }
+  .mx > div:nth-child(n+7) { border-bottom: none; }
+  .mx .axh {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em;
+    color: var(--ink-3); background: var(--surface-2); display: flex; align-items: flex-end;
+  }
+  .mx .axl {
+    font-family: var(--mono); font-size: 11px; color: var(--ink); background: var(--surface-2);
+    line-height: 1.5; font-weight: 600;
+  }
+  .mx .axl em { display: block; font-style: normal; font-weight: 400; color: var(--ink-3); font-size: 10.5px; margin-top: 3px; }
+  .mx .cell { font-size: 14px; line-height: 1.7; }
+  .mx .cell .co { display: block; }
+  .mx .cell .co.host { color: var(--seal); font-weight: 650; }
+  .mx .cell.empty { background: var(--seal-bg); display: flex; align-items: center; justify-content: center; }
+  .mx .cell.empty b { color: var(--seal); font-size: 15px; letter-spacing: .02em; }
+  .mx .cell.none { color: var(--ink-3); }
+
+  /* ── 표 ────────────────────────────────────────────────────── */
+  .scroll { overflow-x: auto; margin: 24px 0; -webkit-overflow-scrolling: touch; }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 14.5px; }
+  th, td { text-align: left; padding: 13px 16px; vertical-align: top; border-bottom: 1px solid var(--rule-soft); }
+  thead th { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; color: var(--ink-3); font-weight: 500; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+  tbody tr:last-child td { border-bottom: none; }
+  td strong { font-weight: 650; }
+  .num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .out { color: var(--ink-2); }
+  .keep { color: var(--verify); font-weight: 650; }
+  .kill { color: var(--seal); font-weight: 650; }
+
+  /* ── 타임라인 ──────────────────────────────────────────────── */
+  .tl { list-style: none; padding: 0; margin: 24px 0 0; }
+  .tl li { display: grid; grid-template-columns: 108px minmax(0,1fr); gap: 20px; padding: 14px 0; border-top: 1px solid var(--rule-soft); }
+  .tl li:first-child { border-top: none; }
+  .tl .when { font-family: var(--mono); font-size: 12px; color: var(--ink-3); font-variant-numeric: tabular-nums; padding-top: 3px; }
+  .tl li.now { background: var(--amber-bg); margin: 0 -16px; padding: 14px 16px; border-radius: 2px; border-top-color: transparent; }
+  .tl li.now .when { color: var(--amber); font-weight: 600; }
+  .tl li.now .what strong { color: var(--amber); }
+  .tl li.risk { background: var(--seal-bg); margin: 0 -16px; padding: 14px 16px; border-radius: 2px; border-top-color: transparent; }
+  .tl li.risk .when { color: var(--seal); font-weight: 600; }
+  .tl li.risk .what strong { color: var(--seal); }
+  .tl .what { margin: 0; font-size: 15px; max-width: none; }
+  @media (max-width: 560px) { .tl li { grid-template-columns: 1fr; gap: 4px; } }
+
+  /* ── 수치 카드 ─────────────────────────────────────────────── */
+  .stats { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; margin: 24px 0; }
+  @media (min-width: 620px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 900px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+  .stat { background: var(--surface); padding: 20px; }
+  .stat .v { font-size: 30px; font-weight: 700; letter-spacing: -.02em; font-variant-numeric: tabular-nums; line-height: 1.15; display: block; }
+  .stat .v.alarm2 { color: var(--seal); }
+  .stat .k { font-size: 13px; color: var(--ink-2); margin-top: 8px; display: block; line-height: 1.5; }
+  .stat .src { font-family: var(--mono); font-size: 10px; letter-spacing: .06em; color: var(--ink-3); margin-top: 10px; display: block; }
+
+  /* ── 논문 ──────────────────────────────────────────────────── */
+  .papers { display: grid; gap: 14px; margin: 24px 0; }
+  .paper { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: 20px 22px; }
+  .paper .top { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: baseline; margin-bottom: 8px; }
+  .paper .t { font-weight: 650; font-size: 15.5px; letter-spacing: -.005em; }
+  .paper .id { font-family: var(--mono); font-size: 11px; color: var(--ink-3); white-space: nowrap; }
+  .paper .meta { font-size: 13px; color: var(--ink-3); margin: 0 0 12px; max-width: none; }
+  .paper .sum { font-size: 14.5px; margin: 0; max-width: none; }
+  .paper .gapn { margin: 14px 0 0; padding-top: 12px; border-top: 1px dashed var(--rule); font-size: 14px; color: var(--ink-2); max-width: none; }
+  .paper .gapn b { color: var(--seal); font-weight: 650; }
+
+  /* ── 접이식 ────────────────────────────────────────────────── */
+  details { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; margin-bottom: 12px; overflow: hidden; }
+  summary { cursor: pointer; padding: 16px 20px; font-weight: 650; font-size: 15px; display: flex; gap: 14px; align-items: baseline; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "＋"; margin-left: auto; color: var(--ink-3); font-weight: 400; font-size: 15px; flex-shrink: 0; }
+  details[open] summary::after { content: "－"; }
+  details[open] summary { border-bottom: 1px solid var(--rule-soft); }
+  .sev { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; padding: 3px 8px; border-radius: 2px; flex-shrink: 0; background: var(--seal-bg); color: var(--seal); border: 1px solid color-mix(in srgb, var(--seal) 24%, transparent); }
+  .sev.mid { background: var(--amber-bg); color: var(--amber); border-color: color-mix(in srgb, var(--amber) 26%, transparent); }
+  .dbody { padding: 18px 20px 20px; }
+  .dbody p { font-size: 14.5px; max-width: none; }
+  .dbody p:last-child { margin-bottom: 0; }
+  .dbody .def { border-left: 3px solid var(--verify); background: var(--verify-bg); padding: 12px 14px; border-radius: 0 2px 2px 0; margin-top: 14px; }
+  .dbody .def b { color: var(--verify); }
+
+  /* ── 차별화 축 ─────────────────────────────────────────────── */
+  .axes { display: grid; gap: 14px; margin: 24px 0; }
+  .axis { display: grid; grid-template-columns: 34px 1fr; gap: 16px; background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: 18px 20px; }
+  .axis.lead { border-color: color-mix(in srgb, var(--seal) 40%, var(--rule)); border-left: 3px solid var(--seal); }
+  .axis .n { font-family: var(--mono); font-size: 12px; color: var(--ink-3); font-weight: 600; padding-top: 3px; }
+  .axis.lead .n { color: var(--seal); }
+  .axis h5 { margin: 0 0 6px; font-size: 15.5px; font-weight: 700; }
+  .axis p { margin: 0; max-width: none; font-size: 14.5px; }
+  .axis p + p { margin-top: 8px; }
+  .axis .tagline { font-family: var(--display); font-size: 17px; color: var(--ink); margin-top: 10px; line-height: 1.55; }
+
+  /* ── 논의 질문 ─────────────────────────────────────────────── */
+  ol.q { counter-reset: q; list-style: none; padding: 0; margin: 24px 0 0; }
+  ol.q li { counter-increment: q; position: relative; padding: 16px 0 16px 46px; border-top: 1px solid var(--rule-soft); font-size: 15.5px; }
+  ol.q li:first-child { border-top: none; }
+  ol.q li::before { content: counter(q, decimal-leading-zero); position: absolute; left: 0; top: 18px; font-family: var(--mono); font-size: 12px; color: var(--seal); font-weight: 600; }
+  ol.q li em { display: block; font-style: normal; color: var(--ink-2); font-size: 14px; margin-top: 4px; }
+
+  ul.plain { padding-left: 20px; margin: 0 0 16px; }
+  ul.plain li { margin-bottom: 8px; max-width: 64ch; }
+
+  .pull {
+    font-family: var(--display); font-size: clamp(20px, 3vw, 27px); line-height: 1.5;
+    color: var(--ink); margin: 36px 0; padding-left: 22px; border-left: 3px solid var(--seal);
+    max-width: 36ch; text-wrap: balance;
+  }
+
+  footer { padding: 48px 0 0; font-size: 13px; color: var(--ink-3); }
+  footer p { max-width: 70ch; }
+  code { font-family: var(--mono); font-size: .88em; background: var(--surface-2); border: 1px solid var(--rule-soft); padding: 1px 5px; border-radius: 2px; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="docmeta">
+      <span>2026 금융 AI CHALLENGE</span>
+      <span>아이디어 브리핑</span>
+      <span class="rev">REV.2 &nbsp;2026.08.09</span>
+      <span>팀 3인 · 논의용</span>
+    </div>
+    <h1>AI 상담 사각지대</h1>
+    <p class="thesis">
+      법은 <strong>"이해할 수 있도록 설명하라"</strong>고 요구한다.
+      그런데 세상의 모든 검증 도구는 <strong>"말했는가"만 검사한다.</strong>
+    </p>
+  </header>
+
+  <div class="tldr">
+    <h4>세 줄 요약</h4>
+    <ol>
+      <li>금융상품 판매가 AI 채널로 옮겨갔는데, <b>대면·전화에 있는 사후 검증 장치(해피콜·녹취)가 AI 채널에만 없다.</b></li>
+      <li>금소법 제19조는 "말했는가"가 아니라 <b>"이해했는가"를 확인받으라</b>고 요구한다. 그런데 기존 도구도, 금융보안원 AI 레드팀도 이걸 보지 않는다.</li>
+      <li>우리는 <b>AI 상담이 끝나면 소비자에게 "안내되지 않은 것"을 자동으로 알려준다.</b> 소비자는 아무것도 하지 않는다.</li>
+    </ol>
+  </div>
+
+  <nav class="toc">
+    <a href="#path">경로</a>
+    <a href="#problem">문제</a>
+    <a href="#product">제품</a>
+    <a href="#rival" class="hot">경쟁 · 금보원 경고</a>
+    <a href="#edge" class="hot">차별화 5축</a>
+    <a href="#timing">타이밍</a>
+    <a href="#impact">파급력</a>
+    <a href="#papers">선행연구</a>
+    <a href="#numbers">현황 수치</a>
+    <a href="#weak">약점</a>
+    <a href="#talk">논의</a>
+  </nav>
+
+  <!-- ═══════════════════ 경로 ═══════════════════ -->
+  <section id="path">
+    <div class="grid">
+      <div class="rail"><b>경로</b>왜 여기에<br>도달했나</div>
+      <div class="body-col">
+        <h2>제약 세 개가 아이디어를 여기까지 몰아붙였다</h2>
+        <p class="dek">
+          "무엇이 멋있을까"가 아니라 "무엇이 이 대회에서 살아남는가"에서 역산해 나왔습니다.
+        </p>
+
+        <h3>제약 ① 데이터를 주지 않는다</h3>
+        <p>
+          공식 안내에 <strong>"별도의 데이터가 제공되지 않습니다"</strong>가 명시돼 있습니다.
+          FDS, 딥보이스 탐지, 보험사기 탐지처럼 정확도로 증명해야 하는 주제는
+          합성 데이터 지표를 들고 가야 하는데, 심사위원이 금융보안원입니다.
+        </p>
+
+        <h3>제약 ② 주최가 금융보안원이다</h3>
+        <p>
+          이상금융거래 탐지, 침해사고 대응 훈련, AI 레드팀은 <strong>전부 주최기관의 본업</strong>입니다.
+          찾아야 할 것은 주최기관이 <em>구조적으로 볼 수 없는 축</em>입니다.
+          (이 제약이 REV.2에서 훨씬 중요해졌습니다 — <a href="#rival">경쟁 섹션</a> 참조)
+        </p>
+
+        <h3>제약 ③ 30일 안에 실제로 도는 웹서비스</h3>
+        <p>
+          배포 URL이 심사 기간(9/7~9/11)에 접속 불가하면 그 자체로 결격입니다.
+        </p>
+
+        <p class="pull">데이터 없이도 정량 지표가 나오고,<br>주최기관의 렌즈로는 보이지 않는 것.</p>
+
+        <div class="scroll">
+          <table>
+            <thead><tr><th>후보</th><th>강점</th><th>걸린 지점</th><th>판정</th></tr></thead>
+            <tbody>
+              <tr><td><strong>딥보이스·보이스피싱 탐지</strong></td><td>주제 예시에 명시</td><td class="out">데이터 불가 · 은행권 이미 구축 · 참가자 최대 밀집</td><td class="out">탈락</td></tr>
+              <tr><td><strong>보험사기 공모망 탐지</strong></td><td>생명보험협회가 공동개최사</td><td class="out">합성 그래프의 설득력 한계</td><td class="out">탈락</td></tr>
+              <tr><td><strong>AI 에이전트 결제 위임 통제</strong></td><td>신선도 최상</td><td class="out">"지금 한국의 금융 현안인가" 반문</td><td class="out">보류</td></tr>
+              <tr><td><strong>AI 상담 규제 준수 검증</strong></td><td>데이터 불필요 · 소비자보호 축</td><td class="out">주제 적합성 → 구조 변경으로 해소</td><td class="keep">채택</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ 문제 ═══════════════════ -->
+  <section id="problem">
+    <div class="grid">
+      <div class="rail"><b>문제</b>채널 규제<br>비대칭</div>
+      <div class="body-col">
+        <h2>사람이 팔면 확인하고, AI가 팔면 확인하지 않는다</h2>
+        <p class="dek">
+          금융사 챗봇이 상품을 언급하는 순간, 법적으로 그것은 <strong>판매 권유 행위</strong>입니다.
+          법은 판매 주체가 사람인지 AI인지 구분하지 않습니다. 검증 체계는 구분합니다.
+        </p>
+
+        <figure style="margin:28px 0 0;">
+          <div class="diagram">
+            <div class="dg-head"><div>판매 채널</div><div>행위</div><div>사후 검증 장치</div><div>상태</div></div>
+            <div class="dg-row">
+              <div class="ch">오프라인 영업점</div><div class="act">상품 권유</div>
+              <div><span class="ctrl">해피콜 · 녹취</span></div><div class="flag">검증됨</div>
+            </div>
+            <div class="dg-row">
+              <div class="ch">전화 상담</div><div class="act">상품 권유</div>
+              <div><span class="ctrl">해피콜 · 녹취</span></div><div class="flag">검증됨</div>
+            </div>
+            <div class="dg-row gap">
+              <div class="ch">모바일 앱 AI 챗봇</div><div class="act">상품 권유</div>
+              <div><span class="ctrl absent">장치 없음</span></div><div class="flag">사각지대</div>
+            </div>
+          </div>
+          <figcaption>
+            해피콜(완전판매 모니터링)은 청약 이후 중요내용 설명 여부를 확인하는 절차이며,
+            금융투자협회 가이드라인상 <strong>만 65세 이상 고령투자자와 부적합 상품 가입 고객은 전수 실시</strong> 대상입니다.
+            같은 상품을 같은 회사가 AI 채널로 팔면 이 절차가 적용되지 않습니다.
+          </figcaption>
+        </figure>
+
+        <h3>그리고 조문은 이미 "이해 확인"을 요구하고 있습니다</h3>
+        <div class="statute">
+          <span class="cite">금융소비자보호에 관한 법률 제19조 제1항</span>
+          <p>금융상품판매업자등은 … 중요한 사항을 일반금융소비자가 <mark>이해할 수 있도록</mark> 설명하여야 한다.</p>
+          <span class="cite">금융소비자보호에 관한 법률 제19조 제2항</span>
+          <p>… 설명한 내용을 일반금융소비자가 <mark>이해하였음</mark>을 서명, 기명날인, <mark>녹취</mark> 또는 그 밖에 대통령령으로 정하는 방법으로 <mark>확인을 받아야 한다.</mark></p>
+        </div>
+        <p>
+          제2항이 결정적입니다. 법은 "말했다"로 끝내지 않고 <strong>이해했음을 확인받으라</strong>고 합니다.
+          그런데 확인 수단으로 든 <em>서명 · 기명날인 · 녹취</em>는 전부 <strong>대면과 전화를 전제한 것</strong>입니다.
+        </p>
+        <p class="pull">AI 챗봇 채널에서<br>제19조 제2항의 "이해 확인"은<br>무엇으로 이행되고 있는가?</p>
+
+        <h3>이 공백은 양쪽을 동시에 다치게 합니다</h3>
+        <div class="versus">
+          <div class="vs-card">
+            <h5>소비자 측</h5>
+            <div class="in">
+              <p>자신이 받은 AI 상담에서 원금 손실 가능성, 수수료, 중도해지 불이익이 누락됐는지 <strong>알 방법이 없습니다.</strong></p>
+              <p>규제가 이미 고령투자자를 전수 검증 대상으로 지정했는데, 채널을 앱으로 옮기는 것만으로 그 보호가 사라집니다.</p>
+            </div>
+          </div>
+          <div class="vs-card">
+            <h5>금융사 측</h5>
+            <div class="in">
+              <p>금소법은 <strong>설명의무 위반의 고의·과실 입증책임을 금융회사로 전환</strong>합니다. 금융사가 "설명했다"를 증명해야 합니다.</p>
+              <p>그런데 AI 상담 이력은 규제 항목 단위로 구조화돼 있지 않아 소명 자료로 쓸 수 없습니다.</p>
+            </div>
+          </div>
+        </div>
+        <p>
+          <strong>피해가 양면이므로 수요자도 양면입니다.</strong>
+          같은 판정 엔진을 소비자용 고지와 금융사용 점검, 두 표면으로 제공하는 구조는
+          마케팅상의 선택이 아니라 문제 구조에서 도출됩니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ 제품 ═══════════════════ -->
+  <section id="product">
+    <div class="grid">
+      <div class="rail"><b>제품</b>정확히<br>무엇인가</div>
+      <div class="body-col">
+        <h2>AI 상담이 끝나면, 안내되지 않은 것을 알려준다</h2>
+        <p class="dek">
+          가장 가까운 비유는 <strong>맞춤법 검사기</strong>입니다. 입력이 글 대신 AI 상담 대화이고,
+          규칙이 어문규범 대신 금융소비자보호법일 뿐입니다.
+        </p>
+
+        <h4 class="sub">⚠️ REV.2에서 바뀐 것 — 소비자는 아무것도 하지 않습니다</h4>
+        <p>
+          REV.1에서는 소비자가 대화를 복사해 우리 사이트에 붙여넣는 구조였습니다.
+          <strong>그건 아무도 안 씁니다.</strong> 문제를 인지하지 못하니 검사할 생각 자체를 안 하고,
+          붙여넣기 마찰을 감수할 동기가 없습니다.
+        </p>
+        <p>
+          해피콜을 다시 보면 답이 있습니다. <strong>해피콜은 소비자가 요청해서 받는 게 아니라
+          회사가 의무적으로 거는 것</strong>입니다. 소비자는 받기만 합니다.
+          우리도 같은 구조여야 합니다 — <strong>상담이 끝나면 앱 안에서 자동으로 뜹니다.</strong>
+        </p>
+
+        <div class="mock">
+          <div class="mock-bar">○○은행 앱 · AI 상담 화면</div>
+          <div class="mock-body">
+            <div class="chat">
+              <div class="bubble me"><span class="who">고객 · 71세</span>목돈 3천만원 정도 굴릴 데 없을까요?</div>
+              <div class="bubble bot"><span class="who">AI 상담</span>고객님께 ‘OO글로벌채권플러스 펀드’를 추천드립니다. 최근 3년 연평균 수익률이 6.2%로 안정적이고, 저희 은행 고객님들께 인기가 많은 상품이에요. 지금 가입하시면 우대 혜택도 적용됩니다!</div>
+            </div>
+          </div>
+          <div class="mock-bar" style="border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)">상담 종료 시 자동 표시 — 6개 항목 중 3개 누락 · 1개 점검 필요</div>
+          <div class="mock-body">
+            <div class="checks">
+              <div class="chk miss">
+                <span class="mk">✗</span>
+                <div>
+                  <span class="name">원금 손실 가능성</span>
+                  <span class="why">펀드는 투자성 상품이나 답변에 손실 가능성 언급이 없습니다.</span>
+                  <span class="law">금융소비자보호법 제19조 설명의무</span>
+                </div>
+                <span class="st">누락</span>
+              </div>
+              <div class="chk miss">
+                <span class="mk">✗</span>
+                <div><span class="name">수수료·보수 안내</span><span class="law">금융소비자보호법 제19조</span></div>
+                <span class="st">누락</span>
+              </div>
+              <div class="chk miss">
+                <span class="mk">✗</span>
+                <div><span class="name">중도해지 시 불이익</span><span class="law">금융소비자보호법 제19조</span></div>
+                <span class="st">누락</span>
+              </div>
+              <div class="chk warn">
+                <span class="mk">!</span>
+                <div>
+                  <span class="name">단정적 판단 제공</span>
+                  <span class="why"><q>연평균 수익률이 6.2%로 안정적이고</q> — 불확실한 사항을 확실한 것으로 오인하게 할 소지.</span>
+                  <span class="law">금융소비자보호법 제21조 부당권유행위 금지</span>
+                </div>
+                <span class="st">점검 필요</span>
+              </div>
+              <div class="chk ok">
+                <span class="mk">✓</span>
+                <div><span class="name">상품 종류 명시</span><span class="why"><q>OO글로벌채권플러스 펀드</q></span></div>
+                <span class="st">충족</span>
+              </div>
+              <div class="chk hold">
+                <span class="mk">–</span>
+                <div>
+                  <span class="name">적합성 원칙</span>
+                  <span class="why">투자성향 확인 절차가 대화에 없으나, 앱 내 사전 절차 여부는 확인 불가.</span>
+                  <span class="law">금융소비자보호법 제17조</span>
+                </div>
+                <span class="st">판단 보류</span>
+              </div>
+            </div>
+          </div>
+          <div class="mock-foot">
+            이 결과는 위반 판정이 아니라 점검 참고 자료입니다. &nbsp;[ 누락 항목 물어보기 ] &nbsp;[ 상담원 연결 ]
+          </div>
+        </div>
+
+        <p>
+          소비자는 <strong>버튼 하나만 누르면 됩니다.</strong> 금융 지식이 없어도, 검사할 생각을 안 해도,
+          놓친 것을 알게 됩니다. 이것이 <strong>해피콜을 AI 채널에 되돌려놓는 것</strong>입니다.
+        </p>
+
+        <h3>표면은 둘, 엔진은 하나</h3>
+        <div class="versus">
+          <div class="vs-card">
+            <h5>① 운영 중 · 소비자에게</h5>
+            <div class="in">
+              <p>상담 종료 시 앱에 자동 표시되는 누락 고지 카드.</p>
+              <p><strong>소비자가 하는 일: 없음.</strong> 금융사가 붙이고 소비자가 받습니다.</p>
+              <p class="verdict">주력</p>
+            </div>
+          </div>
+          <div class="vs-card">
+            <h5>② 출시 전 · 금융사에게</h5>
+            <div class="in">
+              <p>페르소나 200종으로 자사 챗봇을 사전 점검해 항목별 준수율 스코어카드를 산출.</p>
+              <p><strong>주의:</strong> 이 표면을 "레드팀"이라 부르면 주최기관과 충돌합니다.</p>
+              <p class="verdict" style="color:var(--amber)">비중 축소</p>
+            </div>
+          </div>
+        </div>
+
+        <h3>이것이 아닌 것</h3>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>아님</th><th>이유</th></tr></thead>
+            <tbody>
+              <tr><td><strong>챗봇을 만드는 것</strong></td><td class="out">우리는 챗봇을 검사합니다. 만들지 않습니다</td></tr>
+              <tr><td><strong>FDS · 이상거래 탐지</strong></td><td class="out">사기 거래가 아니라 상담 답변의 설명 누락을 봅니다</td></tr>
+              <tr><td><strong>법률 자문</strong></td><td class="out">"위반"이라 판정하지 않습니다. 점검 필요 + 조문 링크까지만</td></tr>
+              <tr><td><strong>범용 LLM 평가 툴</strong></td><td class="out">유해성·환각이 아니라 금소법 6개 조항만 봅니다</td></tr>
+              <tr><td><strong>금융사 내부 시스템 접속</strong></td><td class="out">대화 텍스트만 봅니다. 계좌·고객정보 일절 취급하지 않습니다</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ 경쟁 ═══════════════════ -->
+  <section id="rival">
+    <div class="grid">
+      <div class="rail alert"><b>경쟁</b>누가 이미<br>하고 있나</div>
+      <div class="body-col">
+        <h2>심사위원이 같은 걸 만들고 있습니다</h2>
+
+        <div class="alarm">
+          <span class="tag">팀원 전원 필독 · REV.2 최대 발견</span>
+          <p><strong>금융보안원이 2026년 AI RED팀 전담 조직을 신설했습니다.</strong></p>
+          <p>
+            2025년 국내 금융권 최초로 체계적 AI 레드티밍을 수행하고 「2025년 AI 레드팀 보고서」를 발간했으며,
+            2026년 조직개편에서 AI혁신실을 <strong>AI혁신부</strong>로 격상하고 <strong>AI RED팀</strong>과
+            금융AI보안연구소를 신설했습니다. 모의해킹 인력은 6명에서 20명으로 확대됐습니다.
+          </p>
+          <p>
+            발표된 2026년 계획: <strong>금융 특화 AI 보안 평가지표 개발 · AI 통제 모델 · 자동점검 도구 배포.</strong>
+          </p>
+          <p>
+            → <strong>"저희가 AI 레드팀 도구를 만들었습니다"라고 발표하면
+            "저희가 전담 조직을 만들었고 자동점검 도구도 올해 배포합니다"로 끝납니다.</strong>
+          </p>
+        </div>
+
+        <h3>그런데 축이 다릅니다 — 이게 살 길입니다</h3>
+        <div class="scroll">
+          <table>
+            <thead><tr><th></th><th>금융보안원 AI RED팀</th><th>우리</th></tr></thead>
+            <tbody>
+              <tr><td><strong>질문</strong></td><td class="out">AI가 뚫리는가</td><td class="keep">AI가 법이 요구한 설명을 했는가</td></tr>
+              <tr><td><strong>관점</strong></td><td class="out">보안 — 탈옥 · 인젝션 · 정보유출</td><td class="keep">금융소비자보호 규제</td></tr>
+              <tr><td><strong>소관</strong></td><td class="out">금융보안원</td><td class="keep">금융위 · 금감원 (금소법)</td></tr>
+              <tr><td><strong>피해자</strong></td><td class="out">금융회사</td><td class="keep">금융소비자</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          금융보안원은 <strong>보안 기관</strong>이지 금융소비자보호 기관이 아닙니다.
+          설명의무·부당권유는 그쪽 관할이 아닙니다. 이 선을 명확히 그으면 충돌하지 않고,
+          오히려 <strong>그들이 커버하지 못하는 축을 보완한다</strong>고 선언할 수 있습니다.
+        </p>
+
+        <h3>경쟁 지형 — 빈 칸이 어디인가</h3>
+        <div class="matrix">
+          <div class="mx">
+            <div class="axh"></div>
+            <div class="axh">사람 상담사 (음성)</div>
+            <div class="axh">AI 챗봇 (텍스트)</div>
+
+            <div class="axl">보안<em>뚫리는가</em></div>
+            <div class="cell none">—</div>
+            <div class="cell">
+              <span class="co host">금융보안원 AI RED팀</span>
+              <span class="co">셀렉트스타 다투모 이밸</span>
+              <span class="co">Enkrypt · Lakera · Giskard</span>
+            </div>
+
+            <div class="axl">규제 준수<em>설명했는가</em></div>
+            <div class="cell">
+              <span class="co">vox.ai (국내)</span>
+              <span class="co">Sedric AI</span>
+              <span class="co">Behavox · Smarsh · Theta Lake</span>
+            </div>
+            <div class="cell empty"><b>★ 빈 칸 ★</b></div>
+          </div>
+        </div>
+        <p style="font-size:14px;color:var(--ink-2)">
+          <strong>빈 칸 = AI 챗봇 × 금소법 준수 × 한국어</strong>
+        </p>
+
+        <h3>국내 — 가장 가까운 3곳</h3>
+        <div class="papers">
+          <article class="paper">
+            <div class="top"><span class="t">vox.ai (Fleek Inc.)</span><span class="id">국내 · 가장 가까움</span></div>
+            <p class="sum">
+              <strong>"완전판매 모니터링 자동화"</strong>를 대놓고 내걸었습니다.
+              STT 실시간 모니터링으로 <strong>설명 누락 감지</strong>, <strong>AI 해피콜 24시간 전수 커버리지</strong>,
+              금소법 컴플라이언스 증빙 자동 생성. 보험(면책조항) · 은행(고령층 보호) · 증권(적합성) 대상.
+            </p>
+            <p class="gapn"><b>차이 →</b> 대상이 <em>사람 상담사의 음성 통화</em>입니다. AI 챗봇 답변은 검사하지 않습니다.</p>
+          </article>
+          <article class="paper">
+            <div class="top"><span class="t">셀렉트스타 — 다투모 이밸 (Datumo Eval)</span><span class="id">국내 LLM 검증 선두</span></div>
+            <p class="sum">
+              2025.02 국내 최초 AI 신뢰성 검증 자동화 솔루션. 스토리텔링·롤플레이·페르소나 변환 레드티밍.
+              삼성생명과 금융 특화 AI 품질 프로젝트 수행, KB·신한·삼성금융 스타트업 프로그램 연이어 수상.
+            </p>
+            <p class="gapn"><b>차이 →</b> 범용 신뢰성·유해성 검증입니다. 금소법 조문 매핑은 하지 않습니다.</p>
+          </article>
+          <article class="paper">
+            <div class="top"><span class="t">AICC 업체 (MetaM 등)</span><span class="id">상담 품질평가</span></div>
+            <p class="sum">AI 자동 품질평가(QA)로 상담 전수 평가는 이미 합니다.</p>
+            <p class="gapn"><b>차이 →</b> 평가 항목이 <em>"인사를 잘했나, 멘트가 적절했나"</em> 수준입니다. 규제 준수 판정과 층위가 다릅니다.</p>
+          </article>
+        </div>
+
+        <h3>해외 — 이미 성숙한 시장</h3>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>회사</th><th>하는 일</th><th>우리와의 거리</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Sedric AI</strong><br><span style="font-size:12.5px;color:var(--ink-3)">$18.5M Series A · RegTech100</span></td>
+                <td>금융 특화 <strong>컴플라이언스 전용 LLM</strong>. 통화·챗·이메일·DM 100% 검토, 실시간 상담원 가이드, 40개 언어. <strong>AI 생성 응답도 분석 대상</strong></td>
+                <td class="kill">가장 가까움. 글로벌 성숙판</td>
+              </tr>
+              <tr><td><strong>PerformLine</strong><br><span style="font-size:12.5px;color:var(--ink-3)">AI Response Monitor</span></td><td>ChatGPT·Gemini·Claude가 자사 상품을 어떻게 설명하는지 감시. CFPB·FTC·SEC</td><td class="out">방향이 반대 (외부 LLM → 자사 브랜드)</td></tr>
+              <tr><td><strong>Theta Lake</strong></td><td>화상·음성·AI 채널 컴플라이언스. 100개+ 플랫폼 연동</td><td class="out">직원 커뮤니케이션 감시</td></tr>
+              <tr><td><strong>Behavox · Smarsh</strong></td><td>Quantum AI / Intelligent Agent — 직원 비위 탐지. MiFID II·FINRA·SEC 17a-4</td><td class="out">직원 감시, 소비자 보호 아님</td></tr>
+              <tr><td><strong>Credo AI · Holistic AI<br>Monitaur · Fiddler</strong></td><td>AI 거버넌스 GRC. Holistic AI는 레드팀 + 런타임 차단까지</td><td class="out">조직·정책 레이어</td></tr>
+              <tr><td><strong>promptfoo · garak · PyRIT</strong></td><td>오픈소스 레드팀</td><td class="out">무료. 규제 매핑 없음</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>결정적 — 소비자 표면은 진짜 비어 있습니다</h3>
+        <p>
+          <strong>신한라이프가 생성형 AI "상담 요약 안내" 서비스를 이미 하고 있습니다.</strong>
+          상담 통화를 AI가 요약해 알림톡으로 발송합니다. 형태가 우리와 똑같습니다. 그런데 항목을 보세요.
+        </p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>요약 항목</th><th>신한라이프</th><th>우리</th></tr></thead>
+            <tbody>
+              <tr><td>고객이 문의한 내용</td><td class="keep">있음</td><td class="out">—</td></tr>
+              <tr><td>상담사가 <strong>안내한</strong> 주요 사항</td><td class="keep">있음</td><td class="keep">있음</td></tr>
+              <tr><td>추가 도움 정보</td><td class="keep">있음</td><td class="out">—</td></tr>
+              <tr><td><strong>안내하지 않은 것</strong></td><td class="kill">없음</td><td class="keep">이것만</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="pull">아무도 "빠뜨린 것"을<br>소비자에게 보여주지 않는다.</p>
+        <p>
+          당연합니다. <strong>금융사가 자기 약점을 소비자에게 자발적으로 보여줄 이유가 없으니까요.</strong>
+          편의 기능은 만들어도 자기 고발 기능은 만들지 않습니다.
+        </p>
+        <p>
+          이것이 빈 칸의 정체이자 <strong>이 아이디어의 최대 리스크</strong>입니다 — "그럼 금융사가 왜 사겠나?"
+          답은 해피콜의 역사 그대로입니다. 해피콜도 금융사가 원해서 생긴 게 아니라 규제가 강제했고,
+          지금은 vox.ai 같은 회사가 그걸 자동화해서 팝니다.
+          <strong>그리고 금소법 제19조 제2항이 이미 "이해 확인"을 의무화하고 있습니다.</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ 차별화 ═══════════════════ -->
+  <section id="edge">
+    <div class="grid">
+      <div class="rail alert"><b>차별화</b>금보원이<br>못 보는 것</div>
+      <div class="body-col">
+        <h2>맹점은 우연이 아니라 기관의 성격에서 나온다</h2>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>기관 속성</th><th>그래서 안 보이는 것</th></tr></thead>
+            <tbody>
+              <tr><td><strong>보안 기관이다</strong></td><td>"공격"이라는 렌즈로만 봄 → <strong>공격 없이 발생하는 실패</strong>가 안 보임</td></tr>
+              <tr><td><strong>고객이 금융회사다</strong></td><td>소비자 쪽 관측점이 없음 → 금융사가 제출한 것만 봄</td></tr>
+              <tr><td><strong>방법론이 점검이다</strong></td><td>특정 시점 스냅샷 → <strong>연속 운영 중의 변화</strong>가 안 보임</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="axes">
+          <div class="axis lead">
+            <span class="n">01</span>
+            <div>
+              <h5>이해도 역검증 — 법이 요구하는데 아무도 안 하는 것</h5>
+              <p>
+                Sedric도, vox.ai도, FinGuard도, promptfoo도 전부 <strong>키워드·의미의 존재 여부</strong>만 검사합니다.
+                <strong>"이해했는가"를 검사하는 도구는 확인되지 않습니다.</strong>
+              </p>
+              <p>
+                측정 방법은 해피콜의 원리 그대로입니다 — <strong>되물어봅니다.</strong>
+                단, 대상이 사람이 아니라 고령자 페르소나 LLM입니다.
+              </p>
+              <p class="tagline">기존 도구는 “원금 손실 가능성이 있습니다”라고<br>말했는지를 검사한다. 우리는 그 말을 듣고<br>고령자가 이해했는지를 검사한다.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="versus">
+          <div class="vs-card old">
+            <h5>기존 도구 판정</h5>
+            <div class="in">
+              <p style="font-size:13.5px;color:var(--ink-2)">챗봇 답변: <q>본 상품은 실적배당형으로 운용 결과에 따라 원금 손실이 발생할 수 있으며, 예금자보호법에 따라 보호되지 않습니다. 총보수는 연 1.35%입니다.</q></p>
+              <p>✓ 원금 손실 고지 &nbsp;있음<br>✓ 예금자보호 여부 &nbsp;있음<br>✓ 수수료 안내 &nbsp;있음</p>
+              <p class="verdict">설명의무 준수율 100%</p>
+            </div>
+          </div>
+          <div class="vs-card new">
+            <h5>이해도 역검증</h5>
+            <div class="in">
+              <p style="font-size:13.5px;color:var(--ink-2)">페르소나: 71세 · 예적금만 이용 · 투자 경험 없음</p>
+              <div class="qa">
+                <span class="q">Q. 이 상품에 넣으면 원금을 못 받을 수도 있나요?</span>
+                <span class="a">“실적배당형이라니까 이자가 좀 달라진다는 거 같은데… 원금은 보장되는 거 아닌가요?”</span>
+              </div>
+              <p style="margin-top:14px">✗ 원금 손실 가능성 &nbsp;전달 실패<br>✗ 예금자보호 미적용 &nbsp;전달 실패<br>✓ 수수료 &nbsp;전달됨</p>
+              <p class="verdict">실질 전달률 1 / 3</p>
+            </div>
+          </div>
+        </div>
+        <p>
+          문언상 설명은 이행됐으나 <strong>제19조 제1항의 "이해할 수 있도록"은 충족되지 않았습니다.</strong>
+          그리고 이 화면이 곧 <strong>제19조 제2항이 요구하는 "이해 확인"을 AI 채널에서 이행하는 수단</strong>이 됩니다.
+          금융사가 사야 할 이유가 법에 적혀 있습니다.
+        </p>
+
+        <div class="axes" style="margin-top:32px">
+          <div class="axis">
+            <span class="n">02</span>
+            <div>
+              <h5>공격 없는 실패 — 레드팀 프레임의 사각지대</h5>
+              <p>
+                금소법 위반은 공격 없이 정상 대화에서 발생합니다. 고령자가 "안전한 거 뭐 없나요?" 하고 물었을 때
+                챗봇이 그냥 원금 손실 고지를 빼먹는 것 — 탈옥도 인젝션도 아닙니다.
+              </p>
+              <p class="tagline">금융보안원은 뚫리는 걸 본다.<br>우리는 안 뚫려도 새는 걸 본다.</p>
+              <p style="font-size:13.5px;color:var(--ink-3);margin-top:10px">구현 난이도 최하 · 논리적 파괴력 최상</p>
+            </div>
+          </div>
+          <div class="axis">
+            <span class="n">03</span>
+            <div>
+              <h5>언어 전환 시 붕괴 — 대회 주제 예시와 직결</h5>
+              <p>
+                대회 세부 주제 예시에 <strong>"국내 체류 외국인 고객의 금융 정착을 돕는 AI Agent"</strong>가 있습니다.
+                같은 질문을 영어·베트남어·중국어로 던지면 설명의무를 지키는가?
+              </p>
+              <p style="font-size:13.5px;color:var(--ink-3)">구현 최하 (시나리오 그대로, 언어만 교체) · <strong>심사위원이 처음 보는 숫자를 만드는 가장 값싼 방법</strong></p>
+            </div>
+          </div>
+          <div class="axis">
+            <span class="n">04</span>
+            <div>
+              <h5>회귀 감시 — 점검은 시점, 운영은 연속</h5>
+              <p>
+                LLM은 모델 업데이트·프롬프트 수정·RAG 문서 교체로 매주 행동이 바뀝니다.
+                <em>9월 1일 점검 통과 → 9월 5일 프롬프트 한 줄 수정 → 준수율 41%로 하락 → 아무도 모름.</em>
+              </p>
+              <p style="font-size:13.5px;color:var(--ink-3)">스냅샷 + diff로 구현. 앞서 컷했던 “패치 후 재검증 루프”가 여기서 정당한 이유를 갖고 부활</p>
+            </div>
+          </div>
+          <div class="axis">
+            <span class="n">05</span>
+            <div>
+              <h5>대화 궤적 누적 판정 — 단일 답변으로는 안 잡힘</h5>
+              <p>
+                1턴에서 위험을 고지했어도, 8턴 뒤 고객이 "그래서 안전한 거죠?" 물었을 때
+                "네, 만족도가 높으세요"라고 하면 앞의 고지가 무력화됩니다.
+                대화 전체를 하나의 판매 행위로 놓고 <strong>최종 인상</strong>을 판정해야 합니다.
+              </p>
+              <p style="font-size:13.5px;color:var(--ink-3)">구현 난이도 상 · 여유 있으면</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="scroll">
+          <table>
+            <thead><tr><th>#</th><th>축</th><th>금보원 사각지대</th><th>구현</th><th>데모 임팩트</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td><strong>이해도 역검증</strong></td><td>★★★★★</td><td>중</td><td>★★★★★</td></tr>
+              <tr><td class="num">2</td><td><strong>공격 없는 실패</strong></td><td>★★★★★</td><td>하</td><td>★★★★</td></tr>
+              <tr><td class="num">3</td><td><strong>언어 전환 붕괴</strong></td><td>★★★★</td><td>하</td><td>★★★★</td></tr>
+              <tr><td class="num">4</td><td class="out">회귀 감시</td><td>★★★★</td><td>중</td><td>★★★</td></tr>
+              <tr><td class="num">5</td><td class="out">대화 궤적 누적</td><td>★★★</td><td>상</td><td>★★★</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>1·2·3번만 해도 충분합니다.</strong> 구현 부담이 크지 않고, 셋을 합치면 하나의 일관된 주장이 됩니다.</p>
+
+        <h3>발표 한 문장</h3>
+        <p class="pull" style="border-left-color:var(--verify)">
+          금융보안원은 AI가 공격당하는지 본다.<br>
+          우리는 AI가 정상 작동하면서<br>소비자를 놓치는지 본다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ 타이밍 ═══════════════════ -->
+  <section id="timing">
+    <div class="grid">
+      <div class="rail"><b>타이밍</b>왜 지금인가</div>
+      <div class="body-col">
+        <h2>규제는 이미 시행됐고, 사고는 아직 안 났다</h2>
+        <p class="dek">6개월 빨랐으면 "규제도 없는데 왜"였고, 6개월 늦으면 이미 사고가 터진 뒤입니다.</p>
+        <ul class="tl">
+          <li><span class="when">2024.08</span><p class="what">금융위, 금융분야 망분리 개선 로드맵</p></li>
+          <li><span class="when">2025 Q1</span><p class="what">망분리 특례 신청 <span class="num">125</span>건 (74개사 141개 서비스)</p></li>
+          <li class="risk"><span class="when">2025.12.30</span><p class="what"><strong>금융보안원 「2025년 AI 레드팀 보고서」 발간</strong> — 국내 금융권 최초 체계적 AI 레드티밍</p></li>
+          <li class="risk"><span class="when">2026 조직개편</span><p class="what"><strong>AI혁신부 격상 · AI RED팀 신설</strong> · 금융AI보안연구소 신설 · 모의해킹 6→20명</p></li>
+          <li class="now"><span class="when">2026.06.22</span><p class="what"><strong>「금융분야 인공지능 가이드라인」 시행</strong> · 금감원 AI 위험관리프레임워크 + 금보원 AI 보안 안내서 동시 배포</p></li>
+          <li><span class="when">2026 H2</span><p class="what">금융보안원 AI 안전성·신뢰성 시범평가 (10개 영역 33개 항목) · <strong>자동점검 도구 배포 예정</strong></p></li>
+          <li><span class="when">2026 H2</span><p class="what">에이전틱 AI 전환 원년 — 카카오뱅크·케이뱅크는 이미 <strong>AI 이체를 실행 단계</strong>로 제공</p></li>
+          <li><span class="when">2026.09.07</span><p class="what">기획서 · MVP 제출 마감 <span class="num">10:00</span></p></li>
+          <li><span class="when">2026.10.13</span><p class="what">오프라인 발표 심사</p></li>
+        </ul>
+        <h3>안내형에서 실행형으로 넘어가는 그 순간</h3>
+        <p>
+          현재 대다수 은행의 AI 상담은 메뉴 링크 안내 수준이라 아직 사고가 없습니다.
+          6개 은행 비교에서 실제로 송금을 실행할 수 있는 곳은 <strong>카카오뱅크 한 곳</strong>뿐입니다.
+          바꿔 말하면 <strong>AI가 상품 가입과 이체를 직접 실행하기 시작하는 순간이 첫 사고 지점</strong>이고,
+          검증 인프라는 그 전에 있어야 합니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ 파급력 ═══════════════════ -->
+  <section id="impact">
+    <div class="grid">
+      <div class="rail"><b>파급력</b>무엇이<br>바뀌는가</div>
+      <div class="body-col">
+        <h2>규제 항목을 코드로 옮기면 세 층위가 동시에 움직인다</h2>
+        <h3>소비자 — 인지 불가에서 자동 고지로</h3>
+        <p>
+          지금은 AI 상담을 받고 가입한 소비자가 무엇을 못 들었는지 알 수 없습니다.
+          상담 종료 시 <em>"이 답변에는 중도해지 불이익 안내가 없습니다"</em>가 자동으로 뜨면,
+          그 자체가 <strong>고령층·사회초년생에게 해피콜을 되돌려주는 것</strong>입니다.
+        </p>
+        <h3>금융사 — 사후 소명에서 사전 이행으로</h3>
+        <p>
+          입증책임이 금융사에 있는 구조에서, 배포 전에 자사 AI를 수백 건의 규제 시나리오로 점검하고
+          누락을 잡아낼 수 있으면 리스크의 성격이 달라집니다. 더 중요한 건
+          <strong>제19조 제2항의 이해 확인 절차를 AI 채널에서 이행한 기록이 남는다</strong>는 점입니다.
+        </p>
+        <h3>감독기관 — 보안 축 옆에 소비자보호 축을 세움</h3>
+        <p>
+          금융보안원의 33개 항목은 보안 축입니다. 금소법 준수는 금융위·금감원 축이고,
+          AI 채널에는 아직 그 도구가 없습니다. <strong>두 축은 경쟁하지 않고 보완합니다.</strong>
+        </p>
+        <h3>확장 — 규제 도메인은 금융만이 아니다</h3>
+        <p>
+          엔진 구조는 <code>규제 조문 → 체크리스트 → 판정 → 증거</code>입니다.
+          조문만 바꾸면 의료 상담 AI(의료법 광고 규제), 보험 설계 AI, 법률 상담 AI로 이식됩니다.
+          <strong>규제 산업의 AI 도입에는 전부 같은 공백이 있습니다.</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ 선행연구 ═══════════════════ -->
+  <section id="papers">
+    <div class="grid">
+      <div class="rail"><b>선행연구</b>남이 어디까지<br>했는가</div>
+      <div class="body-col">
+        <h2>같은 문제를 세계가 올해 들어 동시에 파기 시작했다</h2>
+        <p class="dek">
+          문제가 진짜라는 증거이자, 우리가 늦었을 수도 있다는 뜻입니다.
+          결론부터 — <strong>한국 규제 대상은 아직 없고, "이해했는가"를 보는 연구도 없습니다.</strong>
+        </p>
+
+        <div class="papers">
+          <article class="paper">
+            <div class="top"><span class="t">FinGuard: Detecting Financial Regulatory Non-Compliance in LLM Interactions</span><span class="id">arXiv:2605.29427</span></div>
+            <p class="meta">Huaixia Dou 외 7인 · 2026.05</p>
+            <p class="sum">LLM 상호작용의 금융 규제 미준수를 탐지하는 <strong>최초의 벤치마크(FinGuard-Bench)</strong>. 질의·응답 양쪽 수준에 전문가 주석. Qwen3-8B 기반 소형 모델이 GPT-5.1 등 대형 모델을 능가.</p>
+            <p class="gapn"><b>빈 칸 →</b> 중국 규제·중국어 대상. 한국 금소법 벤치마크는 존재하지 않습니다. <strong>"세계 최초"라고 쓰면 안 됩니다.</strong></p>
+          </article>
+          <article class="paper">
+            <div class="top"><span class="t">ComplianceNLP: KG-Augmented RAG for Multi-Framework Regulatory Gap Detection</span><span class="id">arXiv:2604.23585</span></div>
+            <p class="meta">Dongxin Guo 외 · ACL 2026 Industry Track</p>
+            <p class="sum">규정 <span class="num">12,847</span>건 지식그래프 + RAG로 SEC·MiFID II·Basel III 대비 준수 격차 탐지. 갭 탐지 <span class="num">87.7</span> F1, 근거 정확도 <span class="num">94.2%</span>. 실배포 추정 재현율 <span class="num">96.0%</span>, 분석가 효율 <span class="num">3.1</span>배.</p>
+            <p class="gapn"><b>빈 칸 →</b> 대상이 <em>기관 내부 정책 문서</em>입니다. 소비자와 오간 <em>대화 한 건</em>을 판정하지 않습니다.</p>
+          </article>
+          <article class="paper">
+            <div class="top"><span class="t">Risk-Adjusted Harm Scoring for Automated Red Teaming for LLMs in Financial Services</span><span class="id">arXiv:2603.10807</span></div>
+            <p class="meta">Fabrizio Dimino, Bhaskarjit Sarmah, Stefano Pasquali (BlackRock 계열) · 2026.03</p>
+            <p class="sum"><strong>"기존 레드팀 벤치마크는 도메인 불문이라 규제 산업(BFSI) 고유의 실패 모드를 잡지 못한다"</strong> — 우리 논지를 그대로 학술적으로 정리해 둔 논문.</p>
+            <p class="gapn"><b>활용 →</b> 기획서 배경 인용. 우리 접근이 국제적 연구 흐름 위에 있음을 보여줍니다.</p>
+          </article>
+          <article class="paper">
+            <div class="top"><span class="t">A Survey on LLM-as-a-Judge</span><span class="id">arXiv:2411.15594</span></div>
+            <p class="meta">판정기 설계 근거</p>
+            <p class="sum">강력한 LLM 판정기는 인간 선호와 <strong>80% 이상 일치</strong>하며, 이는 인간 평가자들 사이의 일치 수준과 동등합니다. 편향은 있으나 보정·인간 검증 병행 시 신뢰 범위.</p>
+            <p class="gapn"><b>함의 →</b> "AI를 AI로 평가한다"는 반론의 표준 답변이자, <strong>골든셋 라벨링과 일치율 측정이 필수</strong>라는 근거.</p>
+          </article>
+          <article class="paper">
+            <div class="top"><span class="t">자동 레드팀 계보</span><span class="id">PAIR · Rainbow Teaming · AutoDAN-Turbo · GOAT</span></div>
+            <p class="meta">공격 생성기 참고 · HarmBench / JailbreakBench 평가 표준</p>
+            <p class="sum">PAIR은 <strong>20회 미만 블랙박스 질의</strong>로 사람이 읽을 수 있는 탈옥을 찾아냅니다. 2025년 한 연구는 <span class="num">1,400</span>여 개 적대 프롬프트를 평가해 롤플레이 기반 주입 성공률 <span class="num">89.6%</span>를 보고.</p>
+            <p class="gapn"><b>활용 →</b> 공격 로직을 새로 발명할 필요 없음. 우리 기여는 <strong>판정과 규제 매핑</strong>에 있습니다.</p>
+          </article>
+          <article class="paper">
+            <div class="top"><span class="t">국내 — KRX-Bench, Allganize 금융 LLM 리더보드</span><span class="id">한국어 금융 벤치마크</span></div>
+            <p class="sum">사업보고서·금융 소송 문서에서 자동 문항을 생성해 금융 지식과 추론 능력을 평가합니다.</p>
+            <p class="gapn"><b>빈 칸 →</b> 전부 <em>능력(capability)</em> 평가입니다. <strong>답변이 금소법을 지켰는지 판정하는 한국어 자원은 확인되지 않습니다.</strong> 우리 골든셋 150건이 그 자리에 놓입니다.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ 현황 ═══════════════════ -->
+  <section id="numbers">
+    <div class="grid">
+      <div class="rail"><b>현황</b>시장 검증<br>수치</div>
+      <div class="body-col">
+        <h2>도입은 끝났고, 검증은 시작도 안 했다</h2>
+        <div class="stats">
+          <div class="stat"><span class="v">6곳</span><span class="k">대고객 생성형 AI를 배치한 은행<br>(KB·신한·하나·우리·카뱅·케뱅)</span><span class="src">뉴데일리 6개 은행 비교, 2026.06</span></div>
+          <div class="stat"><span class="v alarm2">2 / 3</span><span class="k">AI 편향·부당한 차별을 아직 모니터링하지 않는 금융권 응답자</span><span class="src">케임브리지 저지·BIS·IMF·WEF, 2026</span></div>
+          <div class="stat"><span class="v alarm2">19%</span><span class="k">AI 도입 시도 중 실제 운영 전환 성공 비율 (시도는 96%)</span><span class="src">OpenText 조사</span></div>
+          <div class="stat"><span class="v alarm2">28<span style="font-size:.6em">%p</span></span><span class="k">설명가능성 중요도 인식 격차<br>규제기관 78% vs 금융사 50%</span><span class="src">케임브리지 저지·BIS·IMF·WEF, 2026</span></div>
+          <div class="stat"><span class="v">37.8<span style="font-size:.6em">%p</span></span><span class="k">AI 활용 필요성(88.8%)과 실제 활용(51.0%)의 괴리</span><span class="src">대한상의, 금융사 116곳</span></div>
+          <div class="stat"><span class="v">4 / 5</span><span class="k">AI 콜센터(AICC)를 운영 중인 5대 시중은행</span><span class="src">EBN, 2026</span></div>
+          <div class="stat"><span class="v">32곳</span><span class="k">AI를 도입 중이거나 계획한 보험사</span><span class="src">2025년 기준</span></div>
+          <div class="stat"><span class="v">1 / 6</span><span class="k">실제로 송금을 실행할 수 있는 은행 AI (나머지는 링크 안내)</span><span class="src">뉴데일리 6개 은행 비교, 2026.06</span></div>
+        </div>
+        <p style="margin-top:24px">마지막 수치가 핵심입니다. <strong>아직 대부분이 안내 수준이라 사고가 안 났을 뿐</strong>이고, 그 상태는 올 하반기에 끝납니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ 약점 ═══════════════════ -->
+  <section id="weak">
+    <div class="grid">
+      <div class="rail"><b>약점</b>정직하게<br>먼저</div>
+      <div class="body-col">
+        <h2>이 아이디어를 죽일 수 있는 것들</h2>
+        <p class="dek">
+          발표장에서 맞기 전에 여기서 맞아야 합니다.
+          각자 아이디어를 가져올 때 <strong>같은 질문을 자기 것에도 던져보세요.</strong>
+        </p>
+
+        <details open>
+          <summary><span class="sev">치명 · 신규</span>주최기관이 이미 AI 레드팀을 만들었다</summary>
+          <div class="dbody">
+            <p>
+              금융보안원 2026년 조직개편에서 <strong>AI RED팀이 신설</strong>됐고,
+              <strong>금융 특화 AI 보안 평가지표와 자동점검 도구 배포</strong>가 예정돼 있습니다.
+              REV.1의 B2B 레드팀 콘솔 구상은 이대로 가면 정면충돌합니다.
+            </p>
+            <div class="def">
+              <p><b>대응 —</b> 발표에서 <strong>"레드팀"이라는 단어를 뺍니다.</strong>
+              축을 <em>보안 → 소비자보호 규제</em>로 완전히 옮기고, 금융보안원이 커버하지 않는
+              세 가지(이해도·공격 없는 실패·언어 전환)로 포지셔닝합니다.
+              금소법 소관은 금융위·금감원이라는 점을 명확히 짚습니다.</p>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="sev">치명</span>이건 금융 서비스가 아니라 개발 도구 아닌가</summary>
+          <div class="dbody">
+            <p>
+              본선 심사 첫 필터가 <strong>"공모전 주제 적합성"</strong>이고, 기획서 양식은
+              <strong>특정 고객 세그먼트와 채널을 명시하라고 요구</strong>합니다. 순수 B2B 도구였다면 탈락합니다.
+            </p>
+            <div class="def">
+              <p><b>대응 —</b> 소비자 자동 고지 카드를 <em>주 표면</em>으로 놓았습니다.
+              대상 고객은 만 65세 이상 고령층과 사회초년생, 채널은 모바일 앱 AI 상담.
+              <strong>소비자가 능동적으로 해야 하는 일은 없습니다.</strong></p>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="sev">치명</span>실제 금융사에서 취약점을 찾은 적이 있나</summary>
+          <div class="dbody">
+            <p>
+              없습니다. 앞으로도 없습니다. 운영 중인 은행 챗봇에 대량 질의를 던지는 것은
+              <strong>그 자체가 비인가 침해행위</strong>입니다.
+            </p>
+            <div class="def">
+              <p><b>대응 —</b> 검증 대상을 <em>모델 레이어</em>로 옮깁니다.
+              상용 모델 4종에 동일한 금융 상담 시스템 프롬프트를 씌우고 준수율·전달률을 비교하면
+              합법이고, <strong>심사위원이 처음 보는 숫자</strong>가 됩니다.
+              무단 스캔을 하지 않는다는 원칙을 기획서에 명시하는 것 자체가 보안 심사에서 가점입니다.</p>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="sev mid">중상</span>AI를 AI로 평가하는데 판정기가 환각하면</summary>
+          <div class="dbody">
+            <p>
+              전제를 바꿉니다. <strong>판정기는 판결하지 않고 증거를 제출합니다.</strong>
+              출력을 <code>플래그 + 원문 인용 + 재현 프롬프트 + 근거 조문</code>으로 설계하면
+              오탐 비용이 "잘못된 판결"에서 "10초 낭비"로 떨어집니다.
+            </p>
+            <div class="def">
+              <p><b>대응 —</b> 골든셋 <span class="num">150</span>건 직접 라벨링 + 사람–판정기 일치율 제시.
+              애매한 건 <code>판단 보류</code> 3-way 출력.
+              <strong>이 라벨링이 전체에서 ROI가 가장 높은 작업입니다.</strong></p>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="sev mid">중상</span>Sedric·vox.ai가 이미 하고 있지 않나</summary>
+          <div class="dbody">
+            <p>
+              Sedric은 $18.5M을 받은 금융 특화 컴플라이언스 LLM이고, vox.ai는 국내에서 완전판매 모니터링을 자동화합니다.
+              둘 다 우리보다 성숙합니다.
+            </p>
+            <div class="def">
+              <p><b>대응 —</b> 둘 다 대상이 <strong>사람 상담사</strong>이고, 둘 다 <strong>"말했는가"만</strong> 봅니다.
+              AI 챗봇 × 금소법 × 한국어 × 이해도 축은 비어 있습니다.
+              단, <strong>"세계 최초"는 절대 금지</strong>입니다 — "국내 최초, AI 챗봇 대상"으로만.</p>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="sev mid">중상</span>금융사가 자기 약점을 보여주는 기능을 왜 사나</summary>
+          <div class="dbody">
+            <p>
+              가장 아픈 질문입니다. 신한라이프도 "안내한 것"만 요약하지 "빠뜨린 것"은 안 보여줍니다.
+            </p>
+            <div class="def">
+              <p><b>대응 —</b> 해피콜도 금융사가 원해서 생긴 게 아니라 규제가 강제했습니다.
+              그리고 <strong>금소법 제19조 제2항이 이미 "이해했음의 확인"을 의무화</strong>하고 있는데
+              AI 채널에는 그 수단이 없습니다. 게다가 입증책임이 금융사에 있으므로
+              <strong>"누락을 발견하고 즉시 보완했다"는 기록은 오히려 방어 자산</strong>이 됩니다.</p>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="sev mid">중상</span>대상(금융위원장상)을 받을 수 있는 그림인가</summary>
+          <div class="dbody">
+            <p>
+              대상 심사에서 금융위가 원하는 건 "AI로 금융소비자가 이런 혜택을 받았습니다"라는 정책 홍보용 사진입니다.
+            </p>
+            <div class="def">
+              <p><b>현실적 목표 —</b> REV.2에서 소비자 자동 고지를 주 표면으로 올리면서
+              대상 가능성이 소폭 열렸습니다. 다만 정렬이 가장 좋은 것은 여전히
+              <strong>최우수상(금융보안원 원장상)</strong>입니다.
+              참가 640명 중 <strong>상위 11팀 진입</strong>이 1차 관문입니다.</p>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ 논의 ═══════════════════ -->
+  <section id="talk" style="border-bottom:none;">
+    <div class="grid">
+      <div class="rail"><b>논의</b>가져와서<br>따질 것</div>
+      <div class="body-col">
+        <h2>각자 아이디어를 가져올 때 같이 답해볼 질문</h2>
+        <p class="dek">이 문서는 결정문이 아니라 후보 하나입니다. 다른 아이디어가 더 잘 답하면 그쪽으로 갑니다.</p>
+        <ol class="q">
+          <li>데이터 없이 정량 지표를 만들 수 있는가?
+            <em>대회가 데이터를 주지 않습니다. "정확도 0.9x"를 주장해야 하는 아이디어는 여기서 걸립니다.</em></li>
+          <li>금융보안원이 이미 하고 있는 일과 겹치지 않는가?
+            <em>AI 레드팀 전담 조직이 생겼습니다. 보안 축은 이제 사실상 막혔다고 봐야 합니다.</em></li>
+          <li>기획서 양식이 요구하는 특정 고객 세그먼트와 채널을 한 문장으로 댈 수 있는가?
+            <em>양식 3번 필수 항목입니다. 못 대면 주제 적합성에서 탈락합니다.</em></li>
+          <li>소비자가 <strong>아무것도 하지 않아도</strong> 작동하는가?
+            <em>능동적 참여를 요구하는 소비자 서비스는 사용률이 처참합니다. 해피콜 구조를 따르세요.</em></li>
+          <li>30일 안에 배포되고, 9/7~9/11 닷새를 무중단으로 버티는가?
+            <em>이 기간 접속 불가는 결격입니다. API 비용 소진도 포함입니다.</em></li>
+          <li>발표 15분에서 심사위원이 처음 보는 숫자가 하나라도 있는가?
+            <em>데모 열 개보다 새 숫자 하나가 강합니다.</em></li>
+          <li>3명이 나눠서 병렬로 진행 가능한 구조인가?
+            <em>한 사람에게 병목이 걸리면 한 달을 못 버팁니다.</em></li>
+        </ol>
+
+        <h3>이 아이디어로 갈 경우 아직 미정인 것</h3>
+        <ul class="plain">
+          <li>서비스 명칭</li>
+          <li>기술 스택</li>
+          <li>규제 조문 범위 — 현재 안은 <strong>금소법 제17~22조에만 집중.</strong> 조문은 프롬프트에, 금감원 제재사례는 RAG에</li>
+          <li>비교 대상 모델 4종 선정</li>
+          <li>이해도 역검증 페르소나 설계 (연령·금융경험·언어)</li>
+        </ul>
+
+        <h3>제출 전 반드시 확인</h3>
+        <ul class="plain">
+          <li><strong>금소법 제19조 제2항의 "대통령령으로 정하는 방법"에 전자적 확인(체크박스)이 포함되는지</strong> — 시행령 직접 확인. 이미 허용돼 있다면 "확인 수단이 없다"를 <em>"형식화되어 있다"</em>로 톤을 낮춰야 합니다. <strong>논리의 뿌리라 여기서 틀리면 발표가 무너집니다.</strong></li>
+          <li>금융보안원 「2025년 AI 레드팀 보고서」 원문 — 심사위원이 쓴 문서입니다. 자동점검 도구의 정확한 범위(보안만인지 규제 준수까지인지) 확인</li>
+          <li>해피콜 전수 실시 조건 — 금융투자협회 가이드라인 기준임을 명시하거나 원문 재확인</li>
+          <li>vox.ai가 챗봇 채널로 확장했는지 · Sedric의 한국 진출 여부</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      REV.2 · 2026년 8월 9일 기준 공개 자료 조사. 통계·논문·경쟁사 정보는 조사 시점 기준이며,
+      법령 조문 번호와 시행령 세부 내용은 최종 기획서 제출 전 원문 재확인이 필요합니다
+      — 심사위원이 해당 분야 전문가이므로 이 지점의 오류는 치명적입니다.
+    </p>
+    <p style="margin-top:14px">
+      제출 마감: 2026년 9월 7일(월) 오전 10:00 · 배포 URL 상시 가동 필수 구간: 9월 7일 11:00 ~ 9월 11일 23:59
+    </p>
+  </footer>
+
+</div>

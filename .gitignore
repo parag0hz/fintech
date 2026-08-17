@@ -1,0 +1,15 @@
+# secrets — never commit
+smoke/.env
+.env
+*.key
+
+# python
+__pycache__/
+*.pyc
+
+# os
+.DS_Store
+
+# transient run logs (keep results *.json, drop noisy logs)
+smoke/*.log
+.claude/

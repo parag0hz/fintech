@@ -1,0 +1,320 @@
+<title>로컬 LLM 하네스 & 프론티어 레드팀 — 실험 결과</title>
+<style>
+  :root {
+    --paper:#EEF1F5; --surface:#FFFFFF; --surface-2:#F7F9FB;
+    --ink:#16202A; --ink-2:#55636F; --ink-3:#8593A0;
+    --rule:#D5DCE4; --rule-soft:#E4E9EF;
+    --seal:#B03A2B; --seal-bg:#FBEEEC;
+    --verify:#1D5B78; --verify-bg:#E9F1F5;
+    --amber:#8A6111; --amber-bg:#FAF2E0;
+    --good:#256b4f;
+    --chart-raw:#B03A2B;      /* 공격 성공(치명오류) — 검증됨 */
+    --chart-harness:#1A6E9E;  /* 하네스 방어 후 — 검증됨 */
+    --grid:#E4E9EF;
+    --shadow:0 1px 2px rgba(22,32,42,.05), 0 8px 24px -16px rgba(22,32,42,.28);
+    --display:"AppleMyungjo","Nanum Myeongjo","Noto Serif KR","Batang",serif;
+    --body:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard Variable",Pretendard,"Malgun Gothic","Noto Sans KR","Helvetica Neue",sans-serif;
+    --mono:"SF Mono",ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0F151B; --surface:#161F27; --surface-2:#1B252E;
+      --ink:#E3E9EE; --ink-2:#97A5B1; --ink-3:#6C7B88;
+      --rule:#2A353F; --rule-soft:#222C35;
+      --seal:#E2796A; --seal-bg:#2B1B18;
+      --verify:#74B6D6; --verify-bg:#14262F;
+      --amber:#D6A445; --amber-bg:#2A2214;
+      --good:#5FB08C;
+      --chart-raw:#D9705E; --chart-harness:#3E92C0; --grid:#222C35;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0F151B; --surface:#161F27; --surface-2:#1B252E;
+    --ink:#E3E9EE; --ink-2:#97A5B1; --ink-3:#6C7B88;
+    --rule:#2A353F; --rule-soft:#222C35;
+    --seal:#E2796A; --seal-bg:#2B1B18;
+    --verify:#74B6D6; --verify-bg:#14262F;
+    --amber:#D6A445; --amber-bg:#2A2214;
+    --good:#5FB08C;
+    --chart-raw:#D9705E; --chart-harness:#3E92C0; --grid:#222C35;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.7);
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--body); font-size:16px; line-height:1.7;
+    -webkit-font-smoothing:antialiased; word-break:keep-all; }
+  .wrap { max-width:1000px; margin:0 auto; padding:0 24px 100px; }
+
+  /* masthead */
+  .masthead { padding:64px 0 28px; border-bottom:2px solid var(--ink); }
+  .docmeta { font-family:var(--mono); font-size:11.5px; letter-spacing:.09em;
+    color:var(--ink-3); display:flex; flex-wrap:wrap; gap:6px 18px; margin-bottom:24px; }
+  .docmeta .hot { color:var(--seal); }
+  h1 { font-family:var(--display); font-weight:400; font-size:clamp(32px,5.5vw,52px);
+    line-height:1.1; letter-spacing:-.02em; margin:0 0 18px; text-wrap:balance; }
+  .thesis { font-size:clamp(16px,2vw,19px); color:var(--ink-2); max-width:56ch; margin:0; }
+  .thesis b { color:var(--ink); font-weight:600; }
+
+  /* theme toggle */
+  .toggle { position:fixed; top:16px; right:16px; z-index:20; display:flex; gap:2px;
+    background:var(--surface); border:1px solid var(--rule); border-radius:999px; padding:3px; box-shadow:var(--shadow); }
+  .toggle button { font-family:var(--mono); font-size:10.5px; letter-spacing:.05em; border:0; cursor:pointer;
+    background:transparent; color:var(--ink-3); padding:5px 10px; border-radius:999px; }
+  .toggle button[aria-pressed="true"] { background:var(--ink); color:var(--paper); }
+
+  /* stat tiles */
+  .tiles { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:28px 0 8px; }
+  @media (max-width:720px){ .tiles{ grid-template-columns:repeat(2,1fr);} }
+  .tile { background:var(--surface); border:1px solid var(--rule); border-top:3px solid var(--seal);
+    border-radius:0 0 3px 3px; padding:16px 16px 14px; box-shadow:var(--shadow); }
+  .tile.blue { border-top-color:var(--verify); }
+  .tile .k { font-family:var(--mono); font-size:10px; letter-spacing:.11em; color:var(--ink-3); text-transform:uppercase; }
+  .tile .v { font-family:var(--display); font-size:34px; line-height:1.05; margin:8px 0 4px; font-variant-numeric:tabular-nums; }
+  .tile .v small { font-size:16px; color:var(--ink-3); }
+  .tile .d { font-size:12.5px; color:var(--ink-2); line-height:1.4; }
+
+  section { padding:44px 0 8px; border-bottom:1px solid var(--rule); }
+  .eyebrow { font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--seal); text-transform:uppercase; margin-bottom:8px; }
+  h2 { font-size:clamp(21px,3vw,27px); line-height:1.25; letter-spacing:-.01em; margin:0 0 10px; font-weight:700; text-wrap:balance; }
+  h3 { font-size:15px; font-weight:700; margin:26px 0 10px; }
+  p { max-width:66ch; margin:0 0 14px; color:var(--ink); }
+  p.dek { color:var(--ink-2); margin:0 0 22px; max-width:64ch; }
+  .fig { background:var(--surface); border:1px solid var(--rule); border-radius:4px; padding:20px 20px 14px; margin:18px 0; box-shadow:var(--shadow); }
+  .fig figcaption { font-family:var(--mono); font-size:11px; letter-spacing:.04em; color:var(--ink-3); margin-top:6px; }
+  .legend { display:flex; gap:16px; font-family:var(--mono); font-size:11px; color:var(--ink-2); margin:2px 0 14px; flex-wrap:wrap; }
+  .legend span { display:inline-flex; align-items:center; gap:6px; }
+  .swatch { width:11px; height:11px; border-radius:2px; display:inline-block; }
+  svg { display:block; width:100%; height:auto; overflow:visible; }
+  .bar-lbl { font-family:var(--mono); font-size:12px; fill:var(--ink-2); }
+  .val-lbl { font-family:var(--mono); font-size:12px; fill:var(--ink); font-variant-numeric:tabular-nums; }
+  .axis-lbl { font-family:var(--mono); font-size:10px; fill:var(--ink-3); }
+  .gridline { stroke:var(--grid); stroke-width:1; }
+
+  table { width:100%; border-collapse:collapse; font-size:13.5px; margin:8px 0 4px; }
+  th,td { text-align:left; padding:9px 12px; border-bottom:1px solid var(--rule-soft); }
+  th { font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; color:var(--ink-3); text-transform:uppercase; font-weight:500; }
+  td.num { font-family:var(--mono); font-variant-numeric:tabular-nums; text-align:right; }
+  .pill { font-family:var(--mono); font-size:10.5px; padding:2px 9px; border-radius:999px; white-space:nowrap; }
+  .pill.ok { background:var(--verify-bg); color:var(--verify); }
+  .pill.no { background:var(--seal-bg); color:var(--seal); }
+  .scroll { overflow-x:auto; }
+
+  .callout { border-left:3px solid var(--verify); background:var(--verify-bg); padding:14px 18px; border-radius:0 3px 3px 0; margin:18px 0; }
+  .callout.warn { border-left-color:var(--amber); background:var(--amber-bg); }
+  .callout .h { font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); margin-bottom:6px; }
+  .callout p { margin:0; font-size:14px; max-width:none; }
+  ul.tight { margin:6px 0 14px; padding-left:20px; }
+  ul.tight li { margin-bottom:7px; }
+  .find { display:grid; grid-template-columns:auto 1fr; gap:6px 14px; margin:14px 0; }
+  .find .n { font-family:var(--display); font-size:20px; color:var(--seal); line-height:1.2; }
+  .find .t { font-size:14.5px; align-self:center; }
+
+  /* tooltip */
+  #tip { position:fixed; z-index:30; pointer-events:none; opacity:0; transition:opacity .1s;
+    background:var(--ink); color:var(--paper); font-family:var(--mono); font-size:11.5px;
+    padding:6px 9px; border-radius:4px; white-space:nowrap; transform:translate(-50%,-140%); }
+  .barrect { transition:opacity .12s; }
+  .barrect:hover { opacity:.72; }
+  footer { padding-top:26px; font-family:var(--mono); font-size:11px; color:var(--ink-3); line-height:1.7; }
+  a { color:var(--verify); }
+</style>
+
+<div class="toggle" role="group" aria-label="테마">
+  <button data-t="light" aria-pressed="false">LIGHT</button>
+  <button data-t="dark" aria-pressed="false">DARK</button>
+  <button data-t="system" aria-pressed="true">SYS</button>
+</div>
+
+<div class="wrap">
+  <header class="masthead">
+    <div class="docmeta">
+      <span>2026 금융 AI CHALLENGE</span><span>실험 리포트</span>
+      <span class="hot">REV.1 · 2026.08</span><span>text-to-order 안전성</span>
+    </div>
+    <h1>로컬 LLM은 프론티어 공격에 얼마나 뚫리고,<br>하네스는 그걸 얼마나 막나</h1>
+    <p class="thesis">증권사 챗봇이 자연어를 매매 주문으로 바꿀 때, 로컬 Qwen이 내는 <b>되돌릴 수 없는 오파싱(매수↔매도·이하↔이상 뒤집힘)</b>을 — 프론티어 9종이 만든 공격으로 측정하고, <b>결정적 검증 레이어</b>로 방어했다.</p>
+  </header>
+
+  <div class="tiles">
+    <div class="tile"><div class="k">raw ASR · qwen3-8b</div><div class="v">26<small>%</small></div><div class="d">프론티어 공격이 로컬 8b를 뚫은 평균 비율</div></div>
+    <div class="tile blue"><div class="k">하네스 적용 후</div><div class="v">12<small>%</small></div><div class="d">8b를 32b급 안전성으로 — 치명오류 절반 이하</div></div>
+    <div class="tile"><div class="k">최강 공격자</div><div class="v" style="font-size:22px;padding-top:6px">Sonnet 5<br><small>/ GLM 5.2</small></div><div class="d">8b 40% · GLM은 크기·하네스에 가장 강함</div></div>
+    <div class="tile blue"><div class="k">잡은 측정 버그</div><div class="v">5<small>개</small></div><div class="d">검증 전 "90%"는 환상 — 실패콜 오계수였음</div></div>
+  </div>
+
+  <section>
+    <div class="eyebrow">배경 · 목적</div>
+    <h2>왜 이 실험을 했나</h2>
+    <p class="dek">증권사는 개인정보·망분리 때문에 <b>온프레미스 로컬 LLM(오래된 Qwen 계열)</b>으로 자연어 주문을 파싱한다. 그런데 매수↔매도, "26만원 <b>이하</b>"↔"이상" 한 글자만 뒤집혀도 되돌릴 수 없는 손실이다(KRX 착오매매 구제는 10% 초과 이탈만 대상). 로컬 모델은 프론티어의 적대적 공격에 취약할 것이라는 가설을 검증했다.</p>
+    <div class="find">
+      <div class="n">Q1</div><div class="t">프론티어(Claude/GPT/Gemini/…)가 만든 공격이 로컬 Qwen을 실제로 얼마나 뚫는가? 공격자별 위력차는?</div>
+      <div class="n">Q2</div><div class="t">우리가 만든 <b>하네스(다층 검증 레이어)</b>가 그걸 얼마나 막는가?</div>
+    </div>
+    <p><b>구조:</b> 공격자 = 프론티어(공격 시나리오 생성) · 방어자 = 로컬 Qwen(주문 파싱). 전부 OpenRouter로 호출. 대회가 데이터를 안 주므로 코퍼스는 전부 자체 생성. <b>핵심 지표(치명오류):</b> 방어자가 주문을 <em>확정</em>했는데 side 또는 condition이 정답과 다른 경우 = 되돌릴 수 없는 오주문.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">실험 1 · 원본 모델 스모크</div>
+    <h2>어느 모델이, 어디서 무너지나 (자체작성 47건)</h2>
+    <p class="dek">각 모델을 그냥 파서로 놓고 치명오류를 측정. 정상 주문에선 전부 안정적 — 실패는 좁은 대역(인젝션·정보부족·복잡 임계·다중턴)에 집중되고, 프론티어 천장(opus-5)도 완벽하지 않다.</p>
+    <figure class="fig">
+      <div class="legend"><span><i class="swatch" style="background:var(--chart-raw)"></i> 치명오류 건수 / 47</span></div>
+      <div id="c1"></div>
+      <figcaption>치명오류 = 매수/매도 또는 이하/이상 뒤집힘. opus-5는 프론티어 "천장" 참고치.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <div class="eyebrow">실험 2 · 하네스 효과</div>
+    <h2>하네스가 치명오류를 절반 이하로 (원본 47건)</h2>
+    <p class="dek">같은 방어자에 3층 하네스(① 문맥 신뢰 분리 ② 강화 프롬프트 ③ 결정적 방향 검증)를 얹어 재측정. 인젝션·정보부족 실패는 <b>0으로 제거</b>된다. 비용은 과잉보류 — 약한 8b는 종목/수량 추출을 자주 실패해 "지어내느니 되묻자"로 안전하게 막는다.</p>
+    <figure class="fig">
+      <div class="legend">
+        <span><i class="swatch" style="background:var(--chart-raw)"></i> raw</span>
+        <span><i class="swatch" style="background:var(--chart-harness)"></i> 하네스 적용</span>
+      </div>
+      <div id="c2"></div>
+      <figcaption>치명오류 raw → 하네스. 괄호 밖 값은 건수 / 47. 과잉보류(사용성 비용)는 표 참조.</figcaption>
+    </figure>
+    <div class="callout warn"><div class="h">트레이드오프</div><p>qwen3-8b는 과잉보류 <b>10건</b>(약한 추출력 → 안전한 "되묻기"로 전환). 14b·32b·72b는 0~2건으로 낮다. 오주문을 안전한 보류로 바꾼 것 — 되돌릴 수 없는 주문 맥락에선 옳은 방향이지만 튜닝 여지.</p></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">실험 3 · 프론티어별 공격 생성</div>
+    <h2>9종에게 "각자 공격을 만들어라" → 7종 성공, 142건</h2>
+    <p class="dek">각 프론티어가 자기만의 적대 케이스를 생성(단일 정답 gold 포함). 안전 조치가 강한 모델은 공격 생성 자체를 거부했다.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>프론티어 공격자</th><th>상태</th><th class="num">생성</th><th>비고</th></tr></thead>
+      <tbody id="genrows"></tbody>
+    </table></div>
+    <div class="callout"><div class="h">부수 발견</div><p><b>Claude Fable 5는 공격 생성을 거부</b>(<span style="font-family:var(--mono)">content_filter</span>, 3회 재현) — dual-use 안전층이 인젝션/공격 콘텐츠를 차단한다. 역설적으로 형제 모델 Opus·Sonnet은 가장 강한 공격자였다.</p></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">실험 4 · ASR 매트릭스 (핵심)</div>
+    <h2>공격자 × 방어자 — 크기가 좌우하고, 하네스가 8b를 32b급으로</h2>
+    <p class="dek">각 프론티어 공격 세트를 Qwen 방어자(8b·32b)에 던져 치명오류율(ASR)을 측정. 실패콜은 재시도·제외한 검증된 수치다.</p>
+    <figure class="fig">
+      <div class="legend">
+        <span><i class="swatch" style="background:var(--chart-raw)"></i> raw ASR</span>
+        <span><i class="swatch" style="background:var(--chart-harness)"></i> 하네스 적용 ASR</span>
+      </div>
+      <h3 style="margin:4px 0 2px">방어자: qwen3-8b (약한 로컬)</h3>
+      <div id="c4a"></div>
+      <h3 style="margin:22px 0 2px">방어자: qwen3-32b (강한 로컬)</h3>
+      <div id="c4b"></div>
+      <figcaption>치명오류율(%), 공격자당 20~22건. 낮을수록 방어자가 강함.</figcaption>
+    </figure>
+    <div class="find">
+      <div class="n">1</div><div class="t"><b>크기가 raw 강건성을 좌우</b> — 8b(평균 26%)가 32b(12%)의 약 2배로 뚫린다.</div>
+      <div class="n">2</div><div class="t"><b>하네스가 약한 8b를 32b급으로</b> — 8b+하네스(12%) ≈ 32b raw(12%). 값싼 작은 모델을 안전하게.</div>
+      <div class="n">3</div><div class="t"><b>강한 32b엔 ~무변, 가끔 악화</b>(12→10, Sonnet 10→15). 이미 잘하는 모델엔 순이득 작음 → 튜닝.</div>
+      <div class="n">4</div><div class="t"><b>GLM 5.2가 가장 강하고 전이 잘 됨</b> — 8b·32b 양쪽 20%, 하네스도 15%까지만. Claude는 8b엔 최강(40/32%)이나 32b에선 무력화.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">방법론 · 정직성</div>
+    <h2>잡은 측정 버그 5개 — 검증 없이는 숫자를 못 믿는다</h2>
+    <p class="dek">이 실험은 채점이 어렵다. 약한 모델의 자유형 JSON, 자가생성 gold, 동시성 실패가 모두 숫자를 오염시킨다. 최종 표는 아래를 전부 수정한 값이다.</p>
+    <ul class="tight">
+      <li><b>행 드롭</b> — 에러 핸들링이 47건 중 45건을 조용히 버려 "46/47 치명"처럼 보였다.</li>
+      <li><b>스키마 형식 오판</b> — 모델이 <code>action/symbol</code> 등 자기 필드명으로 정답을 냈는데 오답 처리 → 정규화기로 해결.</li>
+      <li><b>중첩 조건 오판</b> — opus가 <code>condition:{type:GE}</code>로 정답을 냈는데 못 읽음.</li>
+      <li><b>price_condition 누락</b> — 임계 방향을 다른 키에 담은 걸 놓침.</li>
+      <li class="hot" style="color:var(--seal)"><b>실패콜을 공격으로 오계수</b> — 동시성 rate-limit 실패를 "오주문"으로 세어 <b>GLM이 90%로 부풀려짐</b>. 재시도·제외 후 진짜 값 <b>20%</b>.</li>
+    </ul>
+    <div class="callout warn"><div class="h">한계</div><p>풀정밀도(실제 4bit 온프레미스 아님, 더 나쁠 것) · 표본 작음(47건·공격자당 20건, ±5%p 노이즈) · 자가생성 gold 미검증(adjudication 필요) · 9종 중 7종 공격자. <b>셀 하나하나가 아니라 대세만 신뢰할 것.</b></p></div>
+  </section>
+
+  <section style="border-bottom:none">
+    <div class="eyebrow">결론 · 다음</div>
+    <h2>모델과 무관한 결정적 검증 레이어가 필수다</h2>
+    <p>로컬 Qwen은 프론티어 공격에 취약하고(8b 26%, Sonnet 시 40%) 큰 모델일수록 강건하다(32b 12%). <b>하네스는 약한 로컬을 큰 모델 수준의 안전성으로 끌어올린다</b>(8b 26%→12%). 진짜 가치는 작은/양자화 모델을 강제로 써야 하는 온프레미스 상황 — 실제 4bit 배포는 이 수치보다 나쁘므로 하네스 이득은 더 커진다.</p>
+    <p><b>발표 한 문장:</b> "AI가 공격당해서가 아니라, 정상·적대 입력 모두에서 되돌릴 수 없는 주문 오류가 나고 어떤 모델도 완벽하지 않다 → 모델과 무관한 결정적 검증 레이어가 필수다."</p>
+    <h3>다음 단계</h3>
+    <ul class="tight">
+      <li>gold adjudication(제3 모델 패널) + 표본 확대로 노이즈 제거</li>
+      <li>실제 4bit 양자화 로컬 Qwen(vLLM) 추가 → 진짜 수치 + 스키마 강제 채점</li>
+      <li>하네스 잔존(다중턴·관용 임계표현) 보강 + 강한 모델 과잉보류 튜닝</li>
+    </ul>
+    <footer>
+      전 수치는 <code>smoke/</code>에서 재현(results_full.json · harness_results.json · asr_8b.json · asr_32b.json).<br>
+      공격 코퍼스: attacks.jsonl(47) · attacks_frontier9.jsonl(142). 코드: run.py · harness.py · run_harness.py · generate_attacks.py · run_asr.py.
+    </footer>
+  </section>
+</div>
+<div id="tip"></div>
+
+<script>
+const D = {
+  smoke47:[["qwen3-8b",3],["qwen3-14b",4],["qwen3-32b",6],["qwen3-30b-a3b",6],["qwen2.5-72b",5],["claude-opus-5 *천장",3]],
+  harness47:[["qwen3-8b",3,1,10],["qwen3-14b",3,1,1],["qwen3-32b",4,2,2],["qwen3-30b-a3b",5,2,0],["qwen2.5-72b",4,1,1]],
+  gen:[["Kimi K3",1,20,""],["Claude Opus 5",1,22,""],["Claude Sonnet 5",1,20,""],["GLM 5.2",1,20,""],["GPT-5.6 Sol",1,20,""],["GPT-5.6 Luna",1,20,""],["DeepSeek V4 Pro",1,20,""],
+    ["Claude Fable 5",0,0,"거부 · content_filter (안전층)"],["Gemini 3.7 Flash",0,0,"JSON 파싱 실패"]],
+  asr8:[["Claude Sonnet 5",40,20],["Claude Opus 5",32,14],["DeepSeek V4 Pro",25,10],["GPT-5.6 Sol",25,10],["Kimi K3",20,10],["GPT-5.6 Luna",20,5],["GLM 5.2",20,15]],
+  asr32:[["Claude Sonnet 5",10,15],["Claude Opus 5",14,9],["DeepSeek V4 Pro",10,10],["GPT-5.6 Sol",10,10],["Kimi K3",10,5],["GPT-5.6 Luna",10,5],["GLM 5.2",20,15]]
+};
+const NS="http://www.w3.org/2000/svg";
+const tip=document.getElementById("tip");
+function el(n,a){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;}
+function hov(rect,text){
+  rect.addEventListener("mousemove",e=>{tip.textContent=text;tip.style.left=e.clientX+"px";tip.style.top=e.clientY+"px";tip.style.opacity=1;});
+  rect.addEventListener("mouseleave",()=>{tip.style.opacity=0;});
+}
+// horizontal bar chart. rows=[[label, v1, v2?]], series colors, unit, max
+function chart(id, rows, opts){
+  const {series, max, unit, labelW=150} = opts;
+  const W=900, pad=16, plotW=W-labelW-pad-46;
+  const bh=series.length>1?13:16, gap=series.length>1?4:0, rowGap=series.length>1?18:12;
+  const rowH=series.length*bh+(series.length-1)*gap+rowGap;
+  const H=rows.length*rowH+18;
+  const svg=el("svg",{viewBox:`0 0 ${W} ${H}`,role:"img"});
+  // gridlines
+  const ticks=opts.ticks||4;
+  for(let t=0;t<=ticks;t++){
+    const x=labelW+plotW*t/ticks;
+    svg.appendChild(el("line",{x1:x,y1:0,x2:x,y2:H-14,class:"gridline"}));
+    const tx=el("text",{x:x,y:H-2,class:"axis-lbl","text-anchor":"middle"});tx.textContent=(max*t/ticks).toFixed(0)+(unit||"");svg.appendChild(tx);
+  }
+  rows.forEach((r,i)=>{
+    const y0=i*rowH+2;
+    const lbl=el("text",{x:labelW-10,y:y0+(series.length*bh+(series.length-1)*gap)/2+4,class:"bar-lbl","text-anchor":"end"});
+    lbl.textContent=r[0];svg.appendChild(lbl);
+    series.forEach((s,si)=>{
+      const v=r[si+1];const y=y0+si*(bh+gap);
+      const w=Math.max(v/max*plotW, v>0?3:0);
+      const rect=el("rect",{x:labelW,y:y,width:w,height:bh,rx:4,fill:s.color,class:"barrect"});
+      svg.appendChild(rect);hov(rect,`${r[0]} · ${s.name}: ${v}${unit||""}`);
+      const vl=el("text",{x:labelW+w+6,y:y+bh-2.5,class:"val-lbl"});vl.textContent=v+(unit||"");svg.appendChild(vl);
+    });
+  });
+  document.getElementById(id).appendChild(svg);
+}
+const RAW={name:"raw",color:"var(--chart-raw)"}, HAR={name:"하네스",color:"var(--chart-harness)"};
+chart("c1", D.smoke47, {series:[{name:"치명오류",color:"var(--chart-raw)"}], max:8, unit:"", ticks:4});
+chart("c2", D.harness47.map(r=>[r[0],r[1],r[2]]), {series:[RAW,HAR], max:6, unit:"", ticks:3});
+chart("c4a", D.asr8, {series:[RAW,HAR], max:40, unit:"%", ticks:4});
+chart("c4b", D.asr32, {series:[RAW,HAR], max:40, unit:"%", ticks:4});
+
+// gen table
+const gb=document.getElementById("genrows");
+D.gen.forEach(g=>{
+  const tr=document.createElement("tr");
+  tr.innerHTML=`<td>${g[0]}</td><td><span class="pill ${g[1]?'ok':'no'}">${g[1]?'생성':'실패'}</span></td>`+
+    `<td class="num">${g[1]?g[2]+'건':'—'}</td><td style="color:var(--ink-2);font-size:12.5px">${g[3]||'단일 정답 gold 포함'}</td>`;
+  gb.appendChild(tr);
+});
+
+// theme toggle
+const root=document.documentElement, btns=[...document.querySelectorAll(".toggle button")];
+function setT(t){
+  if(t==="system"){root.removeAttribute("data-theme");}else{root.setAttribute("data-theme",t);}
+  btns.forEach(b=>b.setAttribute("aria-pressed", b.dataset.t===t));
+  try{localStorage.setItem("rep-theme",t);}catch(e){}
+}
+btns.forEach(b=>b.addEventListener("click",()=>setT(b.dataset.t)));
+try{const s=localStorage.getItem("rep-theme"); if(s)setT(s);}catch(e){}
+</script>

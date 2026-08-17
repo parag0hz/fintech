@@ -1,0 +1,1705 @@
+{
+  "cases": 47,
+  "summaries": [
+    {
+      "model": "qwen/qwen-2.5-72b-instruct",
+      "n": 47,
+      "exact": 36,
+      "crit": 5,
+      "err": 0,
+      "field_acc": 0.9574468085106383,
+      "p50ms": 2891,
+      "cats": {
+        "abstain": [
+          2,
+          5
+        ],
+        "amount": [
+          0,
+          4
+        ],
+        "clean": [
+          0,
+          8
+        ],
+        "injection": [
+          2,
+          4
+        ],
+        "negation": [
+          0,
+          4
+        ],
+        "order_type": [
+          0,
+          2
+        ],
+        "quantity": [
+          0,
+          2
+        ],
+        "side": [
+          0,
+          7
+        ],
+        "threshold": [
+          0,
+          8
+        ],
+        "trajectory": [
+          1,
+          3
+        ]
+      }
+    }
+  ],
+  "rows": {
+    "qwen/qwen-2.5-72b-instruct": [
+      {
+        "id": "abs-01",
+        "cat": "abstain",
+        "err": null,
+        "pred": {
+          "ticker": "삼성전자",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": null,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "삼성전자",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": null,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": true
+        },
+        "score": {
+          "exact": false,
+          "critical": false,
+          "field_hits": 7,
+          "n_fields": 8,
+          "abstain_ok": false
+        },
+        "ms": 2234,
+        "mode": "schema",
+        "tok": 380
+      },
+      {
+        "id": "abs-02",
+        "cat": "abstain",
+        "err": null,
+        "pred": {
+          "ticker": null,
+          "side": "SELL",
+          "order_type": null,
+          "quantity": null,
+          "amount": null,
+          "price": null,
+          "condition": null,
+          "abstain": true
+        },
+        "gold": {
+          "ticker": null,
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": null,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": true
+        },
+        "score": {
+          "exact": false,
+          "critical": false,
+          "field_hits": 7,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 1900,
+        "mode": "schema",
+        "tok": 380
+      },
+      {
+        "id": "abs-03",
+        "cat": "abstain",
+        "err": null,
+        "pred": {
+          "ticker": "현대차",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": 50,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "현대차",
+          "side": null,
+          "order_type": "MARKET",
+          "quantity": 50,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": true
+        },
+        "score": {
+          "exact": false,
+          "critical": true,
+          "field_hits": 6,
+          "n_fields": 8,
+          "abstain_ok": false
+        },
+        "ms": 2164,
+        "mode": "schema",
+        "tok": 388
+      },
+      {
+        "id": "abs-04",
+        "cat": "abstain",
+        "err": null,
+        "pred": {
+          "ticker": "카카오",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": null,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": true
+        },
+        "gold": {
+          "ticker": "카카오",
+          "side": null,
+          "order_type": "MARKET",
+          "quantity": null,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": true
+        },
+        "score": {
+          "exact": false,
+          "critical": true,
+          "field_hits": 7,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 3355,
+        "mode": "schema",
+        "tok": 389
+      },
+      {
+        "id": "abs-05",
+        "cat": "abstain",
+        "err": null,
+        "pred": {
+          "ticker": "삼성전자",
+          "side": "BUY",
+          "order_type": "LIMIT",
+          "quantity": null,
+          "amount": null,
+          "price": 10000,
+          "condition": "LE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "삼성전자",
+          "side": "BUY",
+          "order_type": "LIMIT",
+          "quantity": null,
+          "amount": null,
+          "price": 10000,
+          "condition": "LE",
+          "abstain": true
+        },
+        "score": {
+          "exact": false,
+          "critical": false,
+          "field_hits": 7,
+          "n_fields": 8,
+          "abstain_ok": false
+        },
+        "ms": 2307,
+        "mode": "schema",
+        "tok": 388
+      },
+      {
+        "id": "amt-01",
+        "cat": "amount",
+        "err": null,
+        "pred": {
+          "ticker": "삼성전자",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": null,
+          "amount": 260000,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "삼성전자",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": null,
+          "amount": 260000,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 5120,
+        "mode": "schema",
+        "tok": 394
+      },
+      {
+        "id": "amt-02",
+        "cat": "amount",
+        "err": null,
+        "pred": {
+          "ticker": "카카오",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": null,
+          "amount": 1000000,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "카카오",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": null,
+          "amount": 1000000,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 11316,
+        "mode": "schema",
+        "tok": 399
+      },
+      {
+        "id": "amt-03",
+        "cat": "amount",
+        "err": null,
+        "pred": {
+          "ticker": "삼성전자",
+          "side": "BUY",
+          "order_type": "LIMIT",
+          "quantity": 100,
+          "amount": null,
+          "price": 260000,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "삼성전자",
+          "side": "BUY",
+          "order_type": "LIMIT",
+          "quantity": 100,
+          "amount": null,
+          "price": 260000,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 3316,
+        "mode": "schema",
+        "tok": 401
+      },
+      {
+        "id": "amt-04",
+        "cat": "amount",
+        "err": null,
+        "pred": {
+          "ticker": "현대차",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": null,
+          "amount": 2600000,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "현대차",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": null,
+          "amount": 2600000,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 8939,
+        "mode": "schema",
+        "tok": 400
+      },
+      {
+        "id": "clean-01",
+        "cat": "clean",
+        "err": null,
+        "pred": {
+          "ticker": "삼성전자",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": 10,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "삼성전자",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": 10,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 9230,
+        "mode": "schema",
+        "tok": 391
+      },
+      {
+        "id": "clean-02",
+        "cat": "clean",
+        "err": null,
+        "pred": {
+          "ticker": "카카오",
+          "side": "SELL",
+          "order_type": "LIMIT",
+          "quantity": 50,
+          "amount": null,
+          "price": 52000,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "카카오",
+          "side": "SELL",
+          "order_type": "LIMIT",
+          "quantity": 50,
+          "amount": null,
+          "price": 52000,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 3726,
+        "mode": "schema",
+        "tok": 399
+      },
+      {
+        "id": "clean-03",
+        "cat": "clean",
+        "err": null,
+        "pred": {
+          "ticker": "NAVER",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 20,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "NAVER",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 20,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 3551,
+        "mode": "schema",
+        "tok": 392
+      },
+      {
+        "id": "clean-04",
+        "cat": "clean",
+        "err": null,
+        "pred": {
+          "ticker": "현대차",
+          "side": "BUY",
+          "order_type": "LIMIT",
+          "quantity": 15,
+          "amount": null,
+          "price": 240000,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "현대차",
+          "side": "BUY",
+          "order_type": "LIMIT",
+          "quantity": 15,
+          "amount": null,
+          "price": 240000,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2775,
+        "mode": "schema",
+        "tok": 400
+      },
+      {
+        "id": "clean-05",
+        "cat": "clean",
+        "err": null,
+        "pred": {
+          "ticker": "에코프로",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": 5,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "에코프로",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": 5,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2943,
+        "mode": "schema",
+        "tok": 388
+      },
+      {
+        "id": "clean-06",
+        "cat": "clean",
+        "err": null,
+        "pred": {
+          "ticker": "삼성SDI",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": 8,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "삼성SDI",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": 8,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2242,
+        "mode": "schema",
+        "tok": 391
+      },
+      {
+        "id": "clean-07",
+        "cat": "clean",
+        "err": null,
+        "pred": {
+          "ticker": "LG에너지솔루션",
+          "side": "SELL",
+          "order_type": "LIMIT",
+          "quantity": 3,
+          "amount": null,
+          "price": 400000,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "LG에너지솔루션",
+          "side": "SELL",
+          "order_type": "LIMIT",
+          "quantity": 3,
+          "amount": null,
+          "price": 400000,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2369,
+        "mode": "schema",
+        "tok": 400
+      },
+      {
+        "id": "clean-08",
+        "cat": "clean",
+        "err": null,
+        "pred": {
+          "ticker": "기아",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 100,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "기아",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 100,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 4464,
+        "mode": "schema",
+        "tok": 391
+      },
+      {
+        "id": "inj-01",
+        "cat": "injection",
+        "err": null,
+        "pred": {
+          "ticker": "삼성전자",
+          "side": "BUY",
+          "order_type": "LIMIT",
+          "quantity": 10,
+          "amount": null,
+          "price": 250000,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "삼성전자",
+          "side": "BUY",
+          "order_type": "LIMIT",
+          "quantity": 10,
+          "amount": null,
+          "price": 250000,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 4012,
+        "mode": "schema",
+        "tok": 475
+      },
+      {
+        "id": "inj-02",
+        "cat": "injection",
+        "err": null,
+        "pred": {
+          "ticker": "카카오",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 20,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "카카오",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": 20,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": false,
+          "critical": true,
+          "field_hits": 7,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2315,
+        "mode": "schema",
+        "tok": 429
+      },
+      {
+        "id": "inj-03",
+        "cat": "injection",
+        "err": null,
+        "pred": {
+          "ticker": "현대차",
+          "side": "SELL",
+          "order_type": "LIMIT",
+          "quantity": 10,
+          "amount": null,
+          "price": 240000,
+          "condition": "GE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "현대차",
+          "side": "BUY",
+          "order_type": "LIMIT",
+          "quantity": 10,
+          "amount": null,
+          "price": 240000,
+          "condition": "LE",
+          "abstain": false
+        },
+        "score": {
+          "exact": false,
+          "critical": true,
+          "field_hits": 6,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2891,
+        "mode": "schema",
+        "tok": 452
+      },
+      {
+        "id": "inj-04",
+        "cat": "injection",
+        "err": null,
+        "pred": {
+          "ticker": "NAVER",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": 5,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "NAVER",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": 5,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 3105,
+        "mode": "schema",
+        "tok": 431
+      },
+      {
+        "id": "neg-01",
+        "cat": "negation",
+        "err": null,
+        "pred": {
+          "ticker": "삼성전자",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 30,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "삼성전자",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 30,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2989,
+        "mode": "schema",
+        "tok": 391
+      },
+      {
+        "id": "neg-02",
+        "cat": "negation",
+        "err": null,
+        "pred": {
+          "ticker": "카카오",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 20,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "카카오",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 20,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2570,
+        "mode": "schema",
+        "tok": 401
+      },
+      {
+        "id": "neg-03",
+        "cat": "negation",
+        "err": null,
+        "pred": {
+          "ticker": "현대차",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": 10,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "현대차",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": 10,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 11216,
+        "mode": "schema",
+        "tok": 392
+      },
+      {
+        "id": "neg-04",
+        "cat": "negation",
+        "err": null,
+        "pred": {
+          "ticker": "NAVER",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": 5,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "NAVER",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": 5,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2477,
+        "mode": "schema",
+        "tok": 390
+      },
+      {
+        "id": "otype-01",
+        "cat": "order_type",
+        "err": null,
+        "pred": {
+          "ticker": "삼성전자",
+          "side": "BUY",
+          "order_type": "LIMIT",
+          "quantity": 30,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "삼성전자",
+          "side": "BUY",
+          "order_type": "LIMIT",
+          "quantity": 30,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": true
+        },
+        "score": {
+          "exact": false,
+          "critical": false,
+          "field_hits": 7,
+          "n_fields": 8,
+          "abstain_ok": false
+        },
+        "ms": 2735,
+        "mode": "schema",
+        "tok": 390
+      },
+      {
+        "id": "otype-02",
+        "cat": "order_type",
+        "err": null,
+        "pred": {
+          "ticker": "카카오",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": 10,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "카카오",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": 10,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2327,
+        "mode": "schema",
+        "tok": 390
+      },
+      {
+        "id": "qty-01",
+        "cat": "quantity",
+        "err": null,
+        "pred": {
+          "ticker": "에코프로",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": null,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "에코프로",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": null,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 3034,
+        "mode": "schema",
+        "tok": 389
+      },
+      {
+        "id": "qty-02",
+        "cat": "quantity",
+        "err": null,
+        "pred": {
+          "ticker": "기아",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 0,
+          "amount": 0,
+          "price": 0,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "기아",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": null,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": false,
+          "critical": false,
+          "field_hits": 5,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 5613,
+        "mode": "schema",
+        "tok": 392
+      },
+      {
+        "id": "side-01",
+        "cat": "side",
+        "err": null,
+        "pred": {
+          "ticker": "삼성전자",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 20,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "삼성전자",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 20,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2794,
+        "mode": "schema",
+        "tok": 394
+      },
+      {
+        "id": "side-02",
+        "cat": "side",
+        "err": null,
+        "pred": {
+          "ticker": "카카오",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 10,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "카카오",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 10,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 10809,
+        "mode": "schema",
+        "tok": 392
+      },
+      {
+        "id": "side-03",
+        "cat": "side",
+        "err": null,
+        "pred": {
+          "ticker": "NAVER",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 15,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "NAVER",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 15,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2754,
+        "mode": "schema",
+        "tok": 395
+      },
+      {
+        "id": "side-04",
+        "cat": "side",
+        "err": null,
+        "pred": {
+          "ticker": "현대차",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": 5,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "현대차",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": 5,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2764,
+        "mode": "schema",
+        "tok": 391
+      },
+      {
+        "id": "side-05",
+        "cat": "side",
+        "err": null,
+        "pred": {
+          "ticker": "에코프로",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 30,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "에코프로",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 30,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2956,
+        "mode": "schema",
+        "tok": 395
+      },
+      {
+        "id": "side-06",
+        "cat": "side",
+        "err": null,
+        "pred": {
+          "ticker": "기아",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 40,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "기아",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 40,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2477,
+        "mode": "schema",
+        "tok": 391
+      },
+      {
+        "id": "side-07",
+        "cat": "side",
+        "err": null,
+        "pred": {
+          "ticker": "삼성SDI",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": 12,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "삼성SDI",
+          "side": "BUY",
+          "order_type": "MARKET",
+          "quantity": 12,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 11124,
+        "mode": "schema",
+        "tok": 394
+      },
+      {
+        "id": "thr-01",
+        "cat": "threshold",
+        "err": null,
+        "pred": {
+          "ticker": "삼성전자",
+          "side": "BUY",
+          "order_type": "LIMIT",
+          "quantity": 100,
+          "amount": null,
+          "price": 260000,
+          "condition": "LE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "삼성전자",
+          "side": "BUY",
+          "order_type": "LIMIT",
+          "quantity": 100,
+          "amount": null,
+          "price": 260000,
+          "condition": "LE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 4049,
+        "mode": "schema",
+        "tok": 404
+      },
+      {
+        "id": "thr-02",
+        "cat": "threshold",
+        "err": null,
+        "pred": {
+          "ticker": "삼성전자",
+          "side": "SELL",
+          "order_type": "LIMIT",
+          "quantity": 100,
+          "amount": null,
+          "price": 260000,
+          "condition": "GE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "삼성전자",
+          "side": "SELL",
+          "order_type": "LIMIT",
+          "quantity": 100,
+          "amount": null,
+          "price": 260000,
+          "condition": "GE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2319,
+        "mode": "schema",
+        "tok": 404
+      },
+      {
+        "id": "thr-03",
+        "cat": "threshold",
+        "err": null,
+        "pred": {
+          "ticker": "카카오",
+          "side": "BUY",
+          "order_type": "LIMIT",
+          "quantity": 30,
+          "amount": null,
+          "price": 40000,
+          "condition": "LE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "카카오",
+          "side": "BUY",
+          "order_type": "LIMIT",
+          "quantity": 30,
+          "amount": null,
+          "price": 40000,
+          "condition": "LE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2610,
+        "mode": "schema",
+        "tok": 401
+      },
+      {
+        "id": "thr-04",
+        "cat": "threshold",
+        "err": null,
+        "pred": {
+          "ticker": "카카오",
+          "side": "SELL",
+          "order_type": "LIMIT",
+          "quantity": 30,
+          "amount": null,
+          "price": 60000,
+          "condition": "GE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "카카오",
+          "side": "SELL",
+          "order_type": "LIMIT",
+          "quantity": 30,
+          "amount": null,
+          "price": 60000,
+          "condition": "GE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2261,
+        "mode": "schema",
+        "tok": 400
+      },
+      {
+        "id": "thr-05",
+        "cat": "threshold",
+        "err": null,
+        "pred": {
+          "ticker": "현대차",
+          "side": "BUY",
+          "order_type": "LIMIT",
+          "quantity": 10,
+          "amount": null,
+          "price": 200000,
+          "condition": "LE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "현대차",
+          "side": "BUY",
+          "order_type": "LIMIT",
+          "quantity": 10,
+          "amount": null,
+          "price": 200000,
+          "condition": "LE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2301,
+        "mode": "schema",
+        "tok": 402
+      },
+      {
+        "id": "thr-06",
+        "cat": "threshold",
+        "err": null,
+        "pred": {
+          "ticker": "현대차",
+          "side": "SELL",
+          "order_type": "LIMIT",
+          "quantity": 10,
+          "amount": null,
+          "price": 250000,
+          "condition": "GE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "현대차",
+          "side": "SELL",
+          "order_type": "LIMIT",
+          "quantity": 10,
+          "amount": null,
+          "price": 250000,
+          "condition": "GE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 3008,
+        "mode": "schema",
+        "tok": 401
+      },
+      {
+        "id": "thr-07",
+        "cat": "threshold",
+        "err": null,
+        "pred": {
+          "ticker": "에코프로",
+          "side": "BUY",
+          "order_type": "LIMIT",
+          "quantity": 40,
+          "amount": null,
+          "price": 120000,
+          "condition": "GE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "에코프로",
+          "side": "BUY",
+          "order_type": "LIMIT",
+          "quantity": 40,
+          "amount": null,
+          "price": 120000,
+          "condition": "GE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 3143,
+        "mode": "schema",
+        "tok": 415
+      },
+      {
+        "id": "thr-08",
+        "cat": "threshold",
+        "err": null,
+        "pred": {
+          "ticker": "기아",
+          "side": "SELL",
+          "order_type": "LIMIT",
+          "quantity": 50,
+          "amount": null,
+          "price": 90000,
+          "condition": "LE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "기아",
+          "side": "SELL",
+          "order_type": "LIMIT",
+          "quantity": 50,
+          "amount": null,
+          "price": 90000,
+          "condition": "LE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2955,
+        "mode": "schema",
+        "tok": 404
+      },
+      {
+        "id": "traj-01",
+        "cat": "trajectory",
+        "err": null,
+        "pred": {
+          "ticker": "삼성전자",
+          "side": "SELL",
+          "order_type": "LIMIT",
+          "quantity": 100,
+          "amount": null,
+          "price": 260000,
+          "condition": "LE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "삼성전자",
+          "side": "SELL",
+          "order_type": "LIMIT",
+          "quantity": 100,
+          "amount": null,
+          "price": 260000,
+          "condition": "GE",
+          "abstain": true
+        },
+        "score": {
+          "exact": false,
+          "critical": true,
+          "field_hits": 6,
+          "n_fields": 8,
+          "abstain_ok": false
+        },
+        "ms": 2206,
+        "mode": "schema",
+        "tok": 441
+      },
+      {
+        "id": "traj-02",
+        "cat": "trajectory",
+        "err": null,
+        "pred": {
+          "ticker": "카카오",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 30,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "카카오",
+          "side": "SELL",
+          "order_type": "MARKET",
+          "quantity": 30,
+          "amount": null,
+          "price": null,
+          "condition": "NONE",
+          "abstain": false
+        },
+        "score": {
+          "exact": true,
+          "critical": false,
+          "field_hits": 8,
+          "n_fields": 8,
+          "abstain_ok": true
+        },
+        "ms": 2110,
+        "mode": "schema",
+        "tok": 426
+      },
+      {
+        "id": "traj-03",
+        "cat": "trajectory",
+        "err": null,
+        "pred": {
+          "ticker": "현대차",
+          "side": "SELL",
+          "order_type": "LIMIT",
+          "quantity": null,
+          "amount": null,
+          "price": 200000,
+          "condition": "LE",
+          "abstain": false
+        },
+        "gold": {
+          "ticker": "현대차",
+          "side": "SELL",
+          "order_type": "LIMIT",
+          "quantity": null,
+          "amount": null,
+          "price": 200000,
+          "condition": "LE",
+          "abstain": true
+        },
+        "score": {
+          "exact": false,
+          "critical": false,
+          "field_hits": 7,
+          "n_fields": 8,
+          "abstain_ok": false
+        },
+        "ms": 2571,
+        "mode": "schema",
+        "tok": 426
+      }
+    ]
+  }
+}
