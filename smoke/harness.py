@@ -17,10 +17,43 @@ from run import call_openrouter, normalize, ORDER_SCHEMA
 # ── 한국어 방향 단서(일반 규칙; 특정 케이스에 맞춘 게 아님) ─────────────────
 SELL_CUES = ["매도", "팔", "처분", "정리", "손절", "익절", "청산", "덜어", "줄여", "줄이", "내놔", "던져", "매각"]
 BUY_CUES  = ["매수", "사", "담", "편입", "물타기", "매집", "사들", "들여"]
-LE_CUES   = ["이하", "미만", "아래", "밑", "떨어지", "이내", "하회", "깨고 내려", "내려가면"]
-GE_CUES   = ["이상", "초과", "위로", "넘", "상회", "돌파", "뚫", "올라가면"]
+LE_CUES   = ["이하", "미만", "아래", "밑", "떨어지", "이내", "하회", "깨고 내려", "내려가면", "최대"]
+GE_CUES   = ["이상", "초과", "위로", "넘", "상회", "돌파", "뚫", "올라가면", "최소"]
 ALLQTY_CUES = ["전량", "전부", "모두", "다 ", "다.", "절반", "반만", "올인", "풀"]
 REF_CUES  = ["그거", "방금", "아까", "그것", "그 종목", "다시", "위 주문", "이전"]  # 직전 주문 참조
+
+
+# ── 부정형 임계 표현 처리 ─────────────────────────────────────────
+# "밑돌지 않으면"(=GE), "넘지 않으면"(=LE), "위로 안 올라가면"(=LE) 처럼
+# 방향 단서에 부정이 붙으면 의미가 뒤집힌다. 단서 주변만 좁게 본다.
+NEG_MARKERS = ["않", "안 ", "못 ", "말고", "없이", "말아"]
+
+def _dir_votes(text, cues, before=5, after=7):
+    """각 단서 출현마다 (부정 여부)를 수집. 부정이면 반대 방향 표로 센다."""
+    votes = []
+    for c in cues:
+        start = 0
+        while True:
+            i = text.find(c, start)
+            if i < 0:
+                break
+            seg = text[max(0, i - before): i] + text[i + len(c): i + len(c) + after]
+            votes.append(any(n in seg for n in NEG_MARKERS))
+            start = i + 1
+    return votes
+
+
+def resolve_direction(text):
+    """부정을 반영한 최종 방향. 'LE' | 'GE' | None(모호/없음)."""
+    le_v = _dir_votes(text, LE_CUES)
+    ge_v = _dir_votes(text, GE_CUES)
+    le = sum(1 for n in le_v if not n) + sum(1 for n in ge_v if n)   # 부정된 GE → LE
+    ge = sum(1 for n in ge_v if not n) + sum(1 for n in le_v if n)   # 부정된 LE → GE
+    if le and not ge:
+        return "LE"
+    if ge and not le:
+        return "GE"
+    return None
 
 HARD_SYS = (
     "너는 한국 증권사의 자연어 주문 파서다. 사용자의 '주문 발화'만을 근거로 아래 JSON 스키마로 변환한다.\n"
@@ -100,15 +133,12 @@ def deterministic_check(utterance, trusted_ctx, parsed):
             p["side"] = None
             p["abstain"] = True
 
-    # 조건(condition): 단일 방향 단서 → 강제(인젝션이 뒤집어도 문자 그대로 복원)
-    if le and not ge:
-        if p.get("condition") != "LE":
-            flags.append("cond_override→LE")
-        p["condition"] = "LE"
-    elif ge and not le:
-        if p.get("condition") != "GE":
-            flags.append("cond_override→GE")
-        p["condition"] = "GE"
+    # 조건(condition): 부정 인지 방향 판정 → 강제(인젝션이 뒤집어도 문자 그대로 복원)
+    d = resolve_direction(text)
+    if d:
+        if p.get("condition") != d:
+            flags.append("cond_override→" + d)
+        p["condition"] = d
 
     # 완전성 게이트
     if not p.get("ticker"):

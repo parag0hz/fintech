@@ -1,0 +1,2994 @@
+{
+  "kothr-029": {
+    "gold": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 52000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "기아 5만2천원 위로 올라가면 5주 매수 걸어줘",
+    "expr": "위로 올라가면",
+    "raw": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 52000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 50000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-007": {
+    "gold": {
+      "ticker": "삼성SDI",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 20,
+      "amount": null,
+      "price": 90000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "삼성SDI 9만원 이하 20주 매수",
+    "expr": "이하",
+    "raw": {
+      "ticker": "삼성SDI",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 20,
+      "price": 90000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "삼성SDI",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 20,
+      "amount": null,
+      "price": 90000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-044": {
+    "gold": {
+      "ticker": "LG에너지솔루션",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 124000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "LG에너지솔루션 12만4천원보다 높으면 30주 매도 주문 넣어줘",
+    "expr": "보다 높으면",
+    "raw": {
+      "ticker": "LG에너지솔루션",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 30,
+      "price": 124000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "LG에너지솔루션",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 124000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-008": {
+    "gold": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "기아 41,500원 이하 10주 매수 주문 넣어줘",
+    "expr": "이하",
+    "raw": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 10,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-020": {
+    "gold": {
+      "ticker": "NAVER",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 412000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "NAVER 41만2천원보다 낮으면 10주 매도 걸어줘",
+    "expr": "보다 낮으면",
+    "raw": {
+      "ticker": null,
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 10,
+      "price": 412000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "NAVER",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 412000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-046": {
+    "gold": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 124000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "POSCO홀딩스 12만4천원보다 높으면 5주 매도",
+    "expr": "보다 높으면",
+    "raw": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 5,
+      "price": 124000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 124000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-004": {
+    "gold": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 412000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "카카오 41만2천원 이하 5주 매수 주문 넣어줘",
+    "expr": "이하",
+    "raw": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 5,
+      "price": 412000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 412000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-009": {
+    "gold": {
+      "ticker": "삼성SDI",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 300,
+      "amount": null,
+      "price": 68000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "삼성SDI 6만8천원 이하면 300주 매수 주문 넣어줘",
+    "expr": "이하면",
+    "raw": {
+      "ticker": "삼성SDI",
+      "side": null,
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 300,
+      "price": 68000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "삼성SDI",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 300,
+      "amount": null,
+      "price": 68000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-034": {
+    "gold": {
+      "ticker": "NAVER",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 305000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "NAVER 30만5천원 위로 올라가면 10주 담아",
+    "expr": "위로 올라가면",
+    "raw": {
+      "ticker": "NAVER",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 10,
+      "price": 305000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "NAVER",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 305000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-019": {
+    "gold": {
+      "ticker": "에코프로",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 124000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "에코프로 12만4천원 아래로 떨어지면 5주 매도 걸어줘",
+    "expr": "아래로 떨어지면",
+    "raw": {
+      "ticker": "에코프로",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 5,
+      "price": 124000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "에코프로",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 124000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-033": {
+    "gold": {
+      "ticker": "삼성SDI",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 26000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "삼성SDI 2만6천원 넘으면 10주 매수",
+    "expr": "넘으면",
+    "raw": {
+      "ticker": "삼성SDI",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 10,
+      "price": 26000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "삼성SDI",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 26000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-018": {
+    "gold": {
+      "ticker": "에코프로",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 300,
+      "amount": null,
+      "price": 412000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "에코프로 41만2천원 미만이면 300주 정리해",
+    "expr": "미만이면",
+    "raw": {
+      "ticker": "에코프로",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 300,
+      "price": 412000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "에코프로",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 300,
+      "amount": null,
+      "price": 412000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-001": {
+    "gold": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 412000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "기아 41만2천원 이하 5주 매수 주문 넣어줘",
+    "expr": "이하",
+    "raw": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 5,
+      "price": 412000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 412000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-016": {
+    "gold": {
+      "ticker": "삼성SDI",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 300,
+      "amount": null,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "삼성SDI 24만원보다 낮으면 300주 매도",
+    "expr": "보다 낮으면",
+    "raw": {
+      "ticker": "삼성SDI",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 300,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "삼성SDI",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 300,
+      "amount": null,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-011": {
+    "gold": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 52000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "카카오 5만2천원 미만이면 30주 매수",
+    "expr": "미만이면",
+    "raw": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 30,
+      "price": 52000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 52000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-017": {
+    "gold": {
+      "ticker": "현대차",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "현대차 24만원 이하로 내려오면 10주 매도",
+    "expr": "이하로 내려오면",
+    "raw": {
+      "ticker": "현대차",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": null,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "현대차",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-040": {
+    "gold": {
+      "ticker": "LG에너지솔루션",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 26000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "LG에너지솔루션 2만6천원 아래로 안 내려가면 30주 매도 주문 넣어줘",
+    "expr": "아래로 안 내려가면",
+    "raw": {
+      "ticker": "LG에너지솔루션",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 30,
+      "price": 26000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "LG에너지솔루션",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 26000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-027": {
+    "gold": {
+      "ticker": "NAVER",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 50,
+      "amount": null,
+      "price": 90000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "NAVER 9만원 위로 올라가면 50주 매수",
+    "expr": "위로 올라가면",
+    "raw": {
+      "ticker": "NAVER",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 50,
+      "price": 90000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "NAVER",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 50,
+      "amount": null,
+      "price": 90000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-002": {
+    "gold": {
+      "ticker": "삼성전자",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 200,
+      "amount": null,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "삼성전자 41,500원 이하 200주 매수 걸어줘",
+    "expr": "이하",
+    "raw": {
+      "ticker": "삼성전자",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 200,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "삼성전자",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 200,
+      "amount": null,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-010": {
+    "gold": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 300,
+      "amount": null,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "기아 24만원 하회하면 300주 담아",
+    "expr": "하회하면",
+    "raw": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 300,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 300,
+      "amount": null,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-036": {
+    "gold": {
+      "ticker": "NAVER",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 100,
+      "amount": null,
+      "price": 90000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "NAVER 9만원 돌파하면 100주 매도 주문 넣어줘",
+    "expr": "돌파하면",
+    "raw": {
+      "ticker": "NAVER",
+      "side": null,
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 100,
+      "price": 90000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "NAVER",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 100,
+      "amount": null,
+      "price": 90000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-031": {
+    "gold": {
+      "ticker": "POSCO홀딩스",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 178000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "POSCO홀딩스 17만8천원 이상 5주 사줘",
+    "expr": "이상",
+    "raw": {
+      "ticker": "POSCO홀딩스",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 5,
+      "price": 178000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "POSCO홀딩스",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 178000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-015": {
+    "gold": {
+      "ticker": "삼성전자",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 100,
+      "amount": null,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "삼성전자 41,500원 하회하면 100주 정리해",
+    "expr": "하회하면",
+    "raw": {
+      "ticker": "삼성전자",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 100,
+      "amount": null,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "삼성전자",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 100,
+      "amount": null,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-041": {
+    "gold": {
+      "ticker": "NAVER",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 305000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "NAVER 30만5천원 넘어서면 5주 매도 주문 넣어줘",
+    "expr": "넘어서면",
+    "raw": {
+      "ticker": "NAVER",
+      "side": null,
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 5,
+      "price": 305000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "NAVER",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 305000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-032": {
+    "gold": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 20,
+      "amount": null,
+      "price": 240000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "카카오 24만원 이상으로 올라가면 20주 매수",
+    "expr": "이상으로 올라가면",
+    "raw": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 20,
+      "price": 240000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 20,
+      "amount": null,
+      "price": 240000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-024": {
+    "gold": {
+      "ticker": "LG에너지솔루션",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 200,
+      "amount": null,
+      "price": 90000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "LG에너지솔루션 9만원 위로 뚫으면 200주 담아",
+    "expr": "위로 뚫으면",
+    "raw": {
+      "ticker": "LG에너지솔루션",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 200,
+      "price": 90000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "LG에너지솔루션",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 200,
+      "amount": null,
+      "price": 90000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-025": {
+    "gold": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 52000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "카카오 5만2천원 돌파하면 10주 사줘",
+    "expr": "돌파하면",
+    "raw": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 10,
+      "price": 52000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 52000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-038": {
+    "gold": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 50,
+      "amount": null,
+      "price": 240000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "POSCO홀딩스 24만원 초과 50주 매도",
+    "expr": "초과",
+    "raw": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 50,
+      "amount": null,
+      "price": 240000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 50,
+      "amount": null,
+      "price": 240000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-003": {
+    "gold": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 200,
+      "amount": null,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "카카오 41,500원 이하로 내려오면 200주 매수",
+    "expr": "이하로 내려오면",
+    "raw": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 200,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 200,
+      "amount": null,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-026": {
+    "gold": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 68000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "카카오 6만8천원 밑돌지 않으면 5주 매수 걸어줘",
+    "expr": "밑돌지 않으면",
+    "raw": {
+      "ticker": "카카오",
+      "side": null,
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 5,
+      "price": 68000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 68000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-037": {
+    "gold": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 41500,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "POSCO홀딩스 41,500원 넘어서면 10주 매도 걸어줘",
+    "expr": "넘어서면",
+    "raw": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 10,
+      "price": 41500,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 41500,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-043": {
+    "gold": {
+      "ticker": "NAVER",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 124000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "NAVER 12만4천원 넘어서면 30주 매도 주문 넣어줘",
+    "expr": "넘어서면",
+    "raw": {
+      "ticker": "NAVER",
+      "side": null,
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 30,
+      "price": 124000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "NAVER",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 124000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-035": {
+    "gold": {
+      "ticker": "삼성전자",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 41500,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "삼성전자 41,500원 상회하면 30주 매수 주문 넣어줘",
+    "expr": "상회하면",
+    "raw": {
+      "ticker": null,
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 30,
+      "price": 41500,
+      "condition": "NONE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "삼성전자",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 41500,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-045": {
+    "gold": {
+      "ticker": "카카오",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 178000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "카카오 17만8천원 이상 30주 팔아",
+    "expr": "이상",
+    "raw": {
+      "ticker": "카카오",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 30,
+      "price": 178000,
+      "condition": "NONE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "카카오",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 178000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-000": {
+    "gold": {
+      "ticker": "NAVER",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 178000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "NAVER 17만8천원보다 작으면 5주 매수",
+    "expr": "보다 작으면",
+    "raw": {
+      "ticker": "NAVER",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 5,
+      "price": 178000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "NAVER",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 178000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-039": {
+    "gold": {
+      "ticker": "SK하이닉스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 50,
+      "amount": null,
+      "price": 124000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "SK하이닉스 12만4천원 밑돌지 않으면 50주 매도 걸어줘",
+    "expr": "밑돌지 않으면",
+    "raw": {
+      "ticker": "SK하이닉스",
+      "side": null,
+      "order_type": "LIMIT",
+      "quantity": 50,
+      "amount": null,
+      "price": 124000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "SK하이닉스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 50,
+      "amount": null,
+      "price": 124000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-021": {
+    "gold": {
+      "ticker": "카카오",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 20,
+      "amount": null,
+      "price": 90000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "카카오 9만원 이하면 20주 팔아",
+    "expr": "이하면",
+    "raw": {
+      "ticker": null,
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 20,
+      "price": 90000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "카카오",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 20,
+      "amount": null,
+      "price": 90000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-013": {
+    "gold": {
+      "ticker": "삼성SDI",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "삼성SDI 41,500원 미만이면 10주 매도 주문 넣어줘",
+    "expr": "미만이면",
+    "raw": {
+      "ticker": "삼성SDI",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 10,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "삼성SDI",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-012": {
+    "gold": {
+      "ticker": "LG에너지솔루션",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 100,
+      "amount": null,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "LG에너지솔루션 24만원 미만이면 100주 매도 걸어줘",
+    "expr": "미만이면",
+    "raw": {
+      "ticker": "LG에너지솔루션",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 100,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "LG에너지솔루션",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 100,
+      "amount": null,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-030": {
+    "gold": {
+      "ticker": "셀트리온",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 200,
+      "amount": null,
+      "price": 178000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "셀트리온 17만8천원보다 높으면 200주 매수 걸어줘",
+    "expr": "보다 높으면",
+    "raw": {
+      "ticker": "셀트리온",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 200,
+      "price": 178000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "셀트리온",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 200,
+      "amount": null,
+      "price": 178000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-042": {
+    "gold": {
+      "ticker": "에코프로",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 50,
+      "amount": null,
+      "price": 41500,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "에코프로 41,500원 초과하면 50주 매도 주문 넣어줘",
+    "expr": "초과하면",
+    "raw": {
+      "ticker": "에코프로",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 50,
+      "price": 41500,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "에코프로",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 50,
+      "amount": null,
+      "price": 41500,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-006": {
+    "gold": {
+      "ticker": "현대차",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 20,
+      "amount": null,
+      "price": 178000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "현대차 17만8천원 넘지 않으면 20주 매수 주문 넣어줘",
+    "expr": "넘지 않으면",
+    "raw": {
+      "ticker": "현대차",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 20,
+      "price": 178000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "현대차",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 20,
+      "amount": null,
+      "price": 178000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-005": {
+    "gold": {
+      "ticker": "삼성전자",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 68000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "삼성전자 6만8천원 아래로 떨어지면 5주 매수 주문 넣어줘",
+    "expr": "아래로 떨어지면",
+    "raw": {
+      "ticker": "삼성전자",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 5,
+      "price": 68000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "삼성전자",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 68000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-014": {
+    "gold": {
+      "ticker": "NAVER",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 20,
+      "amount": null,
+      "price": 124000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "NAVER 12만4천원 하회하면 20주 매도 걸어줘",
+    "expr": "하회하면",
+    "raw": {
+      "ticker": "NAVER",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 20,
+      "price": 124000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "NAVER",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 20,
+      "amount": null,
+      "price": 124000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-023": {
+    "gold": {
+      "ticker": "셀트리온",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 50,
+      "amount": null,
+      "price": 305000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "셀트리온 30만5천원 밑으로 내려가면 50주 팔아",
+    "expr": "밑으로 내려가면",
+    "raw": {
+      "ticker": "셀트리온",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 50,
+      "price": 305000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "셀트리온",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 50,
+      "amount": null,
+      "price": 305000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-047": {
+    "gold": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 90000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "POSCO홀딩스 9만원 초과 30주 매도 주문 넣어줘",
+    "expr": "초과",
+    "raw": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 90000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 90000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-028": {
+    "gold": {
+      "ticker": "셀트리온",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 100,
+      "amount": null,
+      "price": 305000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "셀트리온 30만5천원 밑돌지 않으면 100주 매수 주문 넣어줘",
+    "expr": "밑돌지 않으면",
+    "raw": {
+      "ticker": "셀트리온",
+      "side": null,
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 100,
+      "price": 305000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "셀트리온",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 100,
+      "amount": null,
+      "price": 305000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-022": {
+    "gold": {
+      "ticker": "셀트리온",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "셀트리온 24만원 아래로 떨어지면 10주 팔아",
+    "expr": "아래로 떨어지면",
+    "raw": {
+      "ticker": "셀트리온",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 10,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "셀트리온",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-008-flip": {
+    "gold": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 41500,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "기아 41,500원 최소 10주 매수 주문 넣어줘",
+    "expr": "최소",
+    "raw": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 10,
+      "price": 41500,
+      "condition": "NONE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 41500,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-044-flip": {
+    "gold": {
+      "ticker": "LG에너지솔루션",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 124000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "LG에너지솔루션 12만4천원밑돌면 30주 매도 주문 넣어줘",
+    "expr": "밑돌면",
+    "raw": {
+      "ticker": "LG에너지솔루션",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 30,
+      "price": 124000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "LG에너지솔루션",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 124000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-007-flip": {
+    "gold": {
+      "ticker": "삼성SDI",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 20,
+      "amount": null,
+      "price": 90000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "삼성SDI 9만원 최소 20주 매수",
+    "expr": "최소",
+    "raw": {
+      "ticker": "삼성SDI",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 20,
+      "price": 90000,
+      "condition": "NONE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "삼성SDI",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 20,
+      "amount": null,
+      "price": 90000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-029-flip": {
+    "gold": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 52000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "기아 5만2천원 보다 낮으면 5주 매수 걸어줘",
+    "expr": "보다 낮으면",
+    "raw": {
+      "ticker": "기아",
+      "side": null,
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 5,
+      "price": 52000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 52000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-020-flip": {
+    "gold": {
+      "ticker": "NAVER",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 412000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "NAVER 41만2천원넘으면 10주 매도 걸어줘",
+    "expr": "넘으면",
+    "raw": {
+      "ticker": null,
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 10,
+      "price": 412000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "NAVER",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 412000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-046-flip": {
+    "gold": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 124000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "POSCO홀딩스 12만4천원밑돌면 5주 매도",
+    "expr": "밑돌면",
+    "raw": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 5,
+      "price": 124000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 124000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-004-flip": {
+    "gold": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 412000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "카카오 41만2천원 이상으로 올라가면 5주 매수 주문 넣어줘",
+    "expr": "이상으로 올라가면",
+    "raw": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 5,
+      "price": 412000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 412000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-034-flip": {
+    "gold": {
+      "ticker": "NAVER",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 305000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "NAVER 30만5천원 밑돌면 10주 담아",
+    "expr": "밑돌면",
+    "raw": {
+      "ticker": "NAVER",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 10,
+      "price": 305000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "NAVER",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 305000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-009-flip": {
+    "gold": {
+      "ticker": "삼성SDI",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 300,
+      "amount": null,
+      "price": 68000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "삼성SDI 6만8천원 이상이면 300주 매수 주문 넣어줘",
+    "expr": "이상이면",
+    "raw": {
+      "ticker": "삼성SDI",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 300,
+      "price": 68000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "삼성SDI",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 300,
+      "amount": null,
+      "price": 68000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-019-flip": {
+    "gold": {
+      "ticker": "에코프로",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 124000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "에코프로 12만4천원 돌파하면 5주 매도 걸어줘",
+    "expr": "돌파하면",
+    "raw": {
+      "ticker": "에코프로",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 5,
+      "price": 124000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "에코프로",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 124000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-033-flip": {
+    "gold": {
+      "ticker": "삼성SDI",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 26000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "삼성SDI 2만6천원 보다 작으면 10주 매수",
+    "expr": "보다 작으면",
+    "raw": {
+      "ticker": null,
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 10,
+      "price": 26000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "삼성SDI",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 26000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-018-flip": {
+    "gold": {
+      "ticker": "에코프로",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 300,
+      "amount": null,
+      "price": 412000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "에코프로 41만2천원 초과하면 300주 정리해",
+    "expr": "초과하면",
+    "raw": {
+      "ticker": "에코프로",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 300,
+      "price": 412000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "에코프로",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 300,
+      "amount": null,
+      "price": 412000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-016-flip": {
+    "gold": {
+      "ticker": "삼성SDI",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 300,
+      "amount": null,
+      "price": 240000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "삼성SDI 24만원보다 높으면 300주 매도",
+    "expr": "보다 높으면",
+    "raw": {
+      "ticker": "삼성SDI",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 300,
+      "price": 240000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "삼성SDI",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 300,
+      "amount": null,
+      "price": 240000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-001-flip": {
+    "gold": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 412000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "기아 41만2천원 이상 5주 매수 주문 넣어줘",
+    "expr": "이상",
+    "raw": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 5,
+      "price": 412000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 412000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-011-flip": {
+    "gold": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 52000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "카카오 5만2천원 보다 높으면 30주 매수",
+    "expr": "보다 높으면",
+    "raw": {
+      "ticker": null,
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 30,
+      "price": 52000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 52000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-017-flip": {
+    "gold": {
+      "ticker": "현대차",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 240000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "현대차 24만원 이상 10주 매도",
+    "expr": "이상",
+    "raw": {
+      "ticker": null,
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 10,
+      "price": 240000,
+      "condition": "NONE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "현대차",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 240000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-040-flip": {
+    "gold": {
+      "ticker": "LG에너지솔루션",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 26000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "LG에너지솔루션 2만6천원 위로 안 올라가면 30주 매도 주문 넣어줘",
+    "expr": "위로 안 올라가면",
+    "raw": {
+      "ticker": "LG에너지솔루션",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 30,
+      "price": 26000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "LG에너지솔루션",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 26000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-027-flip": {
+    "gold": {
+      "ticker": "NAVER",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 50,
+      "amount": null,
+      "price": 90000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "NAVER 9만원 보다 작으면 50주 매수",
+    "expr": "보다 작으면",
+    "raw": {
+      "ticker": null,
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 50,
+      "price": 90000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "NAVER",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 50,
+      "amount": null,
+      "price": 90000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-002-flip": {
+    "gold": {
+      "ticker": "삼성전자",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 200,
+      "amount": null,
+      "price": 41500,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "삼성전자 41,500원 이상 200주 매수 걸어줘",
+    "expr": "이상",
+    "raw": {
+      "ticker": "삼성전자",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 200,
+      "price": 41500,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "삼성전자",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 200,
+      "amount": null,
+      "price": 41500,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-010-flip": {
+    "gold": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 300,
+      "amount": null,
+      "price": 240000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "기아 24만원 보다 높으면 300주 담아",
+    "expr": "보다 높으면",
+    "raw": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 300,
+      "price": 240000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "기아",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 300,
+      "amount": null,
+      "price": 240000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-031-flip": {
+    "gold": {
+      "ticker": "POSCO홀딩스",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 178000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "POSCO홀딩스 17만8천원 이하 5주 사줘",
+    "expr": "이하",
+    "raw": {
+      "ticker": "POSCO홀딩스",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 5,
+      "price": 178000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "POSCO홀딩스",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 178000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-036-flip": {
+    "gold": {
+      "ticker": "NAVER",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 100,
+      "amount": null,
+      "price": 90000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "NAVER 9만원 미만이면 100주 매도 주문 넣어줘",
+    "expr": "미만이면",
+    "raw": {
+      "ticker": "NAVER",
+      "side": null,
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 100,
+      "price": 90000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "NAVER",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 100,
+      "amount": null,
+      "price": 90000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-015-flip": {
+    "gold": {
+      "ticker": "삼성전자",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 100,
+      "amount": null,
+      "price": 41500,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "삼성전자 41,500원 초과 100주 정리해",
+    "expr": "초과",
+    "raw": {
+      "ticker": null,
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 100,
+      "price": 41500,
+      "condition": "NONE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "삼성전자",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 100,
+      "amount": null,
+      "price": 41500,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-041-flip": {
+    "gold": {
+      "ticker": "NAVER",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 305000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "NAVER 30만5천원 보다 낮으면 5주 매도 주문 넣어줘",
+    "expr": "보다 낮으면",
+    "raw": {
+      "ticker": "NAVER",
+      "side": null,
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 5,
+      "price": 305000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "NAVER",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 305000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-024-flip": {
+    "gold": {
+      "ticker": "LG에너지솔루션",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 200,
+      "amount": null,
+      "price": 90000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "LG에너지솔루션 9만원 보다 낮으면 200주 담아",
+    "expr": "보다 낮으면",
+    "raw": {
+      "ticker": "LG에너지솔루션",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 200,
+      "price": 90000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "LG에너지솔루션",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 200,
+      "amount": null,
+      "price": 90000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-032-flip": {
+    "gold": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 20,
+      "amount": null,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "카카오 24만원 이하 20주 매수",
+    "expr": "이하",
+    "raw": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 20,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 20,
+      "amount": null,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-025-flip": {
+    "gold": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 52000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "카카오 5만2천원 밑돌면 10주 사줘",
+    "expr": "밑돌면",
+    "raw": {
+      "ticker": null,
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 10,
+      "price": 52000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 52000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-038-flip": {
+    "gold": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 50,
+      "amount": null,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "POSCO홀딩스 24만원 하회하면 50주 매도",
+    "expr": "하회하면",
+    "raw": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 50,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 50,
+      "amount": null,
+      "price": 240000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-026-flip": {
+    "gold": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 68000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "카카오 6만8천원 이하 5주 매수 걸어줘",
+    "expr": "이하",
+    "raw": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 68000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 68000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-003-flip": {
+    "gold": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 200,
+      "amount": null,
+      "price": 41500,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "카카오 41,500원 최소 200주 매수",
+    "expr": "최소",
+    "raw": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 200,
+      "price": 41500,
+      "condition": "NONE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "카카오",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 200,
+      "amount": null,
+      "price": 41500,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-037-flip": {
+    "gold": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "POSCO홀딩스 41,500원 보다 낮으면 10주 매도 걸어줘",
+    "expr": "보다 낮으면",
+    "raw": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 10,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "POSCO홀딩스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-043-flip": {
+    "gold": {
+      "ticker": "NAVER",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 124000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "NAVER 12만4천원 아래로 떨어지면 30주 매도 주문 넣어줘",
+    "expr": "아래로 떨어지면",
+    "raw": {
+      "ticker": "NAVER",
+      "side": null,
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 30,
+      "price": 124000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "NAVER",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 124000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-045-flip": {
+    "gold": {
+      "ticker": "카카오",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 178000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "카카오 17만8천원 위로 안 올라가면 30주 팔아",
+    "expr": "위로 안 올라가면",
+    "raw": {
+      "ticker": "카카오",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 30,
+      "price": 178000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "카카오",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 178000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-035-flip": {
+    "gold": {
+      "ticker": "삼성전자",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "삼성전자 41,500원 미만 30주 매수 주문 넣어줘",
+    "expr": "미만",
+    "raw": {
+      "ticker": "삼성전자",
+      "side": null,
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 30,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "삼성전자",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 30,
+      "amount": null,
+      "price": 41500,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-000-flip": {
+    "gold": {
+      "ticker": "NAVER",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 178000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "NAVER 17만8천원위로 올라가면 5주 매수",
+    "expr": "위로 올라가면",
+    "raw": {
+      "ticker": "NAVER",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 5,
+      "price": 178000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "NAVER",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 5,
+      "amount": null,
+      "price": 178000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-039-flip": {
+    "gold": {
+      "ticker": "SK하이닉스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 50,
+      "amount": null,
+      "price": 124000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "SK하이닉스 12만4천원 이하면 50주 매도 걸어줘",
+    "expr": "이하면",
+    "raw": {
+      "ticker": "SK하이닉스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 50,
+      "price": 124000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "SK하이닉스",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 50,
+      "amount": null,
+      "price": 124000,
+      "condition": "LE",
+      "abstain": false
+    }
+  },
+  "kothr-021-flip": {
+    "gold": {
+      "ticker": "카카오",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 20,
+      "amount": null,
+      "price": 90000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "카카오 9만원 밑돌지 않으면 20주 팔아",
+    "expr": "밑돌지 않으면",
+    "raw": {
+      "ticker": "카카오",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 20,
+      "price": 90000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "카카오",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 20,
+      "amount": null,
+      "price": 90000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-012-flip": {
+    "gold": {
+      "ticker": "LG에너지솔루션",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 100,
+      "amount": null,
+      "price": 240000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "LG에너지솔루션 24만원 초과 100주 매도 걸어줘",
+    "expr": "초과",
+    "raw": {
+      "ticker": "LG에너지솔루션",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 100,
+      "price": 240000,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "LG에너지솔루션",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 100,
+      "amount": null,
+      "price": 240000,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-013-flip": {
+    "gold": {
+      "ticker": "삼성SDI",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 41500,
+      "condition": "GE",
+      "abstain": false
+    },
+    "nl": "삼성SDI 41,500원 보다 크면 10주 매도 주문 넣어줘",
+    "expr": "보다 크면",
+    "raw": {
+      "ticker": "삼성SDI",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 10,
+      "price": 41500,
+      "condition": "GE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "삼성SDI",
+      "side": "SELL",
+      "order_type": "LIMIT",
+      "quantity": 10,
+      "amount": null,
+      "price": 41500,
+      "condition": "GE",
+      "abstain": false
+    }
+  },
+  "kothr-030-flip": {
+    "gold": {
+      "ticker": "셀트리온",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 200,
+      "amount": null,
+      "price": 178000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "nl": "셀트리온 17만8천원미만이면 200주 매수 걸어줘",
+    "expr": "미만이면",
+    "raw": {
+      "ticker": "셀트리온",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": null,
+      "amount": 200,
+      "price": 178000,
+      "condition": "LE",
+      "abstain": false
+    },
+    "harness": {
+      "ticker": "셀트리온",
+      "side": "BUY",
+      "order_type": "LIMIT",
+      "quantity": 200,
+      "amount": null,
+      "price": 178000,
+      "condition": "LE",
+      "abstain": false
+    }
+  }
+}

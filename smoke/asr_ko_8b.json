@@ -1,0 +1,12 @@
+{
+  "('bull-derived', 'qwen/qwen3-8b', 'raw')": [
+    23,
+    88,
+    0
+  ],
+  "('bull-derived', 'qwen/qwen3-8b', 'harness')": [
+    11,
+    88,
+    0
+  ]
+}

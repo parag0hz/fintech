@@ -1,0 +1,294 @@
+{
+  "GE": [
+    {
+      "ko": "이상",
+      "op": ">=",
+      "inclusive": true,
+      "src_cn": "以上",
+      "bull_freq": 44,
+      "condition": "GE"
+    },
+    {
+      "ko": "이상이면",
+      "op": ">=",
+      "inclusive": true,
+      "src_cn": "以上",
+      "bull_freq": 44,
+      "condition": "GE"
+    },
+    {
+      "ko": "이상으로 올라가면",
+      "op": ">=",
+      "inclusive": true,
+      "src_cn": "以上",
+      "bull_freq": 44,
+      "condition": "GE"
+    },
+    {
+      "ko": "이상",
+      "op": ">=",
+      "inclusive": true,
+      "src_cn": "不低于",
+      "bull_freq": 1,
+      "condition": "GE"
+    },
+    {
+      "ko": "밑돌지 않으면",
+      "op": ">=",
+      "inclusive": true,
+      "src_cn": "不低于",
+      "bull_freq": 1,
+      "condition": "GE"
+    },
+    {
+      "ko": "아래로 안 내려가면",
+      "op": ">=",
+      "inclusive": true,
+      "src_cn": "不低于",
+      "bull_freq": 1,
+      "condition": "GE"
+    },
+    {
+      "ko": "이상",
+      "op": ">=",
+      "inclusive": true,
+      "src_cn": "不少于",
+      "bull_freq": 2,
+      "condition": "GE"
+    },
+    {
+      "ko": "최소",
+      "op": ">=",
+      "inclusive": true,
+      "src_cn": "不少于",
+      "bull_freq": 2,
+      "condition": "GE"
+    },
+    {
+      "ko": "초과",
+      "op": ">",
+      "inclusive": false,
+      "src_cn": "超过",
+      "bull_freq": 660,
+      "condition": "GE"
+    },
+    {
+      "ko": "초과하면",
+      "op": ">",
+      "inclusive": false,
+      "src_cn": "超过",
+      "bull_freq": 660,
+      "condition": "GE"
+    },
+    {
+      "ko": "넘으면",
+      "op": ">",
+      "inclusive": false,
+      "src_cn": "超过",
+      "bull_freq": 660,
+      "condition": "GE"
+    },
+    {
+      "ko": "넘어서면",
+      "op": ">",
+      "inclusive": false,
+      "src_cn": "超过",
+      "bull_freq": 660,
+      "condition": "GE"
+    },
+    {
+      "ko": "돌파하면",
+      "op": ">",
+      "inclusive": false,
+      "src_cn": "超过",
+      "bull_freq": 660,
+      "condition": "GE"
+    },
+    {
+      "ko": "위로 뚫으면",
+      "op": ">",
+      "inclusive": false,
+      "src_cn": "超过",
+      "bull_freq": 660,
+      "condition": "GE"
+    },
+    {
+      "ko": "초과",
+      "op": ">",
+      "inclusive": false,
+      "src_cn": "大于",
+      "bull_freq": 165,
+      "condition": "GE"
+    },
+    {
+      "ko": "보다 크면",
+      "op": ">",
+      "inclusive": false,
+      "src_cn": "大于",
+      "bull_freq": 165,
+      "condition": "GE"
+    },
+    {
+      "ko": "보다 높으면",
+      "op": ">",
+      "inclusive": false,
+      "src_cn": "大于",
+      "bull_freq": 165,
+      "condition": "GE"
+    },
+    {
+      "ko": "보다 높으면",
+      "op": ">",
+      "inclusive": false,
+      "src_cn": "高于",
+      "bull_freq": 13,
+      "condition": "GE"
+    },
+    {
+      "ko": "위로 올라가면",
+      "op": ">",
+      "inclusive": false,
+      "src_cn": "高于",
+      "bull_freq": 13,
+      "condition": "GE"
+    },
+    {
+      "ko": "상회하면",
+      "op": ">",
+      "inclusive": false,
+      "src_cn": "高于",
+      "bull_freq": 13,
+      "condition": "GE"
+    }
+  ],
+  "LE": [
+    {
+      "ko": "이하",
+      "op": "<=",
+      "inclusive": true,
+      "src_cn": "以下",
+      "bull_freq": 0,
+      "condition": "LE"
+    },
+    {
+      "ko": "이하면",
+      "op": "<=",
+      "inclusive": true,
+      "src_cn": "以下",
+      "bull_freq": 0,
+      "condition": "LE"
+    },
+    {
+      "ko": "이하로 내려오면",
+      "op": "<=",
+      "inclusive": true,
+      "src_cn": "以下",
+      "bull_freq": 0,
+      "condition": "LE"
+    },
+    {
+      "ko": "이하",
+      "op": "<=",
+      "inclusive": true,
+      "src_cn": "不超过",
+      "bull_freq": 7,
+      "condition": "LE"
+    },
+    {
+      "ko": "넘지 않으면",
+      "op": "<=",
+      "inclusive": true,
+      "src_cn": "不超过",
+      "bull_freq": 7,
+      "condition": "LE"
+    },
+    {
+      "ko": "초과하지 않으면",
+      "op": "<=",
+      "inclusive": true,
+      "src_cn": "不超过",
+      "bull_freq": 7,
+      "condition": "LE"
+    },
+    {
+      "ko": "이하",
+      "op": "<=",
+      "inclusive": true,
+      "src_cn": "不高于",
+      "bull_freq": 3,
+      "condition": "LE"
+    },
+    {
+      "ko": "위로 안 올라가면",
+      "op": "<=",
+      "inclusive": true,
+      "src_cn": "不高于",
+      "bull_freq": 3,
+      "condition": "LE"
+    },
+    {
+      "ko": "미만",
+      "op": "<",
+      "inclusive": false,
+      "src_cn": "小于",
+      "bull_freq": 46,
+      "condition": "LE"
+    },
+    {
+      "ko": "미만이면",
+      "op": "<",
+      "inclusive": false,
+      "src_cn": "小于",
+      "bull_freq": 46,
+      "condition": "LE"
+    },
+    {
+      "ko": "보다 작으면",
+      "op": "<",
+      "inclusive": false,
+      "src_cn": "小于",
+      "bull_freq": 46,
+      "condition": "LE"
+    },
+    {
+      "ko": "보다 낮으면",
+      "op": "<",
+      "inclusive": false,
+      "src_cn": "低于",
+      "bull_freq": 36,
+      "condition": "LE"
+    },
+    {
+      "ko": "아래로 떨어지면",
+      "op": "<",
+      "inclusive": false,
+      "src_cn": "低于",
+      "bull_freq": 36,
+      "condition": "LE"
+    },
+    {
+      "ko": "하회하면",
+      "op": "<",
+      "inclusive": false,
+      "src_cn": "低于",
+      "bull_freq": 36,
+      "condition": "LE"
+    },
+    {
+      "ko": "밑으로 내려가면",
+      "op": "<",
+      "inclusive": false,
+      "src_cn": "低于",
+      "bull_freq": 36,
+      "condition": "LE"
+    },
+    {
+      "ko": "밑돌면",
+      "op": "<",
+      "inclusive": false,
+      "src_cn": "低于",
+      "bull_freq": 36,
+      "condition": "LE"
+    }
+  ]
+}
