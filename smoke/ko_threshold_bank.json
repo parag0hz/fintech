@@ -57,14 +57,6 @@
       "condition": "GE"
     },
     {
-      "ko": "최소",
-      "op": ">=",
-      "inclusive": true,
-      "src_cn": "不少于",
-      "bull_freq": 2,
-      "condition": "GE"
-    },
-    {
       "ko": "초과",
       "op": ">",
       "inclusive": false,

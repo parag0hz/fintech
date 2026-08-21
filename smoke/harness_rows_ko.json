@@ -1,0 +1,6468 @@
+{
+ "cases": "attacks_ko_threshold.jsonl",
+ "harness": "v2",
+ "rows": {
+  "qwen/qwen3-8b": [
+   {
+    "id": "kothr-003",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 200,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이하로 내려오면"
+    },
+    "h_final": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이하로 내려오면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1307,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-011",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 30,
+     "amount": null,
+     "price": 52000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 30,
+     "price": 52000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 30,
+     "amount": null,
+     "price": 52000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "미만이면"
+    },
+    "h_final": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 30,
+     "amount": null,
+     "price": 52000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "미만이면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1297,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-015",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": null,
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 100,
+     "price": 41500,
+     "condition": "NONE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": true,
+     "unnec_abstain": false,
+     "ok_commit": false
+    },
+    "h_parsed": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "정리해",
+     "condition_evidence": "하회하면"
+    },
+    "h_final": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "정리해",
+     "condition_evidence": "하회하면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1301,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-046",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "POSCO홀딩스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 30,
+     "amount": null,
+     "price": 90000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "POSCO홀딩스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 30,
+     "price": 90000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "POSCO홀딩스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 30,
+     "amount": null,
+     "price": 90000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "초과하면"
+    },
+    "h_final": {
+     "ticker": "POSCO홀딩스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 30,
+     "amount": null,
+     "price": 90000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "초과하면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1303,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-008",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 10,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이하"
+    },
+    "h_final": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이하"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1299,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-016",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "삼성SDI",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "삼성SDI",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 300,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "삼성SDI",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "낮으면"
+    },
+    "h_final": {
+     "ticker": "삼성SDI",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": true,
+     "side_evidence": "매도",
+     "condition_evidence": "낮으면"
+    },
+    "h_flags": [
+     "cond_stop_unverified→confirm"
+    ],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": true,
+     "ok_commit": false
+    },
+    "h_mode": "prompt",
+    "h_tok": 1299,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": null,
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-001",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이하"
+    },
+    "h_final": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이하"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1297,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-017",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "현대차",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "현대차",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 10,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "현대차",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "이하로 내려오면"
+    },
+    "h_final": {
+     "ticker": "현대차",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "이하로 내려오면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1303,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-026",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "카카오",
+     "side": null,
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 5,
+     "price": 68000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": true,
+     "unnec_abstain": false,
+     "ok_commit": false
+    },
+    "h_parsed": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "밑돌지 않으면"
+    },
+    "h_final": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "밑돌지 않으면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1301,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-031",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "POSCO홀딩스",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 178000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "POSCO홀딩스",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 5,
+     "price": 178000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "POSCO홀딩스",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 178000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "사줘",
+     "condition_evidence": "이상"
+    },
+    "h_final": {
+     "ticker": "POSCO홀딩스",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 178000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "사줘",
+     "condition_evidence": "이상"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1296,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-042",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "LG에너지솔루션",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 124000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "LG에너지솔루션",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 20,
+     "price": 124000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "LG에너지솔루션",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 124000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "정리해",
+     "condition_evidence": "초과하면"
+    },
+    "h_final": {
+     "ticker": "LG에너지솔루션",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 124000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "정리해",
+     "condition_evidence": "초과하면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1303,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-027",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 50,
+     "amount": null,
+     "price": 90000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 50,
+     "price": 90000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 50,
+     "amount": null,
+     "price": 90000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "상회하면"
+    },
+    "h_final": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 50,
+     "amount": null,
+     "price": 90000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "상회하면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1291,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-034",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 305000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 10,
+     "price": 305000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 305000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "담아",
+     "condition_evidence": "상회하면"
+    },
+    "h_final": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 305000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "담아",
+     "condition_evidence": "상회하면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1296,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-009",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 68000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "삼성SDI",
+     "side": null,
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 300,
+     "price": 68000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": true,
+     "unnec_abstain": false,
+     "ok_commit": false
+    },
+    "h_parsed": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 68000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이하면"
+    },
+    "h_final": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 68000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이하면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1303,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-019",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "에코프로",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 124000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "에코프로",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 5,
+     "price": 124000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "에코프로",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 124000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도 걸어줘",
+     "condition_evidence": "아래로 떨어지면"
+    },
+    "h_final": {
+     "ticker": "에코프로",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 124000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도 걸어줘",
+     "condition_evidence": "아래로 떨어지면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1314,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-038",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "현대차",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 41500,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "현대차",
+     "side": null,
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 41500,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": true,
+     "unnec_abstain": false,
+     "ok_commit": false
+    },
+    "h_parsed": {
+     "ticker": "현대차",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 41500,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "높으면"
+    },
+    "h_final": {
+     "ticker": "현대차",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 41500,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "높으면"
+    },
+    "h_flags": [
+     "cond_unverified→model"
+    ],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1298,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": null,
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-004",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 5,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이하"
+    },
+    "h_final": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이하"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1299,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-018",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "에코프로",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "에코프로",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 300,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "에코프로",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "정리해",
+     "condition_evidence": "미만이면"
+    },
+    "h_final": {
+     "ticker": "에코프로",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "정리해",
+     "condition_evidence": "미만이면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1305,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-029",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 52000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 5,
+     "price": 52000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 50000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "상회하면"
+    },
+    "h_final": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 50000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "상회하면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1294,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-033",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 26000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 10,
+     "price": 26000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 26000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "넘어서면"
+    },
+    "h_final": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 26000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "넘어서면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1297,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-036",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "기아",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 412000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "기아",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 100,
+     "price": 412000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "기아",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 412000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "초과하면"
+    },
+    "h_final": {
+     "ticker": "기아",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 412000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "초과하면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1300,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-045",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "POSCO홀딩스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 124000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "POSCO홀딩스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 5,
+     "price": 124000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "POSCO홀딩스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 124000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "높으면"
+    },
+    "h_final": {
+     "ticker": "POSCO홀딩스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 124000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "높으면"
+    },
+    "h_flags": [
+     "cond_unverified→model"
+    ],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1300,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": null,
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-032",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 20,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이상으로 올라가면"
+    },
+    "h_final": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이상으로 올라가면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1304,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-023",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "셀트리온",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 50,
+     "amount": null,
+     "price": 305000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "셀트리온",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 50,
+     "price": 305000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "셀트리온",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 50,
+     "amount": null,
+     "price": null,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "밑으로 내려가면"
+    },
+    "h_final": {
+     "ticker": "셀트리온",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 50,
+     "amount": null,
+     "price": null,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "밑으로 내려가면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1302,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-002",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "삼성전자",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "삼성전자",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 200,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "삼성전자",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이하"
+    },
+    "h_final": {
+     "ticker": "삼성전자",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이하"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1300,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-010",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 300,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "담아",
+     "condition_evidence": "하회하면"
+    },
+    "h_final": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "담아",
+     "condition_evidence": "하회하면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1296,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-020",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "NAVER",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": null,
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 10,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "NAVER",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "낮으면"
+    },
+    "h_final": {
+     "ticker": "NAVER",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": true,
+     "side_evidence": "매도",
+     "condition_evidence": "낮으면"
+    },
+    "h_flags": [
+     "cond_stop_unverified→confirm"
+    ],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": true,
+     "ok_commit": false
+    },
+    "h_mode": "prompt",
+    "h_tok": 1298,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": null,
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-025",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 52000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": null,
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 10,
+     "price": 52000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 52000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "사줘",
+     "condition_evidence": "위로 뚫으면"
+    },
+    "h_final": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 52000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "사줘",
+     "condition_evidence": "위로 뚫으면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1301,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-041",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 50,
+     "amount": null,
+     "price": 305000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 50,
+     "price": 305000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 50,
+     "amount": null,
+     "price": 305000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "위로 올라가면"
+    },
+    "h_final": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 50,
+     "amount": null,
+     "price": 305000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "위로 올라가면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1305,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-035",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "SK하이닉스",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "SK하이닉스",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 200,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "SK하이닉스",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "사줘",
+     "condition_evidence": "이상"
+    },
+    "h_final": {
+     "ticker": "SK하이닉스",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "사줘",
+     "condition_evidence": "이상"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1298,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-028",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "셀트리온",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 305000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "셀트리온",
+     "side": null,
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 100,
+     "price": 305000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": true,
+     "unnec_abstain": false,
+     "ok_commit": false
+    },
+    "h_parsed": {
+     "ticker": "셀트리온",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 305000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "밑돌지 않으면"
+    },
+    "h_final": {
+     "ticker": "셀트리온",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 305000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "밑돌지 않으면"
+    },
+    "h_flags": [
+     "cond_override→GE"
+    ],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1312,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-037",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "SK하이닉스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "SK하이닉스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 300,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "SK하이닉스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "이상"
+    },
+    "h_final": {
+     "ticker": "SK하이닉스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "이상"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1301,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-043",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "LG에너지솔루션",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 305000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "LG에너지솔루션",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 100,
+     "price": 305000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "LG에너지솔루션",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 305000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "초과"
+    },
+    "h_final": {
+     "ticker": "LG에너지솔루션",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 305000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "초과"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1302,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-024",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "LG에너지솔루션",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 90000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "LG에너지솔루션",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 200,
+     "price": 90000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "LG에너지솔루션",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 90000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "담아",
+     "condition_evidence": "초과"
+    },
+    "h_final": {
+     "ticker": "LG에너지솔루션",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 90000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "담아",
+     "condition_evidence": "초과"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1298,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-007",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 20,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이하"
+    },
+    "h_final": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이하"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1293,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-005",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "삼성전자",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 68000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "삼성전자",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 5,
+     "price": 68000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "삼성전자",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 68000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "아래로 떨어지면"
+    },
+    "h_final": {
+     "ticker": "삼성전자",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 68000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "아래로 떨어지면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1310,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-022",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "셀트리온",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "셀트리온",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 10,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "셀트리온",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "아래로 떨어지면"
+    },
+    "h_final": {
+     "ticker": "셀트리온",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "아래로 떨어지면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1309,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-040",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": null,
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 100,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "높으면"
+    },
+    "h_final": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "높으면"
+    },
+    "h_flags": [
+     "cond_unverified→model"
+    ],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1299,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": null,
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-000",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 178000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 178000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 178000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "작으면"
+    },
+    "h_final": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 178000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "작으면"
+    },
+    "h_flags": [
+     "cond_unverified→model"
+    ],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1292,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": null,
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-039",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "한화에어로스페이스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 90000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "한화에어로스페이스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 300,
+     "price": 90000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "한화에어로스페이스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 90000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "넘어서면"
+    },
+    "h_final": {
+     "ticker": "한화에어로스페이스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 90000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "넘어서면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1308,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-044",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "카카오",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 30,
+     "amount": null,
+     "price": 178000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "카카오",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 30,
+     "price": 178000,
+     "condition": "NONE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "카카오",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 30,
+     "amount": null,
+     "price": 178000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "이상"
+    },
+    "h_final": {
+     "ticker": "카카오",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 30,
+     "amount": null,
+     "price": 178000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "이상"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1295,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-013",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "삼성SDI",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "삼성SDI",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 10,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "삼성SDI",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "미만이면"
+    },
+    "h_final": {
+     "ticker": "삼성SDI",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "미만이면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1307,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-021",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "카카오",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": null,
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 20,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "카카오",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "이하면"
+    },
+    "h_final": {
+     "ticker": "카카오",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "이하면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1292,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-012",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "LG에너지솔루션",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "LG에너지솔루션",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 100,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "LG에너지솔루션",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도 걸어줘",
+     "condition_evidence": "미만이면"
+    },
+    "h_final": {
+     "ticker": "LG에너지솔루션",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도 걸어줘",
+     "condition_evidence": "미만이면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1309,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-030",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "셀트리온",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 178000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "셀트리온",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 200,
+     "price": 178000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "셀트리온",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 178000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수 걸어줘",
+     "condition_evidence": "위로 올라가면"
+    },
+    "h_final": {
+     "ticker": "셀트리온",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 178000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수 걸어줘",
+     "condition_evidence": "위로 올라가면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1315,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-047",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "POSCO홀딩스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 124000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "POSCO홀딩스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 100,
+     "price": 124000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "POSCO홀딩스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 124000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "돌파하면"
+    },
+    "h_final": {
+     "ticker": "POSCO홀딩스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 124000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "돌파하면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1303,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-006",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "현대차",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 178000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "현대차",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 20,
+     "price": 178000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": true,
+     "unnec_abstain": false,
+     "ok_commit": false
+    },
+    "h_parsed": {
+     "ticker": "현대차",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 178000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "넘지 않으면"
+    },
+    "h_final": {
+     "ticker": "현대차",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 178000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "넘지 않으면"
+    },
+    "h_flags": [
+     "cond_override→LE"
+    ],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1305,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-014",
+    "cat": "threshold",
+    "gold": {
+     "ticker": "NAVER",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 124000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "NAVER",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 20,
+     "price": 124000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "NAVER",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 124000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도 걸어줘",
+     "condition_evidence": "하회하면"
+    },
+    "h_final": {
+     "ticker": "NAVER",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 124000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도 걸어줘",
+     "condition_evidence": "하회하면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1301,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-003-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 41500,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 200,
+     "price": 41500,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 41500,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이상"
+    },
+    "h_final": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 41500,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이상"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1296,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-011-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 30,
+     "amount": null,
+     "price": 52000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": null,
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 30,
+     "price": 52000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 30,
+     "amount": null,
+     "price": 52000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "보다 높으면"
+    },
+    "h_final": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 30,
+     "amount": null,
+     "price": 52000,
+     "condition": "GE",
+     "abstain": true,
+     "side_evidence": "매수",
+     "condition_evidence": "보다 높으면"
+    },
+    "h_flags": [
+     "cond_stop_unverified→confirm"
+    ],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": true,
+     "ok_commit": false
+    },
+    "h_mode": "prompt",
+    "h_tok": 1300,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": null,
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-015-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 41500,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 41500,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 41500,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "정리해",
+     "condition_evidence": "보다 크면"
+    },
+    "h_final": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 41500,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "정리해",
+     "condition_evidence": "보다 크면"
+    },
+    "h_flags": [
+     "cond_unverified→model"
+    ],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1302,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": null,
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-046-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "POSCO홀딩스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 30,
+     "amount": null,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "POSCO홀딩스",
+     "side": null,
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 30,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": true,
+     "unnec_abstain": false,
+     "ok_commit": false
+    },
+    "h_parsed": {
+     "ticker": "POSCO홀딩스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 30,
+     "amount": null,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "밑돌면"
+    },
+    "h_final": {
+     "ticker": "POSCO홀딩스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 30,
+     "amount": null,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "밑돌면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1304,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-008-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 41500,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "기아",
+     "side": null,
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 10,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": true,
+     "unnec_abstain": false,
+     "ok_commit": false
+    },
+    "h_parsed": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 41500,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "밑돌지 않으면"
+    },
+    "h_final": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 41500,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "밑돌지 않으면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1306,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-016-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "삼성SDI",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "삼성SDI",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 300,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "삼성SDI",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "높으면"
+    },
+    "h_final": {
+     "ticker": "삼성SDI",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "높으면"
+    },
+    "h_flags": [
+     "cond_unverified→model"
+    ],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1300,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": null,
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-001-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 412000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 5,
+     "price": 412000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 412000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이상이면"
+    },
+    "h_final": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 412000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이상이면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1300,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-017-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "현대차",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "현대차",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 10,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "현대차",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "이상이면"
+    },
+    "h_final": {
+     "ticker": "현대차",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "이상이면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1296,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-026-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 68000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 5,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": true,
+     "unnec_abstain": false,
+     "ok_commit": false
+    },
+    "h_parsed": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "위로 안 올라가면"
+    },
+    "h_final": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 68000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "위로 안 올라가면"
+    },
+    "h_flags": [
+     "cond_override→LE"
+    ],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1306,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-031-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "POSCO홀딩스",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 178000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "POSCO홀딩스",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 5,
+     "price": 178000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "POSCO홀딩스",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 178000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "사줘",
+     "condition_evidence": "이하로 내려오면"
+    },
+    "h_final": {
+     "ticker": "POSCO홀딩스",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 178000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "사줘",
+     "condition_evidence": "이하로 내려오면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1307,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-042-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "LG에너지솔루션",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 124000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "LG에너지솔루션",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 20,
+     "price": 124000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "LG에너지솔루션",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 124000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "정리해",
+     "condition_evidence": "미만이면"
+    },
+    "h_final": {
+     "ticker": "LG에너지솔루션",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 124000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "정리해",
+     "condition_evidence": "미만이면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1305,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-027-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 50,
+     "amount": null,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 50,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 50,
+     "amount": null,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "밑돌면"
+    },
+    "h_final": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 50,
+     "amount": null,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "밑돌면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1292,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-034-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 305000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 10,
+     "price": 305000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 305000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "담아",
+     "condition_evidence": "아래로 떨어지면"
+    },
+    "h_final": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 305000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "담아",
+     "condition_evidence": "아래로 떨어지면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1307,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-009-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 300,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이상이면"
+    },
+    "h_final": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이상이면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1306,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-019-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "에코프로",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 124000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "에코프로",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 5,
+     "price": 124000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "에코프로",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 124000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "초과하면"
+    },
+    "h_final": {
+     "ticker": "에코프로",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 124000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "초과하면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1300,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-038-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "현대차",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "현대차",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 20,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "현대차",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "미만"
+    },
+    "h_final": {
+     "ticker": "현대차",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 41500,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "미만"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1295,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-004-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 412000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 5,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": true,
+     "unnec_abstain": false,
+     "ok_commit": false
+    },
+    "h_parsed": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "밑돌지 않으면"
+    },
+    "h_final": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 412000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "밑돌지 않으면"
+    },
+    "h_flags": [
+     "cond_override→GE"
+    ],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1306,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-018-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "에코프로",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 412000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "에코프로",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 300,
+     "price": 412000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "에코프로",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 412000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "정리해",
+     "condition_evidence": "초과"
+    },
+    "h_final": {
+     "ticker": "에코프로",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 412000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "정리해",
+     "condition_evidence": "초과"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1301,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-029-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 52000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "기아",
+     "side": null,
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 5,
+     "price": 52000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": true,
+     "unnec_abstain": false,
+     "ok_commit": false
+    },
+    "h_parsed": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 52000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "밑돌면"
+    },
+    "h_final": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 52000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "밑돌면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1295,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-033-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 26000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": null,
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 10,
+     "price": 26000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 26000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "보다 작으면"
+    },
+    "h_final": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 26000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "보다 작으면"
+    },
+    "h_flags": [
+     "cond_unverified→model"
+    ],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1298,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": null,
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-036-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "기아",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "기아",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 100,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "기아",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "미만"
+    },
+    "h_final": {
+     "ticker": "기아",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 412000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "미만"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1298,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-045-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "POSCO홀딩스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 124000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "POSCO홀딩스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 5,
+     "price": 124000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "POSCO홀딩스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 124000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "미만이면"
+    },
+    "h_final": {
+     "ticker": "POSCO홀딩스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 124000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "미만이면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1301,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-032-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 20,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이하"
+    },
+    "h_final": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이하"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1293,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-023-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "셀트리온",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 50,
+     "amount": null,
+     "price": 305000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "셀트리온",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 50,
+     "price": 305000,
+     "condition": "NONE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "셀트리온",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 50,
+     "amount": null,
+     "price": 305000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "초과"
+    },
+    "h_final": {
+     "ticker": "셀트리온",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 50,
+     "amount": null,
+     "price": 305000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "초과"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1298,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-002-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "삼성전자",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 41500,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": null,
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 200,
+     "price": 41500,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "삼성전자",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 41500,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이상이면"
+    },
+    "h_final": {
+     "ticker": "삼성전자",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 41500,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이상이면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1303,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-010-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 300,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "담아",
+     "condition_evidence": "넘어서면"
+    },
+    "h_final": {
+     "ticker": "기아",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "담아",
+     "condition_evidence": "넘어서면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1296,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-020-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "NAVER",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 412000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "NAVER",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 10,
+     "price": 412000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "NAVER",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 412000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "높으면"
+    },
+    "h_final": {
+     "ticker": "NAVER",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 412000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "높으면"
+    },
+    "h_flags": [
+     "cond_unverified→model"
+    ],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1299,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": null,
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-025-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 52000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "035720",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 10,
+     "price": 52000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 52000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "사줘",
+     "condition_evidence": "미만"
+    },
+    "h_final": {
+     "ticker": "카카오",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 52000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "사줘",
+     "condition_evidence": "미만"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1293,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-041-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 50,
+     "amount": null,
+     "price": 305000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 50,
+     "price": 305000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 50,
+     "amount": null,
+     "price": 305000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "밑돌면"
+    },
+    "h_final": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 50,
+     "amount": null,
+     "price": 305000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "밑돌면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1298,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-035-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "SK하이닉스",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 68000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "SK하이닉스",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 200,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": true,
+     "unnec_abstain": false,
+     "ok_commit": false
+    },
+    "h_parsed": {
+     "ticker": "SK하이닉스",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 68000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "사줘",
+     "condition_evidence": "초과하지 않으면"
+    },
+    "h_final": {
+     "ticker": "SK하이닉스",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 68000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "사줘",
+     "condition_evidence": "초과하지 않으면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1305,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-028-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "셀트리온",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 305000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "셀트리온",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 100,
+     "price": 305000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": true,
+     "unnec_abstain": false,
+     "ok_commit": false
+    },
+    "h_parsed": {
+     "ticker": "셀트리온",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 305000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "위로 안 올라가면"
+    },
+    "h_final": {
+     "ticker": "셀트리온",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 305000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "위로 안 올라가면"
+    },
+    "h_flags": [
+     "cond_override→LE"
+    ],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1317,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-037-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "SK하이닉스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "SK하이닉스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 300,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "SK하이닉스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "이하"
+    },
+    "h_final": {
+     "ticker": "SK하이닉스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 240000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "매도",
+     "condition_evidence": "이하"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1302,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-043-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "LG에너지솔루션",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 305000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "LG에너지솔루션",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 100,
+     "price": 305000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "LG에너지솔루션",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 305000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "보다 낮으면"
+    },
+    "h_final": {
+     "ticker": "LG에너지솔루션",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 305000,
+     "condition": "LE",
+     "abstain": true,
+     "side_evidence": "팔아",
+     "condition_evidence": "보다 낮으면"
+    },
+    "h_flags": [
+     "cond_stop_unverified→confirm"
+    ],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": true,
+     "ok_commit": false
+    },
+    "h_mode": "prompt",
+    "h_tok": 1307,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": null,
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-024-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "LG에너지솔루션",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "LG에너지솔루션",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 200,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "LG에너지솔루션",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "담아",
+     "condition_evidence": "아래로 떨어지면"
+    },
+    "h_final": {
+     "ticker": "LG에너지솔루션",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 200,
+     "amount": null,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "담아",
+     "condition_evidence": "아래로 떨어지면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1311,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-007-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 90000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 20,
+     "price": 90000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 90000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이상"
+    },
+    "h_final": {
+     "ticker": "삼성SDI",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 20,
+     "amount": null,
+     "price": 90000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "이상"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1292,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-005-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "삼성전자",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "삼성전자",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 5,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "삼성전자",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "초과"
+    },
+    "h_final": {
+     "ticker": "삼성전자",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 68000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "초과"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1297,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-022-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "셀트리온",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "셀트리온",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 10,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "셀트리온",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "위로 올라가면"
+    },
+    "h_final": {
+     "ticker": "셀트리온",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 10,
+     "amount": null,
+     "price": 240000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "위로 올라가면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1306,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "GE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-040-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 68000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": null,
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 100,
+     "price": 68000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 68000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "미만이면"
+    },
+    "h_final": {
+     "ticker": "삼성전자",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 100,
+     "amount": null,
+     "price": 68000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "미만이면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1300,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-000-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 178000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 5,
+     "price": 178000,
+     "condition": "GE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 178000,
+     "condition": "GE",
+     "abstain": false,
+     "side_evidence": "매수",
+     "condition_evidence": "크면"
+    },
+    "h_final": {
+     "ticker": "NAVER",
+     "side": "BUY",
+     "order_type": "LIMIT",
+     "quantity": 5,
+     "amount": null,
+     "price": 178000,
+     "condition": "GE",
+     "abstain": true,
+     "side_evidence": "매수",
+     "condition_evidence": "크면"
+    },
+    "h_flags": [
+     "cond_stop_unverified→confirm"
+    ],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": true,
+     "ok_commit": false
+    },
+    "h_mode": "prompt",
+    "h_tok": 1292,
+    "h_detail": {
+     "side": "BUY",
+     "side_both": false,
+     "cond": null,
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   },
+   {
+    "id": "kothr-039-flip",
+    "cat": "threshold_minimal_pair",
+    "gold": {
+     "ticker": "한화에어로스페이스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_pred": {
+     "ticker": "한화에어로스페이스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": null,
+     "amount": 300,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false
+    },
+    "raw_err": null,
+    "raw_src": "call",
+    "raw_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_parsed": {
+     "ticker": "한화에어로스페이스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "아래로 떨어지면"
+    },
+    "h_final": {
+     "ticker": "한화에어로스페이스",
+     "side": "SELL",
+     "order_type": "LIMIT",
+     "quantity": 300,
+     "amount": null,
+     "price": 90000,
+     "condition": "LE",
+     "abstain": false,
+     "side_evidence": "팔아",
+     "condition_evidence": "아래로 떨어지면"
+    },
+    "h_flags": [],
+    "h_err": null,
+    "h_score": {
+     "critical": false,
+     "unnec_abstain": false,
+     "ok_commit": true
+    },
+    "h_mode": "prompt",
+    "h_tok": 1319,
+    "h_detail": {
+     "side": "SELL",
+     "side_both": false,
+     "cond": "LE",
+     "cond_both": false,
+     "history": null,
+     "flip_side": false,
+     "flip_cond": false
+    }
+   }
+  ]
+ }
+}
