@@ -1,0 +1,121 @@
+{
+  "qwen/qwen3-8b": {
+    "raw_crit": 19,
+    "raw_unnec": 12,
+    "h_crit": 0,
+    "h_unnec": 28,
+    "raw_err": 2,
+    "h_err": 0,
+    "raw_bycat": {
+      "clean": [
+        0,
+        0
+      ],
+      "threshold": [
+        0,
+        0
+      ],
+      "side": [
+        0,
+        0
+      ],
+      "negation": [
+        0,
+        0
+      ],
+      "amount": [
+        0,
+        0
+      ],
+      "quantity": [
+        0,
+        0
+      ],
+      "order_type": [
+        0,
+        0
+      ],
+      "abstain": [
+        0,
+        0
+      ],
+      "trajectory": [
+        0,
+        0
+      ],
+      "injection": [
+        0,
+        0
+      ],
+      "?": [
+        19,
+        240
+      ]
+    },
+    "h_bycat": {
+      "clean": [
+        0,
+        0
+      ],
+      "threshold": [
+        0,
+        0
+      ],
+      "side": [
+        0,
+        0
+      ],
+      "negation": [
+        0,
+        0
+      ],
+      "amount": [
+        0,
+        0
+      ],
+      "quantity": [
+        0,
+        0
+      ],
+      "order_type": [
+        0,
+        0
+      ],
+      "abstain": [
+        0,
+        0
+      ],
+      "trajectory": [
+        0,
+        0
+      ],
+      "injection": [
+        0,
+        0
+      ],
+      "?": [
+        0,
+        240
+      ]
+    },
+    "flags": {
+      "no_side_cue": 3,
+      "no_qty": 23,
+      "cond_unverified": 17,
+      "side_both_cues": 1,
+      "side_from_evidence": 3,
+      "side_override": 12,
+      "pct_trigger": 20,
+      "flip_ref": 4,
+      "cond_immediate": 4,
+      "cond_stop_unverified": 3,
+      "cond_no_price": 3,
+      "ref_side_conflict": 1,
+      "no_ticker": 1
+    },
+    "h_mech_target": {},
+    "harness": "v2",
+    "n": 240,
+    "rescored": true
+  }
+}

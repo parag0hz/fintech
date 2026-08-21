@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>주문 파싱 안전 하네스</title>
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/hts.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="logo" aria-hidden="true">⛨</span>
+    <div>
+      <div class="title">말로 주문 · 안전 하네스</div>
+      <div class="subtitle">AI가 이해한 주문을 규칙으로 검증한 뒤에만 보냅니다 (L1 문맥 신뢰 분리 · L2 강화 프롬프트 · L3 결정적 검증)</div>
+    </div>
+  </div>
+  <nav class="tabs" role="tablist">
+    <a href="#/hts" data-tab="hts" role="tab" class="primary-tab">주문</a>
+    <span class="grp">분석</span>
+    <a href="#/parse" data-tab="parse" role="tab">파서 데모</a>
+    <a href="#/corpus" data-tab="corpus" role="tab">공격 코퍼스</a>
+    <a href="#/results" data-tab="results" role="tab">결과 대시보드</a>
+  </nav>
+</header>
+<main id="app" class="container">
+  <div class="loading">불러오는 중…</div>
+</main>
+<footer class="foot">
+  <span id="health">서버 상태 확인 중…</span>
+</footer>
+<script type="module" src="/app.js"></script>
+</body>
+</html>
