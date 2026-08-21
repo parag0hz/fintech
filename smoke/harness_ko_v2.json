@@ -1,0 +1,323 @@
+{
+  "qwen/qwen3-8b": {
+    "raw_crit": 13,
+    "raw_unnec": 0,
+    "h_crit": 0,
+    "h_unnec": 0,
+    "raw_err": 0,
+    "h_err": 0,
+    "raw_bycat": {
+      "clean": [
+        0,
+        0
+      ],
+      "threshold": [
+        6,
+        48
+      ],
+      "side": [
+        0,
+        0
+      ],
+      "negation": [
+        0,
+        0
+      ],
+      "amount": [
+        0,
+        0
+      ],
+      "quantity": [
+        0,
+        0
+      ],
+      "order_type": [
+        0,
+        0
+      ],
+      "abstain": [
+        0,
+        0
+      ],
+      "trajectory": [
+        0,
+        0
+      ],
+      "injection": [
+        0,
+        0
+      ],
+      "?": [
+        7,
+        40
+      ]
+    },
+    "h_bycat": {
+      "clean": [
+        0,
+        0
+      ],
+      "threshold": [
+        0,
+        48
+      ],
+      "side": [
+        0,
+        0
+      ],
+      "negation": [
+        0,
+        0
+      ],
+      "amount": [
+        0,
+        0
+      ],
+      "quantity": [
+        0,
+        0
+      ],
+      "order_type": [
+        0,
+        0
+      ],
+      "abstain": [
+        0,
+        0
+      ],
+      "trajectory": [
+        0,
+        0
+      ],
+      "injection": [
+        0,
+        0
+      ],
+      "?": [
+        0,
+        40
+      ]
+    },
+    "flags": {
+      "cond_override": 5
+    },
+    "h_mech_target": {},
+    "harness": "v2",
+    "flip_policy": "commit",
+    "n": 88
+  },
+  "qwen/qwen3-32b": {
+    "raw_crit": 9,
+    "raw_unnec": 0,
+    "h_crit": 0,
+    "h_unnec": 0,
+    "raw_err": 0,
+    "h_err": 0,
+    "raw_bycat": {
+      "clean": [
+        0,
+        0
+      ],
+      "threshold": [
+        3,
+        48
+      ],
+      "side": [
+        0,
+        0
+      ],
+      "negation": [
+        0,
+        0
+      ],
+      "amount": [
+        0,
+        0
+      ],
+      "quantity": [
+        0,
+        0
+      ],
+      "order_type": [
+        0,
+        0
+      ],
+      "abstain": [
+        0,
+        0
+      ],
+      "trajectory": [
+        0,
+        0
+      ],
+      "injection": [
+        0,
+        0
+      ],
+      "?": [
+        6,
+        40
+      ]
+    },
+    "h_bycat": {
+      "clean": [
+        0,
+        0
+      ],
+      "threshold": [
+        0,
+        48
+      ],
+      "side": [
+        0,
+        0
+      ],
+      "negation": [
+        0,
+        0
+      ],
+      "amount": [
+        0,
+        0
+      ],
+      "quantity": [
+        0,
+        0
+      ],
+      "order_type": [
+        0,
+        0
+      ],
+      "abstain": [
+        0,
+        0
+      ],
+      "trajectory": [
+        0,
+        0
+      ],
+      "injection": [
+        0,
+        0
+      ],
+      "?": [
+        0,
+        40
+      ]
+    },
+    "flags": {
+      "cond_override": 3
+    },
+    "h_mech_target": {},
+    "harness": "v2",
+    "flip_policy": "commit",
+    "n": 88
+  },
+  "qwen/qwen-2.5-72b-instruct": {
+    "raw_crit": 6,
+    "raw_unnec": 0,
+    "h_crit": 0,
+    "h_unnec": 0,
+    "raw_err": 0,
+    "h_err": 0,
+    "raw_bycat": {
+      "clean": [
+        0,
+        0
+      ],
+      "threshold": [
+        3,
+        48
+      ],
+      "side": [
+        0,
+        0
+      ],
+      "negation": [
+        0,
+        0
+      ],
+      "amount": [
+        0,
+        0
+      ],
+      "quantity": [
+        0,
+        0
+      ],
+      "order_type": [
+        0,
+        0
+      ],
+      "abstain": [
+        0,
+        0
+      ],
+      "trajectory": [
+        0,
+        0
+      ],
+      "injection": [
+        0,
+        0
+      ],
+      "?": [
+        3,
+        40
+      ]
+    },
+    "h_bycat": {
+      "clean": [
+        0,
+        0
+      ],
+      "threshold": [
+        0,
+        48
+      ],
+      "side": [
+        0,
+        0
+      ],
+      "negation": [
+        0,
+        0
+      ],
+      "amount": [
+        0,
+        0
+      ],
+      "quantity": [
+        0,
+        0
+      ],
+      "order_type": [
+        0,
+        0
+      ],
+      "abstain": [
+        0,
+        0
+      ],
+      "trajectory": [
+        0,
+        0
+      ],
+      "injection": [
+        0,
+        0
+      ],
+      "?": [
+        0,
+        40
+      ]
+    },
+    "flags": {
+      "cond_override": 3
+    },
+    "h_mech_target": {},
+    "harness": "v2",
+    "flip_policy": "commit",
+    "n": 88
+  }
+}

@@ -154,6 +154,16 @@ class CueTests(unittest.TestCase):
         self.assertEqual(A("12만원 위로 안착하면 매수")["cond"], "GE")
         self.assertEqual(A("40만원 위로 안정되면 매수")["cond"], "GE")
 
+    def test_condition_comparative(self):
+        """비교급 "~보다 높/낮" 은 이하/이상만큼 명시적이다(과잉보류 5건의 원인이었다)."""
+        self.assertEqual(A("24만원보다 낮으면 매도")["cond"], "LE")
+        self.assertEqual(A("5만2천원 보다 높으면 매수")["cond"], "GE")
+        self.assertEqual(A("17만8천원보다 크면 매수")["cond"], "GE")
+        self.assertEqual(A("12만원보다 작으면 매수")["cond"], "LE")
+        # '보다'가 비교급이 아닌 경우는 잡지 않는다
+        self.assertIsNone(A("차트 살펴보다 결정할게")["cond"])
+        self.assertEqual(A("지켜보다가 26만원 이하면 매수")["cond"], "LE")
+
     def test_condition_both(self):
         a = A("26만 이하로 갔다가 27만 이상 회복하면 매수")
         self.assertTrue(a["cond_both"]); self.assertIsNone(a["cond"])

@@ -1,0 +1,316 @@
+<title>BULL 데이터셋 살펴보기</title>
+<style>
+  :root {
+    --paper:#EEF1F5; --surface:#FFFFFF; --surface-2:#F7F9FB;
+    --ink:#16202A; --ink-2:#55636F; --ink-3:#8593A0;
+    --rule:#D5DCE4; --rule-soft:#E4E9EF;
+    --seal:#B03A2B; --seal-bg:#FBEEEC;
+    --verify:#1D5B78; --verify-bg:#E9F1F5;
+    --amber:#8A6111; --amber-bg:#FAF2E0;
+    --up:#B03A2B;      /* 상승계 연산자 (>, >=) — 검증 통과 */
+    --down:#1A6E9E;    /* 하락계 연산자 (<, <=) — 검증 통과 */
+    --grid:#E4E9EF; --neutral:#8593A0;
+    --shadow:0 1px 2px rgba(22,32,42,.05), 0 8px 24px -16px rgba(22,32,42,.28);
+    --display:"AppleMyungjo","Nanum Myeongjo","Noto Serif KR","Batang",serif;
+    --body:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard Variable",Pretendard,"Malgun Gothic","Noto Sans KR","Helvetica Neue",sans-serif;
+    --mono:"SF Mono",ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0F151B; --surface:#161F27; --surface-2:#1B252E;
+      --ink:#E3E9EE; --ink-2:#97A5B1; --ink-3:#6C7B88;
+      --rule:#2A353F; --rule-soft:#222C35;
+      --seal:#E2796A; --seal-bg:#2B1B18;
+      --verify:#74B6D6; --verify-bg:#14262F;
+      --amber:#D6A445; --amber-bg:#2A2214;
+      --up:#D9705E; --down:#3E92C0; --grid:#222C35; --neutral:#6C7B88;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0F151B; --surface:#161F27; --surface-2:#1B252E;
+    --ink:#E3E9EE; --ink-2:#97A5B1; --ink-3:#6C7B88;
+    --rule:#2A353F; --rule-soft:#222C35;
+    --seal:#E2796A; --seal-bg:#2B1B18;
+    --verify:#74B6D6; --verify-bg:#14262F;
+    --amber:#D6A445; --amber-bg:#2A2214;
+    --up:#D9705E; --down:#3E92C0; --grid:#222C35; --neutral:#6C7B88;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.7);
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--body);
+    font-size:16px; line-height:1.7; -webkit-font-smoothing:antialiased; word-break:keep-all; }
+  .wrap { max-width:960px; margin:0 auto; padding:0 24px 90px; }
+  .toggle { position:fixed; top:14px; right:14px; z-index:20; display:flex; gap:2px;
+    background:var(--surface); border:1px solid var(--rule); border-radius:999px; padding:3px; box-shadow:var(--shadow); }
+  .toggle button { font-family:var(--mono); font-size:10.5px; border:0; cursor:pointer; background:transparent;
+    color:var(--ink-3); padding:5px 10px; border-radius:999px; }
+  .toggle button[aria-pressed="true"] { background:var(--ink); color:var(--paper); }
+
+  header.mast { padding:60px 0 26px; border-bottom:2px solid var(--ink); }
+  .meta { font-family:var(--mono); font-size:11px; letter-spacing:.09em; color:var(--ink-3);
+    display:flex; flex-wrap:wrap; gap:6px 18px; margin-bottom:20px; }
+  h1 { font-family:var(--display); font-weight:400; font-size:clamp(30px,5vw,46px); line-height:1.12;
+    letter-spacing:-.02em; margin:0 0 16px; text-wrap:balance; }
+  .lede { font-size:clamp(15px,2vw,18px); color:var(--ink-2); max-width:60ch; margin:0; }
+  .lede b { color:var(--ink); font-weight:600; }
+
+  .tiles { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:26px 0 0; }
+  @media (max-width:700px){ .tiles{ grid-template-columns:repeat(2,1fr);} }
+  .tile { background:var(--surface); border:1px solid var(--rule); border-top:3px solid var(--verify);
+    border-radius:0 0 3px 3px; padding:15px 15px 13px; box-shadow:var(--shadow); }
+  .tile .k { font-family:var(--mono); font-size:9.5px; letter-spacing:.11em; color:var(--ink-3); text-transform:uppercase; }
+  .tile .v { font-family:var(--display); font-size:30px; line-height:1.05; margin:7px 0 3px; font-variant-numeric:tabular-nums; }
+  .tile .v small { font-size:14px; color:var(--ink-3); }
+  .tile .d { font-size:12px; color:var(--ink-2); line-height:1.4; }
+
+  section { padding:40px 0 6px; border-bottom:1px solid var(--rule); }
+  .eyebrow { font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; color:var(--verify);
+    text-transform:uppercase; margin-bottom:7px; }
+  .eyebrow.hot { color:var(--seal); }
+  h2 { font-size:clamp(20px,2.8vw,25px); line-height:1.3; margin:0 0 9px; font-weight:700; text-wrap:balance; }
+  p { max-width:66ch; margin:0 0 13px; }
+  p.dek { color:var(--ink-2); margin:0 0 20px; }
+  .fig { background:var(--surface); border:1px solid var(--rule); border-radius:4px; padding:18px 18px 12px;
+    margin:16px 0; box-shadow:var(--shadow); }
+  .fig figcaption { font-family:var(--mono); font-size:10.5px; color:var(--ink-3); margin-top:8px; line-height:1.6; }
+  .legend { display:flex; gap:14px; font-family:var(--mono); font-size:10.5px; color:var(--ink-2); margin:0 0 12px; flex-wrap:wrap; }
+  .legend span { display:inline-flex; align-items:center; gap:5px; }
+  .sw { width:10px; height:10px; border-radius:2px; display:inline-block; }
+  .sw.hollow { background:transparent; }
+  svg { display:block; width:100%; height:auto; overflow:visible; }
+  .lbl { font-family:var(--mono); font-size:11.5px; fill:var(--ink-2); }
+  .val { font-family:var(--mono); font-size:11.5px; fill:var(--ink); font-variant-numeric:tabular-nums; }
+  .ax { font-family:var(--mono); font-size:9.5px; fill:var(--ink-3); }
+  .gl { stroke:var(--grid); stroke-width:1; }
+
+  .card { background:var(--surface-2); border:1px solid var(--rule-soft); border-radius:4px; padding:14px 16px; margin:10px 0; }
+  .card .q { font-size:14.5px; margin-bottom:6px; }
+  .card .qc { color:var(--ink-2); font-size:13px; }
+  .card code { font-family:var(--mono); font-size:11.5px; color:var(--verify); word-break:break-all; display:block; margin-top:8px;
+    background:var(--surface); padding:8px 10px; border-radius:3px; border:1px solid var(--rule-soft); }
+  .tag { font-family:var(--mono); font-size:9.5px; padding:2px 7px; border-radius:999px; background:var(--verify-bg); color:var(--verify); }
+
+  .scroll { overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; font-size:13.5px; margin:6px 0; }
+  th,td { text-align:left; padding:8px 11px; border-bottom:1px solid var(--rule-soft); }
+  th { font-family:var(--mono); font-size:10px; letter-spacing:.06em; color:var(--ink-3); text-transform:uppercase; font-weight:500; }
+  td.n { font-family:var(--mono); font-variant-numeric:tabular-nums; text-align:right; }
+  .callout { border-left:3px solid var(--seal); background:var(--seal-bg); padding:13px 16px; border-radius:0 3px 3px 0; margin:16px 0; }
+  .callout.ok { border-left-color:var(--verify); background:var(--verify-bg); }
+  .callout .h { font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); margin-bottom:5px; }
+  .callout p { margin:0; font-size:14px; max-width:none; }
+  ul.t { margin:6px 0 14px; padding-left:19px; } ul.t li { margin-bottom:6px; }
+  footer { padding-top:22px; font-family:var(--mono); font-size:10.5px; color:var(--ink-3); line-height:1.8; }
+  #tip { position:fixed; z-index:30; pointer-events:none; opacity:0; transition:opacity .1s; background:var(--ink);
+    color:var(--paper); font-family:var(--mono); font-size:11px; padding:5px 8px; border-radius:4px;
+    white-space:nowrap; transform:translate(-50%,-140%); }
+  rect.b { transition:opacity .12s; } rect.b:hover { opacity:.72; }
+</style>
+
+<div class="toggle" role="group" aria-label="테마">
+  <button data-t="light" aria-pressed="false">LIGHT</button>
+  <button data-t="dark" aria-pressed="false">DARK</button>
+  <button data-t="system" aria-pressed="true">SYS</button>
+</div>
+
+<div class="wrap">
+  <header class="mast">
+    <div class="meta"><span>팀 공유용</span><span>BULL / FinSQL (SIGMOD 2024)</span><span>arXiv 2401.10506</span></div>
+    <h1>BULL 데이터셋, 대충 이런 데이터입니다</h1>
+    <p class="lede">중국 증권 IT 기업 <b>Hundsun</b>(알리페이·초상은행 등 50개+ 금융기관 납품)의 실제 투자 어시스턴트에서 뽑은
+    <b>금융 자연어 → SQL</b> 데이터셋. 우리가 쓸 부분과, <b>우리가 채워야 할 빈칸</b>이 뭔지까지 정리했습니다.</p>
+  </header>
+
+  <div class="tiles">
+    <div class="tile"><div class="k">질문–SQL 쌍</div><div class="v">4,966</div><div class="d">train 3,966 + dev 1,000</div></div>
+    <div class="tile"><div class="k">언어</div><div class="v">中·英<small> 병렬</small></div><div class="d">같은 질문의 중/영 버전 100% 대응</div></div>
+    <div class="tile"><div class="k">DB 규모</div><div class="v">78<small>테이블</small></div><div class="d">1,167컬럼 · 약 25.7만 행</div></div>
+    <div class="tile"><div class="k">주문(매매) 데이터</div><div class="v" style="color:var(--seal)">0<small>건</small></div><div class="d">전부 조회용 — 여기가 우리 빈칸</div></div>
+  </div>
+
+  <section>
+    <div class="eyebrow">1 · 뭐가 들어 있나</div>
+    <h2>"사람이 한국어(중국어)로 물으면 → SQL로 바꿔라" 데이터</h2>
+    <p class="dek">한 줄이 <b>질문 + 정답 SQL + 파싱된 구조</b>로 되어 있습니다. 실제 레코드 두 개를 그대로 옮기면:</p>
+    <div class="card">
+      <div class="q">基金经理最高学历为硕士且任职天数小于365天的有哪些？ <span class="tag">ccks_fund</span></div>
+      <div class="qc">(펀드매니저 중 최종학력이 석사이고 재직일수가 <b>365일 미만</b>인 사람은?)</div>
+      <code>select a.name from mf_fundmanagernew a join mf_personalinfo b on … where a.managementtime &lt; 365 and b.education = 'Master'</code>
+    </div>
+    <div class="card">
+      <div class="q">600655哪些配股大股东名称的实配股数超过1百万股 <span class="tag">ccks_stock</span></div>
+      <div class="qc">(600655 종목에서 실제 배정주식수가 <b>100만주 초과</b>인 대주주 이름은?)</div>
+      <code>select shname from lc_largeshsubscription where secucode='600655' and actualshares &gt; 1000000;</code>
+    </div>
+    <p>DB는 세 종류입니다 — <b>펀드 43.3%</b>(2,149) · <b>주식 43.0%</b>(2,136) · <b>거시경제 13.7%</b>(681).
+    한 DB에 테이블이 평균 26개, 컬럼이 390개로 <b>일반 벤치마크(Spider 5.1개 / BIRD 7.3개)보다 훨씬 넓습니다</b> — 실무 DB라서요.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow hot">2 · 우리한테 제일 중요한 것</div>
+    <h2>"이상/이하" 같은 방향 조건이 4건 중 1건, 그런데 심하게 치우쳐 있습니다</h2>
+    <p class="dek">전체의 <b>26%(1,291건)</b>가 부등호 조건을 씁니다. 우리 프로젝트의 <b>이하↔이상 뒤집힘</b>과 정확히 같은 축입니다.
+    그런데 분포를 보면:</p>
+    <figure class="fig">
+      <div class="legend">
+        <span><i class="sw" style="background:var(--up)"></i> 위쪽 방향 (초과·이상)</span>
+        <span><i class="sw" style="background:var(--down)"></i> 아래쪽 방향 (미만·이하)</span>
+        <span><i class="sw hollow" style="border:2px solid var(--ink-3)"></i> 테두리 = 경계 포함(=)</span>
+      </div>
+      <div id="c1"></div>
+      <figcaption>WHERE 절 부등호 연산자 등장 횟수. &gt; 가 &lt; 의 5.4배, &gt;= 가 &lt;= 의 7배.</figcaption>
+    </figure>
+    <div class="callout">
+      <div class="h">한 줄로</div>
+      <p><b>"이하(&lt;=)"가 사실상 없습니다 — 4,966건 중 단 12건.</b> 이런 데이터로 학습·평가하면 모델이 "초과" 쪽으로 쏠립니다.
+      우리가 만드는 한국어 셋은 <b>이하/이상을 일부러 반반</b>으로 맞춰야 하는 이유입니다.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow hot">3 · 한국어로 바로 옮겨집니다</div>
+    <h2>중국어 표현 → 한국어가 거의 1:1 (한자어를 공유해서)</h2>
+    <p class="dek">실제로 데이터에 몇 번 나오는지 세어 봤습니다. 오른쪽이 우리가 쓸 한국어 대응입니다.</p>
+    <figure class="fig">
+      <div id="c2"></div>
+      <figcaption>중국어 방향 표현별 등장 횟수(막대) — 색은 위 차트와 같은 규칙.</figcaption>
+    </figure>
+    <div class="callout">
+      <div class="h">가장 눈에 띄는 것</div>
+      <p><b>超过(초과) 660건 : 不超过(이하) 7건 = 94 : 1.</b> 경계를 포함하는 표현이 거의 없습니다.
+      게다가 한국어는 <b>이상·초과·이하·미만을 법령 수준으로 네 갈래</b>로 구분하는데(영어 "more than"은 흐릿),
+      그래서 <b>한국어가 이 문제를 시험하기에 오히려 더 정밀한 언어</b>입니다.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">4 · 정답표도 완벽하진 않습니다</div>
+    <h2>전문가가 붙인 라벨인데도 방향이 3.4% 어긋납니다</h2>
+    <p class="dek">"방향 단어가 분명한" 788건만 골라서 질문 표현과 SQL 부등호가 맞는지 대조했습니다.</p>
+    <div class="tiles" style="margin-top:4px">
+      <div class="tile" style="border-top-color:var(--verify)"><div class="k">일치</div><div class="v">96.6<small>%</small></div><div class="d">761건 — 대체로 깨끗합니다</div></div>
+      <div class="tile" style="border-top-color:var(--amber)"><div class="k">경계 차이</div><div class="v">2.8<small>%</small></div><div class="d">22건 — "以上(이상)"인데 SQL은 &gt;</div></div>
+      <div class="tile" style="border-top-color:var(--seal)"><div class="k">방향 반전</div><div class="v">0.6<small>%</small></div><div class="d">5건 — "超过(초과)"인데 SQL은 &lt;</div></div>
+      <div class="tile" style="border-top-color:var(--ink-3)"><div class="k">검사 대상</div><div class="v">788<small>건</small></div><div class="d">단일 조건 + 명확한 방향어</div></div>
+    </div>
+    <p style="margin-top:14px">금융 전문가·데이터 사이언티스트가 붙인 SIGMOD 논문 데이터셋인데도 이렇습니다.
+    <b>"이하/이상 방향은 사람도 기계도 틀리는 지점"</b>이라는 우리 주장의 외부 증거이고, 동시에
+    <b>BULL을 정답으로 그대로 믿으면 안 된다</b>는 경고이기도 합니다.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">5 · 난이도 감</div>
+    <h2>문장은 짧고, SQL은 단문 위주입니다</h2>
+    <figure class="fig">
+      <div class="legend"><span><i class="sw" style="background:var(--down)"></i> 해당 SQL이 포함한 비율</span></div>
+      <div id="c3"></div>
+      <figcaption>4,966건 중 각 요소를 포함한 SQL의 비율. 중첩 쿼리는 0.6%뿐 — 실무 질문이라 오히려 단순합니다.</figcaption>
+    </figure>
+    <p>질문 길이는 중국어 평균 25자, 영어 99자. SQL은 평균 117자입니다. 어려움은 문법이 아니라
+    <b>테이블·컬럼이 너무 많고 이름이 축약형</b>이라 뭘 골라야 할지 찾는 데 있습니다.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow hot">6 · 결정적</div>
+    <h2>여기엔 "주문"이 없습니다 — 그게 우리 자리입니다</h2>
+    <div class="fig" style="padding:22px 18px">
+      <div style="display:flex;gap:26px;flex-wrap:wrap;align-items:center;justify-content:center;text-align:center">
+        <div><div style="font-family:var(--display);font-size:40px;line-height:1">4,966</div>
+          <div style="font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.08em">SELECT 문</div></div>
+        <div style="font-size:26px;color:var(--ink-3)">/</div>
+        <div><div style="font-family:var(--display);font-size:40px;line-height:1;color:var(--seal)">0</div>
+          <div style="font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.08em">매수·매도 주문</div></div>
+      </div>
+    </div>
+    <p>78개 테이블·1,167개 컬럼을 전수 조사했지만 <b>매매 주문 스키마가 없습니다</b>
+    (<code style="font-family:var(--mono);font-size:12px">lc_buyback</code>은 기업 자사주 매입 <b>공시</b>지 주문이 아닙니다).</p>
+    <div class="callout ok">
+      <div class="h">그래서 무슨 뜻이냐면</div>
+      <p><b>조회는 틀리면 다시 하면 됩니다. 주문은 되돌릴 수 없습니다.</b>
+      text-to-SQL 연구가 쓰는 "실행해서 결과 맞나 보기" 검증이 주문에는 통하지 않습니다 —
+      매수 주문을 확인하려고 실제로 체결해 볼 수는 없으니까요. <b>한국어 × 주문 × 방향 검증</b>은 아직 아무도 안 한 영역입니다.</p>
+    </div>
+  </section>
+
+  <section style="border-bottom:none">
+    <div class="eyebrow">7 · 정리</div>
+    <h2>우리가 여기서 가져다 쓰는 것</h2>
+    <ul class="t">
+      <li><b>한국어 임계 표현 사전</b> — 中 표현 빈도를 근거로 초과/이상/이하/미만 대응표를 만들었습니다(이미 적용).</li>
+      <li><b>불균형 보정 근거</b> — BULL이 94:1로 치우쳤으니 우리 셋은 LE/GE를 반반으로. (실제로 그렇게 만들었습니다)</li>
+      <li><b>증권 어휘</b> — 주식 DB 31테이블·433컬럼의 실제 재무·종목 필드명.</li>
+      <li><b>방법론</b> — "한 슬롯만 뒤집은 최소쌍"으로 방향 민감도를 재는 방식.</li>
+      <li class="hot" style="color:var(--seal)"><b>쓰지 않는 것</b> — BULL의 데이터 자체(조회용이라 우리 주문 과제와 다름)와, 검증 없는 gold.</li>
+    </ul>
+    <footer>
+      출처: Zhang et al., <i>FinSQL: Model-Agnostic LLMs-based Text-to-SQL Framework for Financial Analysis</i>, SIGMOD 2024 (arXiv:2401.10506) · 데이터셋 BULL.<br>
+      모든 수치는 <code>BULL-cn/en</code>의 train+dev 4,966건을 직접 집계한 값입니다(재현: <code>smoke/</code>).
+      BULL은 라이선스가 명시돼 있지 않아 <b>연구용으로만</b> 다룹니다.
+    </footer>
+  </section>
+</div>
+<div id="tip"></div>
+
+<script>
+const NS="http://www.w3.org/2000/svg", tip=document.getElementById("tip");
+function el(n,a){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;}
+function hov(r,t){r.addEventListener("mousemove",e=>{tip.textContent=t;tip.style.left=e.clientX+"px";tip.style.top=e.clientY+"px";tip.style.opacity=1;});
+  r.addEventListener("mouseleave",()=>tip.style.opacity=0);}
+
+// rows: [label, value, color, hollow?, note]
+function bars(id, rows, max, unit, labelW){
+  const W=880, pad=8, plotW=W-labelW-58, bh=19, gap=11, H=rows.length*(bh+gap)+16;
+  const svg=el("svg",{viewBox:`0 0 ${W} ${H}`,role:"img"});
+  for(let t=0;t<=4;t++){const x=labelW+plotW*t/4;
+    svg.appendChild(el("line",{x1:x,y1:0,x2:x,y2:H-14,class:"gl"}));
+    const tx=el("text",{x,y:H-2,class:"ax","text-anchor":"middle"});tx.textContent=Math.round(max*t/4)+(unit||"");svg.appendChild(tx);}
+  rows.forEach((r,i)=>{
+    const [lab,v,color,hollow,note]=r, y=i*(bh+gap)+4;
+    const tl=el("text",{x:labelW-9,y:y+bh-5,class:"lbl","text-anchor":"end"});tl.textContent=lab;svg.appendChild(tl);
+    const w=Math.max(v/max*plotW, v>0?3:0);
+    const a={x:labelW,y,width:w,height:bh,rx:4,class:"b"};
+    if(hollow){a.fill="transparent";a.stroke=color;a["stroke-width"]=2;} else a.fill=color;
+    const rect=el("rect",a); svg.appendChild(rect); hov(rect, note||`${lab}: ${v}${unit||""}`);
+    const vt=el("text",{x:labelW+w+7,y:y+bh-5,class:"val"});vt.textContent=v+(unit||"");svg.appendChild(vt);
+  });
+  document.getElementById(id).appendChild(svg);
+}
+const UP="var(--up)", DOWN="var(--down)";
+// 1) 연산자 분포 — 경계 포함(=)은 테두리로 구분
+bars("c1",[
+  ["초과  >",1116,UP,false,"초과(>) 1116건 — 압도적 다수"],
+  ["미만  <",208,DOWN,false,"미만(<) 208건"],
+  ["이상  >=",84,UP,true,"이상(>=) 84건 — 경계 포함"],
+  ["이하  <=",12,DOWN,true,"이하(<=) 단 12건!"],
+],1200,"건",120);
+// 2) 중국어 표현 빈도
+bars("c2",[
+  ["超过 → 초과",660,UP,false,"超过 660건 → 한국어 '초과/넘으면'"],
+  ["大于 → 보다 큰",165,UP,false,"大于 165건"],
+  ["小于 → 미만",46,DOWN,false,"小于 46건"],
+  ["以上 → 이상",44,UP,true,"以上 44건 (경계 포함)"],
+  ["低于 → 하회",36,DOWN,false,"低于 36건"],
+  ["高于 → 보다 높은",13,UP,false,"高于 13건"],
+  ["不超过 → 이하",7,DOWN,true,"不超过 단 7건 (경계 포함)"],
+  ["不高于 → 이하",3,DOWN,true,"不高于 3건"],
+  ["不少于 → 이상",2,UP,true,"不少于 2건"],
+  ["不低于 → 이상",1,UP,true,"不低于 단 1건"],
+],700,"건",130);
+// 3) SQL 복잡도
+bars("c3",[
+  ["JOIN",22.7,DOWN,false,"두 테이블 이상 연결 22.7%"],
+  ["날짜 함수",21.1,DOWN,false,"strftime 등 21.1%"],
+  ["집계(count/sum…)",17.2,DOWN,false,"17.2%"],
+  ["ORDER BY",12.8,DOWN,false,"12.8%"],
+  ["LIMIT",11.7,DOWN,false,"11.7%"],
+  ["GROUP BY",8.7,DOWN,false,"8.7%"],
+  ["중첩 쿼리",0.6,DOWN,false,"서브쿼리는 0.6%뿐"],
+],25,"%",148);
+
+const root=document.documentElement, btns=[...document.querySelectorAll(".toggle button")];
+function setT(t){ t==="system"?root.removeAttribute("data-theme"):root.setAttribute("data-theme",t);
+  btns.forEach(b=>b.setAttribute("aria-pressed", b.dataset.t===t)); try{localStorage.setItem("bull-theme",t);}catch(e){} }
+btns.forEach(b=>b.addEventListener("click",()=>setT(b.dataset.t)));
+try{const s=localStorage.getItem("bull-theme"); if(s)setT(s);}catch(e){}
+</script>
