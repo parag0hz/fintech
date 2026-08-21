@@ -1,0 +1,27 @@
+{
+  "name": "nl2order-harness-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "한국어 자연어 주문 파싱 안전 하네스(L1/L2/L3) 웹 MVP — 파서 데모 · 공격 코퍼스 · 결과 대시보드",
+  "type": "module",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js",
+    "test": "tsx test/parity.test.ts",
+    "sync-data": "node scripts/sync-data.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
