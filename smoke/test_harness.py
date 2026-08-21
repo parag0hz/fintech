@@ -132,6 +132,28 @@ class CueTests(unittest.TestCase):
         self.assertIsNone(A("10분 이내로 체결")["cond"])                 # 이내 ≠ 이하
         self.assertIsNone(A("위 주문 그대로")["cond"])                   # 위 주문 = 참조, GE 아님
 
+    def test_condition_negated(self):
+        """부정형 임계는 반대 방향이다. 어간+(-지/-지만)+(않|못) 일반형으로 잡는다.
+        (BULL 파생 한국어 임계 코퍼스에서 발견 — v2.3 은 부정 단서를 무효화해 정반대로 판정했다.)"""
+        # 개발 셋
+        self.assertEqual(A("6만8천원 밑돌지 않으면 매수")["cond"], "GE")
+        self.assertEqual(A("17만8천원 넘지 않으면 매수")["cond"], "LE")
+        self.assertEqual(A("5만2천원 위로 안 올라가면 매수")["cond"], "LE")
+        self.assertEqual(A("2만6천원 아래로 안 내려가면 매도")["cond"], "GE")
+        # held-out: 어미(-지만/-지 못) · 어휘가 다른 표현
+        self.assertEqual(A("26만원 떨어지지만 않으면 매수")["cond"], "GE")
+        self.assertEqual(A("6만원 넘지만 않으면 매수")["cond"], "LE")
+        self.assertEqual(A("25만원 돌파하지 못하면 매도")["cond"], "LE")
+        self.assertEqual(A("21만원 회복하지 못하면 매도")["cond"], "LE")
+        self.assertEqual(A("12만원 이탈하지 않으면 매수")["cond"], "GE")
+        self.assertEqual(A("32만원 밀리지 않으면 매수")["cond"], "GE")
+        # 긍정형은 그대로(부정 규칙에 오염되지 않아야)
+        self.assertEqual(A("6만원 돌파하면 매도")["cond"], "GE")
+        self.assertEqual(A("25만원 이탈하면 매도")["cond"], "LE")
+        # '안'이 부정이 아닌 합성어("안착/안정")를 부정으로 오인하지 않는다
+        self.assertEqual(A("12만원 위로 안착하면 매수")["cond"], "GE")
+        self.assertEqual(A("40만원 위로 안정되면 매수")["cond"], "GE")
+
     def test_condition_both(self):
         a = A("26만 이하로 갔다가 27만 이상 회복하면 매수")
         self.assertTrue(a["cond_both"]); self.assertIsNone(a["cond"])
