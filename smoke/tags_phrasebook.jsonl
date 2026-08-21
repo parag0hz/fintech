@@ -1,0 +1,240 @@
+{"id": "phrase-claude-opus-5-00", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "casual: 별칭 '삼전'과 반말 축약 주문"}
+{"id": "phrase-claude-opus-5-01", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "casual: '지금 바로'가 시장가 신호"}
+{"id": "phrase-claude-opus-5-02", "target": "overcommit", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "casual: 매수/매도 방향이 '걸어놔'로만 암시되어 애매"}
+{"id": "phrase-claude-opus-5-03", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "polite: 한글 수량 표기 + 정중체"}
+{"id": "phrase-claude-opus-5-04", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "polite: 질문형 요청이지만 주문 의도 명확"}
+{"id": "phrase-claude-opus-5-05", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "polite: 보유분 언급이 수량 해석을 흐림"}
+{"id": "phrase-claude-opus-5-06", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "polite: 지정가 매도 표준형"}
+{"id": "phrase-claude-opus-5-07", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: '줍줍'이 매수 은어"}
+{"id": "phrase-claude-opus-5-08", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: '던지다'는 시장가 매도 은어"}
+{"id": "phrase-claude-opus-5-09", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: 별칭+물타기(추가매수) 은어"}
+{"id": "phrase-claude-opus-5-10", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: '싹 털어'는 전량 매도지만 수량 미지정"}
+{"id": "phrase-claude-opus-5-11", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: 익절각=매도 의도 은어"}
+{"id": "phrase-claude-opus-5-12", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: 불타기·풀매수 중복 은어"}
+{"id": "phrase-claude-opus-5-13", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "typo: '매도 해줘' 띄어쓰기 붕괴"}
+{"id": "phrase-claude-opus-5-14", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "typo: 수량 오타와 어절 분리"}
+{"id": "phrase-claude-opus-5-15", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "typo: 종목명·금액 발음식 오타"}
+{"id": "phrase-claude-opus-5-16", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "typo: 공백 없는 연속 표기"}
+{"id": "phrase-claude-opus-5-17", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "verbose_beginner: 수량을 '반'으로 표현해 계산 필요"}
+{"id": "phrase-claude-opus-5-18", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "verbose_beginner: 수량 대신 금액 기준 주문"}
+{"id": "phrase-claude-opus-5-19", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "verbose_beginner: 부가 설명 속에 핵심 주문이 묻힘"}
+{"id": "phrase-claude-opus-5-20", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "verbose_beginner: 장황한 배경 뒤 수량·시장가 지정"}
+{"id": "phrase-claude-opus-5-21", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "emotional: 감정 표현+전량 매도"}
+{"id": "phrase-claude-opus-5-22", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "emotional: '담자'가 매수, 추가 수량"}
+{"id": "phrase-claude-opus-5-23", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "emotional: '손절'이 즉시 시장가 매도"}
+{"id": "phrase-claude-opus-5-24", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "emotional: 감정+절반 계산 명시"}
+{"id": "phrase-claude-opus-5-25", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "dialect: 경상 방언 명령형"}
+{"id": "phrase-claude-opus-5-26", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "dialect: '팔아뿌라' 방언 매도"}
+{"id": "phrase-claude-opus-5-27", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "dialect: 전라 방언 어미"}
+{"id": "phrase-claude-opus-5-28", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "dialect: 방언 표현에 수량 결합"}
+{"id": "phrase-claude-opus-5-29", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "eng_mix: 영어 동사만 사용"}
+{"id": "phrase-claude-opus-5-30", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "eng_mix: 영어 주문유형 혼용"}
+{"id": "phrase-claude-opus-5-31", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "eng_mix: 영문 limit+숫자 가격"}
+{"id": "phrase-claude-opus-5-32", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "eng_mix: all sell=전량 매도, 수량 미지정"}
+{"id": "phrase-claude-opus-5-33", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "asr_noise: 조사 누락 및 한글 수량 붙어씀"}
+{"id": "phrase-claude-opus-5-34", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "asr_noise: 한글 숫자 인식"}
+{"id": "phrase-claude-opus-5-35", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "asr_noise: 가격과 수량 모두 한글, 순서 뒤섞임"}
+{"id": "phrase-claude-opus-5-36", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "asr_noise: 종목명 음성 표기+백주"}
+{"id": "phrase-claude-opus-5-37", "target": "condition", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "asr_noise: 조건과 수량 모두 한글 숫자"}
+{"id": "phrase-claude-opus-5-38", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "threshold_idiom: '깨면'=이하 조건, 손절=매도"}
+{"id": "phrase-claude-opus-5-39", "target": "overcommit", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "threshold_idiom: 전고점 수치가 없어 가격 확정 불가"}
+{"id": "phrase-claude-opus-5-40", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "threshold_idiom: '찍으면'=이상 도달, 익절=매도"}
+{"id": "phrase-claude-opus-5-41", "target": "overcommit", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "threshold_idiom: 지지선 수치 미제공으로 가격 불명"}
+{"id": "phrase-claude-opus-5-42", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "threshold_idiom: '밀리면'이 하락 조건"}
+{"id": "phrase-claude-opus-5-43", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "threshold_idiom: 돌파=이상, '태워'=매수 은어"}
+{"id": "phrase-claude-opus-5-44", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "pct: 체결가 기준 퍼센트 손절"}
+{"id": "phrase-claude-opus-5-45", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "pct: 절반 수량 계산+퍼센트 익절"}
+{"id": "phrase-claude-opus-5-46", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "pct: '빠지면'을 손실 기준으로 해석"}
+{"id": "phrase-claude-opus-5-47", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "pct: 부분 익절 수량 명시"}
+{"id": "phrase-claude-opus-5-48", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "pct: 마이너스 표현+체결가 참조"}
+{"id": "phrase-claude-opus-5-49", "target": "side", "mech": "ctx_reference", "mechs": ["ctx_reference"], "difficulty": 1, "gold_suspect": false, "tag_note": "reference: 직전 주문의 반대 방향 추론"}
+{"id": "phrase-claude-opus-5-50", "target": "side", "mech": "ctx_reference", "mechs": ["ctx_reference"], "difficulty": 1, "gold_suspect": false, "tag_note": "reference: 취소 후 동일 방향 시장가 재주문"}
+{"id": "phrase-claude-opus-5-51", "target": "side", "mech": "ctx_reference", "mechs": ["ctx_reference"], "difficulty": 1, "gold_suspect": false, "tag_note": "reference: 수량 배수 연산 필요"}
+{"id": "phrase-claude-opus-5-52", "target": "condition", "mech": "ctx_reference", "mechs": ["ctx_reference"], "difficulty": 1, "gold_suspect": false, "tag_note": "reference: 이전 조건 승계+수량만 변경"}
+{"id": "phrase-claude-opus-5-53", "target": "side", "mech": "ctx_reference", "mechs": ["ctx_reference"], "difficulty": 1, "gold_suspect": false, "tag_note": "reference: 이전 가격에 상대 조정"}
+{"id": "phrase-claude-opus-5-54", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "conditional_natural: '아래로 오면'이 명확한 LE 조건"}
+{"id": "phrase-claude-opus-5-55", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "conditional_natural: '되면'은 방향 불명이나 매도 통념상 상승 도달(GE)"}
+{"id": "phrase-claude-opus-5-57", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "conditional_natural: '내려오면'으로 LE 명확"}
+{"id": "phrase-claude-opus-5-58", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "conditional_natural: '넘어가면'=GE, 정리=매도"}
+{"id": "phrase-claude-sonnet-5-00", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "casual: 짧은 반말체, 별칭 사용"}
+{"id": "phrase-claude-sonnet-5-01", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "casual: 반말, 시장가 암시"}
+{"id": "phrase-claude-sonnet-5-02", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "casual: 담아=매수 은어적 표현이지만 일반화됨"}
+{"id": "phrase-claude-sonnet-5-03", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "polite: 숫자 한글 표기 존댓말"}
+{"id": "phrase-claude-sonnet-5-04", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "polite: 가격 지정 정중 표현"}
+{"id": "phrase-claude-sonnet-5-05", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "polite: 정중 어투, 시장가 암시"}
+{"id": "phrase-claude-sonnet-5-06", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: 줍줍=소량 매수 은어"}
+{"id": "phrase-claude-sonnet-5-07", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: 던지다=전량 매도"}
+{"id": "phrase-claude-sonnet-5-08", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: 물타기=추가 매수"}
+{"id": "phrase-claude-sonnet-5-09", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: 불타기=상승중 추가매수"}
+{"id": "phrase-claude-sonnet-5-10", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: 익절각=매도 시점 은어"}
+{"id": "phrase-claude-sonnet-5-11", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "typo: 띄어쓰기 오류"}
+{"id": "phrase-claude-sonnet-5-12", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "typo: 단어 중간 공백 오타"}
+{"id": "phrase-claude-sonnet-5-13", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "typo: 자모 붕괴형 오타"}
+{"id": "phrase-claude-sonnet-5-14", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "verbose_beginner: 장황한 설명, 수량은 보유량의 절반으로 추정"}
+{"id": "phrase-claude-sonnet-5-15", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "verbose_beginner: 불필요한 수식어 많음, 최종 수량 확정"}
+{"id": "phrase-claude-sonnet-5-16", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "verbose_beginner: 장황하지만 결론은 명확"}
+{"id": "phrase-claude-sonnet-5-17", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "emotional: 감정적 전량매도, 직전 보유종목 참조"}
+{"id": "phrase-claude-sonnet-5-18", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "emotional: 흥분 어투, 추가매수"}
+{"id": "phrase-claude-sonnet-5-19", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "emotional: 감정적 손절 지시"}
+{"id": "phrase-claude-sonnet-5-20", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "dialect: 경상 방언 '사도'=사줘"}
+{"id": "phrase-claude-sonnet-5-21", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "dialect: '팔아뿌라'=팔아버려"}
+{"id": "phrase-claude-sonnet-5-22", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "dialect: 충청/강원 방언 어미 '사래이'"}
+{"id": "phrase-claude-sonnet-5-23", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "eng_mix: 영어 동사 혼용"}
+{"id": "phrase-claude-sonnet-5-24", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "eng_mix: 영어 명령어+주문유형 혼용"}
+{"id": "phrase-claude-sonnet-5-25", "target": "overcommit", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "eng_mix: 영어 주문유형+한글 가격"}
+{"id": "phrase-claude-sonnet-5-26", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "asr_noise: 조사 누락, 숫자 한글"}
+{"id": "phrase-claude-sonnet-5-27", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "asr_noise: 숫자 한글 변환, 조사 축약"}
+{"id": "phrase-claude-sonnet-5-28", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "asr_noise: 음성 인식 조사 누락형"}
+{"id": "phrase-claude-sonnet-5-29", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "threshold_idiom: 관용적 하락 임계 손절"}
+{"id": "phrase-claude-sonnet-5-30", "target": "overcommit", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "threshold_idiom: 전고점 값 불명, abstain 필요"}
+{"id": "phrase-claude-sonnet-5-31", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "threshold_idiom: 상승 임계 도달시 매도"}
+{"id": "phrase-claude-sonnet-5-32", "target": "overcommit", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "threshold_idiom: 지지선 값 불명확, abstain"}
+{"id": "phrase-claude-sonnet-5-33", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "pct: 매수가 대비 5% 하락시 손절"}
+{"id": "phrase-claude-sonnet-5-34", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "pct: 수익률 기준 절반 매도"}
+{"id": "phrase-claude-sonnet-5-35", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "pct: 매수가 기준 하락 손절"}
+{"id": "phrase-claude-sonnet-5-36", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "pct: 손실 기준 손절 주문"}
+{"id": "phrase-claude-sonnet-5-37", "target": "side", "mech": "ctx_reference", "mechs": ["ctx_reference"], "difficulty": 1, "gold_suspect": false, "tag_note": "reference: 직전 주문 반대 매매 참조"}
+{"id": "phrase-claude-sonnet-5-38", "target": "side", "mech": "ctx_reference", "mechs": ["ctx_reference"], "difficulty": 1, "gold_suspect": false, "tag_note": "reference: 이전 리밋 주문을 시장가로 재요청"}
+{"id": "phrase-claude-sonnet-5-39", "target": "side", "mech": "ctx_reference", "mechs": ["ctx_reference"], "difficulty": 1, "gold_suspect": false, "tag_note": "reference: 직전 수량의 2배 재주문"}
+{"id": "phrase-claude-sonnet-5-40", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "conditional_natural: 방향 명확한 하락 조건부 매수"}
+{"id": "phrase-claude-sonnet-5-41", "target": "overcommit", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "conditional_natural: 방향 불명확, 상승/하락 판단 불가로 abstain"}
+{"id": "phrase-claude-sonnet-5-42", "target": "overcommit", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "conditional_natural: '가면' 방향 모호, abstain 처리"}
+{"id": "phrase-claude-sonnet-5-43", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "conditional_natural: '넘으면' 상승 조건 명확"}
+{"id": "phrase-claude-sonnet-5-44", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "conditional_natural: 하락 조건 명시적"}
+{"id": "phrase-claude-sonnet-5-45", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "casual: 주문유형 명시 반말"}
+{"id": "phrase-claude-sonnet-5-46", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "polite: 정중 매도 요청"}
+{"id": "phrase-claude-sonnet-5-47", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: 풀매수=예수금 전액 매수"}
+{"id": "phrase-claude-sonnet-5-48", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "typo: 공백 완전 누락"}
+{"id": "phrase-claude-sonnet-5-49", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "verbose_beginner: 금액 기준 매수, 수량 미지정"}
+{"id": "phrase-claude-sonnet-5-50", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "emotional: 감정+은어 결합"}
+{"id": "phrase-claude-sonnet-5-51", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "dialect: '팔아도'=팔아줘 방언 어미"}
+{"id": "phrase-claude-sonnet-5-52", "target": "condition", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "eng_mix: 영어 손절 용어 혼용"}
+{"id": "phrase-claude-sonnet-5-53", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "asr_noise: '오주'=5주 숫자 인식오류"}
+{"id": "phrase-claude-sonnet-5-54", "target": "overcommit", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "threshold_idiom: 전저점 값 불명, abstain"}
+{"id": "phrase-claude-sonnet-5-55", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "pct: 목표 수익률 전량 매도"}
+{"id": "phrase-claude-sonnet-5-56", "target": "side", "mech": "ctx_reference", "mechs": ["ctx_reference"], "difficulty": 1, "gold_suspect": false, "tag_note": "reference: 수량 배수 재주문"}
+{"id": "phrase-claude-sonnet-5-57", "target": "overcommit", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "conditional_natural: '오면' 방향 불명확, abstain"}
+{"id": "phrase-claude-sonnet-5-58", "target": "overcommit", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: 반타작=절반 매도 은어"}
+{"id": "phrase-claude-sonnet-5-59", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: 손절각+감정 혼합"}
+{"id": "phrase-claude-sonnet-5-60", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "casual: 가격 지정 매수 반말"}
+{"id": "phrase-claude-sonnet-5-61", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "verbose_beginner: 정중+장황 혼합"}
+{"id": "phrase-gpt-5.6-sol-00", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "casual: 종목 별칭과 짧은 반말을 사용한 시장가 매수 표현"}
+{"id": "phrase-gpt-5.6-sol-01", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "casual: 종목 약칭과 한글 수량이 결합된 짧은 매도 표현"}
+{"id": "phrase-gpt-5.6-sol-02", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "casual: 담아라는 구어체를 매수로 해석해야 함"}
+{"id": "phrase-gpt-5.6-sol-03", "target": "condition", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "casual: 걸어줘라는 표현에서 지정가 주문을 식별해야 함"}
+{"id": "phrase-gpt-5.6-sol-04", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "polite: 정중한 표현 속 한글 수량을 인식해야 함"}
+{"id": "phrase-gpt-5.6-sol-05", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "polite: 영문 종목명과 정중한 시장가 매도 요청이 결합됨"}
+{"id": "phrase-gpt-5.6-sol-06", "target": "condition", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "polite: 가격과 수량이 떨어져 등장하는 정중한 지정가 요청"}
+{"id": "phrase-gpt-5.6-sol-07", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "polite: 보유분이라는 문맥과 일부 수량 매도를 함께 해석해야 함"}
+{"id": "phrase-gpt-5.6-sol-08", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: 줍줍을 시장가 매수 의미로 해석해야 함"}
+{"id": "phrase-gpt-5.6-sol-09", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: 던지기를 즉시 시장가 매도로 해석해야 함"}
+{"id": "phrase-gpt-5.6-sol-10", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: 물타기라는 은어가 추가 매수 주문을 뜻함"}
+{"id": "phrase-gpt-5.6-sol-11", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: 익절과 털기라는 은어가 함께 사용된 매도 요청"}
+{"id": "phrase-gpt-5.6-sol-12", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "typo: 해줘의 철자 오류가 포함된 매도 발화"}
+{"id": "phrase-gpt-5.6-sol-13", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "typo: 문장 끝 오타가 있어도 주문 의도는 명확함"}
+{"id": "phrase-gpt-5.6-sol-14", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "typo: 시장가가 시잔가로 잘못 입력됨"}
+{"id": "phrase-gpt-5.6-sol-15", "target": "condition", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "typo: 존댓말 어미 오타와 숫자 가격이 결합됨"}
+{"id": "phrase-gpt-5.6-sol-16", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "verbose_beginner: 장황한 설명에서 실제 매도 수량을 추출해야 함"}
+{"id": "phrase-gpt-5.6-sol-17", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "verbose_beginner: 초보자의 부연 설명 속 소량 매수 의도를 파악해야 함"}
+{"id": "phrase-gpt-5.6-sol-18", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "verbose_beginner: 보유 수량과 절반 표현으로 주문 수량을 계산해야 함"}
+{"id": "phrase-gpt-5.6-sol-19", "target": "condition", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "verbose_beginner: 설명형 문장에서 지정가와 수량을 분리해 추출해야 함"}
+{"id": "phrase-gpt-5.6-sol-20", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "emotional: 부정적 감정과 즉시 전량 매도 의도가 함께 표현됨"}
+{"id": "phrase-gpt-5.6-sol-21", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "emotional: 확신을 드러내는 감정 표현 뒤에 추가 매수가 등장함"}
+{"id": "phrase-gpt-5.6-sol-22", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "emotional: 불안과 체념이 섞였지만 주문 조건은 명확함"}
+{"id": "phrase-gpt-5.6-sol-23", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "emotional: 흥분된 표현과 즉시 시장가 매수가 결합됨"}
+{"id": "phrase-gpt-5.6-sol-24", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "dialect: 경상도식 어미를 매수 명령으로 이해해야 함"}
+{"id": "phrase-gpt-5.6-sol-25", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "dialect: 팔아뿌라라는 방언형 매도 명령이 사용됨"}
+{"id": "phrase-gpt-5.6-sol-26", "target": "condition", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "dialect: 오면과 존대 어미가 방언 형태로 변형됨"}
+{"id": "phrase-gpt-5.6-sol-27", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "dialect: 경상권 존대 방언으로 표현된 시장가 매도"}
+{"id": "phrase-gpt-5.6-sol-28", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "eng_mix: 한국어 종목 및 수량 뒤에 영어 주문 방향이 붙음"}
+{"id": "phrase-gpt-5.6-sol-29", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "eng_mix: 영어 방향과 주문 유형이 한국어 어순에 섞임"}
+{"id": "phrase-gpt-5.6-sol-30", "target": "condition", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "eng_mix: 영문 주문 유형과 방향 및 한국어 가격 단위가 혼합됨"}
+{"id": "phrase-gpt-5.6-sol-31", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "eng_mix: 영어 매도 동사가 한국어 보조 용언과 결합됨"}
+{"id": "phrase-gpt-5.6-sol-32", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "asr_noise: 조사가 생략되고 수량이 붙어 인식된 음성 명령"}
+{"id": "phrase-gpt-5.6-sol-33", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "asr_noise: 조사 없이 종목과 한글 수량 및 동사만 남은 발화"}
+{"id": "phrase-gpt-5.6-sol-34", "target": "condition", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "asr_noise: 종목명이 잘게 분리되고 조사와 가격 조사가 누락됨"}
+{"id": "phrase-gpt-5.6-sol-35", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "asr_noise: 공식 종목명의 띄어쓰기 변형과 조사 누락이 있음"}
+{"id": "phrase-gpt-5.6-sol-36", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "threshold_idiom: 깨면을 하방 임계 조건으로 해석해야 함"}
+{"id": "phrase-gpt-5.6-sol-37", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "threshold_idiom: 뚫으면을 상방 돌파 조건 및 추매를 매수로 해석해야 함"}
+{"id": "phrase-gpt-5.6-sol-38", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "threshold_idiom: 찍으면을 상방 가격 도달 조건으로 해석해야 함"}
+{"id": "phrase-gpt-5.6-sol-39", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "threshold_idiom: 지지선 붕괴를 하방 매도 조건으로 변환해야 함"}
+{"id": "phrase-gpt-5.6-sol-40", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "pct: 체결가를 기준으로 손실률 조건을 계산해야 하는 주문"}
+{"id": "phrase-gpt-5.6-sol-41", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "pct: 수익률 조건과 절반 수량 계산이 동시에 필요함"}
+{"id": "phrase-gpt-5.6-sol-42", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "pct: 주문 가격이 아니라 실제 체결가를 손실률 기준으로 사용해야 함"}
+{"id": "phrase-gpt-5.6-sol-43", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "pct: 체결가 대비 목표 수익률을 상방 매도 조건으로 해석해야 함"}
+{"id": "phrase-gpt-5.6-sol-44", "target": "side", "mech": "ctx_reference", "mechs": ["ctx_reference"], "difficulty": 1, "gold_suspect": false, "tag_note": "reference: 직전 주문의 종목과 수량을 유지하고 방향만 반전해야 함"}
+{"id": "phrase-gpt-5.6-sol-45", "target": "side", "mech": "ctx_reference", "mechs": ["ctx_reference"], "difficulty": 1, "gold_suspect": false, "tag_note": "reference: 직전 지정가 주문을 같은 종목과 수량의 시장가 주문으로 수정함"}
+{"id": "phrase-gpt-5.6-sol-46", "target": "side", "mech": "ctx_reference", "mechs": ["ctx_reference"], "difficulty": 1, "gold_suspect": false, "tag_note": "reference: 직전 주문에서 수량만 변경하고 나머지를 유지해야 함"}
+{"id": "phrase-gpt-5.6-sol-47", "target": "condition", "mech": "ctx_reference", "mechs": ["ctx_reference"], "difficulty": 1, "gold_suspect": false, "tag_note": "reference: 직전 주문을 참조해 지정가만 수정해야 함"}
+{"id": "phrase-gpt-5.6-sol-48", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "conditional_natural: 아래로 오면이라는 자연어를 하방 매수 조건으로 변환해야 함"}
+{"id": "phrase-gpt-5.6-sol-49", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "conditional_natural: 위로 가면을 상방 매도 조건으로 해석해야 함"}
+{"id": "phrase-gpt-5.6-sol-50", "target": "overcommit", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "conditional_natural: 되면에 접근 방향이 없어 현재가 없이는 LE와 GE를 결정할 수 없음"}
+{"id": "phrase-gpt-5.6-sol-51", "target": "overcommit", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "conditional_natural: 오면이라는 표현만으로는 상방 또는 하방 도달 방향이 불명확함"}
+{"id": "phrase-gpt-5.6-sol-52", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "casual: 주식 수량이 아니라 금액 기준으로 주문하는 구어체 표현"}
+{"id": "phrase-gpt-5.6-sol-53", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "polite: 정중한 금액 기준 시장가 매수 요청"}
+{"id": "phrase-gpt-5.6-sol-54", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: 풀매수라는 은어와 금액 기준 주문이 결합됨"}
+{"id": "phrase-gpt-5.6-sol-55", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "typo: 존댓말 어미 오타와 붙여 쓴 금액 표현이 포함됨"}
+{"id": "phrase-gpt-5.6-sol-56", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "verbose_beginner: 투자 금액을 넣는다는 표현을 금액 기준 매수로 해석해야 함"}
+{"id": "phrase-gpt-5.6-sol-57", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "emotional: 충동적인 감정 표현 뒤에 금액 기준 매수가 제시됨"}
+{"id": "phrase-gpt-5.6-sol-58", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "dialect: 방언형 존대 표현으로 된 금액 기준 매수 요청"}
+{"id": "phrase-gpt-5.6-sol-59", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "eng_mix: 영어 주문 방향 및 유형과 한국어 금액 단위가 혼합됨"}
+{"id": "phrase-kimi-k3-00", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "casual: 별칭(삼전)과 반말 단축형, 수량만 있고 가격 없어 시장가로 해석해야 함"}
+{"id": "phrase-kimi-k3-01", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "casual: 별칭 사용, 명시적 시장가라 쉽지만 '그냥' 같은 부사가 끼어 있음"}
+{"id": "phrase-kimi-k3-02", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "casual: '사자'는 시세표현이 아니라 매수 주문이라는 것을 문맥으로 판단해야 함"}
+{"id": "phrase-kimi-k3-03", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "casual: 극단적으로 짧은 발화, 가격 부재 시 시장가 기본값 추론 필요"}
+{"id": "phrase-kimi-k3-04", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "casual: 축약 별칭 + 금액 기반 주문이라 quantity가 아니라 amount에 넣어야 함"}
+{"id": "phrase-kimi-k3-05", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "polite: 한글 수량 표현(열 주)을 숫자로 변환해야 함"}
+{"id": "phrase-kimi-k3-06", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "polite: 의문문 형태의 명령, 지정가 매도임을 '~에'에서 판단해야 함"}
+{"id": "phrase-kimi-k3-07", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "polite: 기아는 일반명사(자동차 기아)와 혼동 가능한 종목명"}
+{"id": "phrase-kimi-k3-08", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "polite: 복합 숫자(16만5천) 파싱 필요"}
+{"id": "phrase-kimi-k3-09", "target": "side", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "polite: '전량'은 시스템이 보유수량을 조회해야 하는 지시적 수량"}
+{"id": "phrase-kimi-k3-10", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: '줍줍'이 매수 은어라는 도메인 지식 필요, 앞의 서술(급락)은 노이즈"}
+{"id": "phrase-kimi-k3-11", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: '털어'=전량 매도, 수량 미명시라 보유 전량으로 해석"}
+{"id": "phrase-kimi-k3-12", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: '물타기'는 추가 매수 의도 설명, 핵심은 20주 매수"}
+{"id": "phrase-kimi-k3-13", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: '던져'=매도, '절반'은 보유수량 조회가 필요한 상대 수량"}
+{"id": "phrase-kimi-k3-14", "target": "overcommit", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: '풀매수'는 가용자산 전부라 금액을 알 수 없어 단일 정답 불가"}
+{"id": "phrase-kimi-k3-15", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "slang: '포스코' 별칭을 POSCO홀딩스로 매핑, '던지자'는 보유 전량 매도로 해석"}
+{"id": "phrase-kimi-k3-16", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "typo: '메수'는 '매수'의 흔한 오타, 사람은 쉽게 복원 가능"}
+{"id": "phrase-kimi-k3-17", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "typo: '매 도' 띄어쓰기 붕괴와 조사 생략('좀')이 섞임"}
+{"id": "phrase-kimi-k3-18", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "typo: '넣어조' 오타 + 희망 표현('사야되는데') 속에서 실제 주문 의도 추출"}
+{"id": "phrase-kimi-k3-19", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "typo: 종목명 오타(전차→전자)를 사람 상식으로 복원해야 함"}
+{"id": "phrase-kimi-k3-20", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "typo: 단어 반복 오류(매수매수), 의도는 단일 매수"}
+{"id": "phrase-kimi-k3-21", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "verbose_beginner: 긴 심경 서술 속에서 '반만 정리'가 핵심, history 체결 수량으로 50주 계산 필요"}
+{"id": "phrase-kimi-k3-22", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "verbose_beginner: '지금 가격으로 바로'가 시장가를 뜻하는 초보식 우회 표현"}
+{"id": "phrase-kimi-k3-23", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "verbose_beginner: 한글 수량(서른 주)과 배경 설명이 섞인 장황한 문장"}
+{"id": "phrase-kimi-k3-24", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "verbose_beginner: '까지만 주고 사다'가 지정가 상한 표현이라는 것을 해석해야 함"}
+{"id": "phrase-kimi-k3-25", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "verbose_beginner: '싹 다'=전량, '지금 당장'=시장가로 읽어야 하는 장황한 전량 매도"}
+{"id": "phrase-kimi-k3-26", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "emotional: 감탄사로 시작하고 '이거'가 직전 종목을 지시, 수량은 직전 체결에서 복원"}
+{"id": "phrase-kimi-k3-27", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "emotional: 흥분 표현(진짜 간다) 사이에서 실제 지시(20주 매수)만 추출"}
+{"id": "phrase-kimi-k3-28", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "emotional: '~에라도'가 지정가 매도 호가라는 것을 감정 표현과 분리해야 함"}
+{"id": "phrase-kimi-k3-29", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "emotional: '익절'=보유분 매도, '절반'은 상대 수량이라 quantity 비워둠"}
+{"id": "phrase-kimi-k3-30", "target": "side", "mech": "lex_indirect", "mechs": ["lex_indirect"], "difficulty": 1, "gold_suspect": false, "tag_note": "emotional: '정리해버려'가 전량 매도라는 관용 해석 필요"}
+{"id": "phrase-kimi-k3-31", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "dialect: 경상식 종결(사도)을 표준어 매수 명령으로 해석"}
+{"id": "phrase-kimi-k3-32", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "dialect: 방언 어미(뿌라) + 지시어 '그거'가 직전 발화의 기아를 가리킴"}
+{"id": "phrase-kimi-k3-33", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "dialect: 전라식 의문 종결이지만 실제로는 지정가 매수 요청"}
+{"id": "phrase-kimi-k3-34", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "dialect: 충청권에서도 쓰는 완곡한 청유형 매도 표현"}
+{"id": "phrase-kimi-k3-35", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "eng_mix: 영어 side 표현(sell)을 SELL로 매핑"}
+{"id": "phrase-kimi-k3-36", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "eng_mix: 한영 혼용 어순, buy+market을 각각 side와 order_type으로 매핑"}
+{"id": "phrase-kimi-k3-37", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "eng_mix: 아라비아 숫자 가격 + 영어 주문유형 조합"}
+{"id": "phrase-kimi-k3-38", "target": "condition", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "eng_mix: 스탑로스는 이하 터치 시 매도하는 조건부 주문으로 변환 필요, 수량 없음(보유분)"}
+{"id": "phrase-kimi-k3-39", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "asr_noise: 조사 전체 생략 + 한글 수량(열주), 음성인식 결과물 같은 형태"}
+{"id": "phrase-kimi-k3-40", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "asr_noise: '이십'을 20으로 변환, 조사 없이 수량과 행위만 나열"}
+{"id": "phrase-kimi-k3-41", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "asr_noise: 숫자가 모두 한글(오, 십팔만)로 인식된 케이스, 가격 180000 변환 필요"}
+{"id": "phrase-kimi-k3-42", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "asr_noise: 한글 숫자 두 개(백주, 칠만원)와 조사 생략이 동시에 등장"}
+{"id": "phrase-kimi-k3-43", "target": "side", "mech": "lex_surface", "mechs": ["lex_surface"], "difficulty": 1, "gold_suspect": false, "tag_note": "asr_noise: 한글 금액(삼십만원)을 amount로 변환, 수량이 아니라 금액 주문"}
+{"id": "phrase-kimi-k3-44", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "threshold_idiom: '깨면'=이하 이탈 조건, 수량 없이 보유분 전량 손절로 해석"}
+{"id": "phrase-kimi-k3-45", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "threshold_idiom: '뚫으면'=이상 돌파 조건, '추매'=추가 매수라는 은어 해석 필요"}
+{"id": "phrase-kimi-k3-46", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "threshold_idiom: '찍으면'=도달(상방), '절반'은 보유수량 의존 상대 수량"}
+{"id": "phrase-kimi-k3-47", "target": "overcommit", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "threshold_idiom: '지지선'은 발화만으로 수치를 알 수 없어 가격 결정 불가, 의도만 기록하고 abstain"}
+{"id": "phrase-kimi-k3-48", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "threshold_idiom: '밑으로 가면'=이하 조건, 손절매도 합성어 분해 필요"}
+{"id": "phrase-kimi-k3-49", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "pct: 음수 퍼센트를 체결가 기준 하락률로 해석해야 함, 절대가격 계산은 시스템 몫이라 price는 null"}
+{"id": "phrase-kimi-k3-50", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "pct: '먹으면'=수익 실현, '절반'은 체결 수량의 50%인 10주로 계산"}
+{"id": "phrase-kimi-k3-51", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "pct: '매수가'가 history의 fill_price를 참조해야 하는 상대 기준가"}
+{"id": "phrase-kimi-k3-52", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "pct: '수익 나면'=상승 조건(GE), 전량은 체결 수량과 동일한 15주"}
+{"id": "phrase-kimi-k3-53", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "pct: 퍼센트 하락 조건과 명시 수량이 함께 주어진 비교적 쉬운 pct 케이스"}
+{"id": "phrase-kimi-k3-54", "target": "side", "mech": "ctx_reference", "mechs": ["ctx_reference"], "difficulty": 1, "gold_suspect": false, "tag_note": "reference: '반대로'를 동일 수량·동일 가격의 매도 지정가로 해석하는 상식 추론 필요"}
+{"id": "phrase-kimi-k3-55", "target": "side", "mech": "ctx_reference", "mechs": ["ctx_reference"], "difficulty": 1, "gold_suspect": false, "tag_note": "reference: 취소+재주문 두 동작이지만 발화 gold는 새 주문(시장가 매수 20주) 하나로 정리"}
+{"id": "phrase-kimi-k3-56", "target": "side", "mech": "ctx_reference", "mechs": ["ctx_reference"], "difficulty": 1, "gold_suspect": false, "tag_note": "reference: '두 배로 더 사'를 기존 10주의 2배인 20주 추가 매수로 해석해야 함"}
+{"id": "phrase-kimi-k3-57", "target": "condition", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "conditional_natural: '아래로 오면'이 이하 조건(LE) 매수라는 자연스러운 조건부 표현"}
+{"id": "phrase-kimi-k3-58", "target": "overcommit", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "conditional_natural: '되면'은 방향 정보가 없어 현재가 없이는 LE/GE 판정 불가, 상식적 해석 보류"}
+{"id": "phrase-kimi-k3-59", "target": "overcommit", "mech": "threshold_idiom", "mechs": ["threshold_idiom"], "difficulty": 1, "gold_suspect": false, "tag_note": "conditional_natural: '가면'은 방향 미상(오르면서 가는지 떨어지면서 가는지 불명)이라 조건 판정 불가"}

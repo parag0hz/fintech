@@ -183,7 +183,7 @@
     "rescored": true
   },
   "qwen/qwen3-14b": {
-    "raw_crit": 2,
+    "raw_crit": 3,
     "raw_unnec": 1,
     "h_crit": 0,
     "h_unnec": 1,
@@ -195,7 +195,7 @@
         8
       ],
       "threshold": [
-        0,
+        1,
         8
       ],
       "side": [
@@ -554,7 +554,7 @@
     "raw_crit": 6,
     "raw_unnec": 2,
     "h_crit": 0,
-    "h_unnec": 2,
+    "h_unnec": 1,
     "raw_err": 0,
     "h_err": 0,
     "raw_bycat": {
@@ -643,7 +643,7 @@
     },
     "flags": {
       "cond_both_cues": 1,
-      "cond_unverified": 1,
+      "no_cond_cue": 1,
       "no_qty": 4,
       "no_ticker": 1,
       "side_override": 3,
@@ -738,9 +738,9 @@
     "raw_crit": 3,
     "raw_unnec": 0,
     "h_crit": 0,
-    "h_unnec": 2,
+    "h_unnec": 5,
     "raw_err": 0,
-    "h_err": 0,
+    "h_err": 6,
     "raw_bycat": {
       "clean": [
         0,
@@ -827,9 +827,12 @@
     },
     "flags": {
       "cond_both_cues": 1,
-      "no_qty": 3,
-      "side_override": 1,
-      "flip_ref": 1
+      "no_qty": 5,
+      "side_override": 5,
+      "no_ticker": 6,
+      "cond_override": 2,
+      "flip_ref": 1,
+      "cond_from_history": 1
     },
     "h_mech_target": {
       "explicit": {

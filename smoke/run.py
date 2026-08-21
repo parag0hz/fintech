@@ -69,16 +69,19 @@ def load_key():
         return k.strip()
     envp = os.path.join(HERE, ".env")
     if os.path.exists(envp):
-        for line in open(envp):
+        for line in open(envp, encoding="utf-8"):
             line = line.strip()
-            if line.startswith("OPENROUTER_API_KEY"):
-                return line.split("=", 1)[1].strip().strip('"').strip("'")
+            if line.startswith("export "):
+                line = line[7:].strip()
+            k, _, v = line.partition("=")
+            if k.strip() == "OPENROUTER_API_KEY" and v:
+                return v.strip().strip('"').strip("'")
     return None
 
 
 def load_cases(path):
     cases = []
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if line:
@@ -131,7 +134,7 @@ def _post(model, msgs, key, response_format, provider, timeout):
     return _extract_json(content), usage
 
 
-def call_openrouter(model, context, nl, key, timeout=90, messages=None):
+def call_openrouter(model, context, nl, key, timeout=90, messages=None, schema=None):
     """폴백 사다리: strict 스키마 → json_object → 순수 프롬프트. 성공 모드도 함께 반환.
     HTTPError는 여기서 전부 흡수해 문자열로 바꾼다(상위로 날것 예외를 던지지 않음).
     messages를 주면 그대로 사용(하네스가 커스텀 프롬프트를 넣을 때)."""
@@ -148,7 +151,7 @@ def call_openrouter(model, context, nl, key, timeout=90, messages=None):
             msgs.append({"role": "user", "content": "[배경 정보]\n" + context})
         msgs.append({"role": "user", "content": user})
 
-    strict_rf = {"type": "json_schema", "json_schema": {"name": "order", "strict": True, "schema": ORDER_SCHEMA}}
+    strict_rf = {"type": "json_schema", "json_schema": {"name": "order", "strict": True, "schema": schema or ORDER_SCHEMA}}
     modes = [
         ("schema", strict_rf, {"require_parameters": True}),
         ("json_object", {"type": "json_object"}, None),
@@ -278,13 +281,22 @@ def normalize(raw):
     side_raw = out.get("side")
     if isinstance(side_raw, dict):
         side_raw = side_raw.get("type") or side_raw.get("action") or side_raw.get("value")
+    ab = out.get("abstain")
+    if isinstance(ab, str):                       # "false"/"no" 문자열을 True 로 오판하지 않도록
+        ab = ab.strip().lower() in ("true", "yes", "y", "1", "예", "보류")
     p = {"ticker": out.get("ticker"), "side": _norm_enum(side_raw, _SIDE),
          "order_type": _norm_enum(out.get("order_type"), _OTYPE),
          "quantity": None, "amount": _kor_num(out.get("amount")),
          "price": None, "condition": _norm_enum(cond_raw, _COND) or ("NONE" if "condition" in out else None),
-         "abstain": bool(out.get("abstain")) if out.get("abstain") is not None else False}
+         "abstain": bool(ab) if ab is not None else False}
     q = out.get("quantity")
-    p["quantity"] = int(q) if isinstance(q, (int, float)) or (isinstance(q, str) and q.strip().isdigit()) else None
+    if isinstance(q, bool):
+        q = None
+    if isinstance(q, (int, float)):
+        p["quantity"] = int(q)
+    elif isinstance(q, str):                      # "100주", "1,000" 도 수량으로 읽는다(가격과 동일 규칙)
+        qn = _kor_num(q)
+        p["quantity"] = int(qn) if isinstance(qn, (int, float)) else None
     # price 자리에 'MARKET'/'시장가'가 들어오면 → order_type=MARKET, price 비움
     rawprice = out.get("price")
     if isinstance(rawprice, str) and rawprice.strip().lower() in ("market", "시장가", "시장", "현재가"):
@@ -299,6 +311,11 @@ def normalize(raw):
         p["order_type"] = "LIMIT" if p["price"] is not None else ("MARKET" if not p["abstain"] else None)
     if p["condition"] is None:
         p["condition"] = "NONE"
+    # 근거 인용(하네스 프롬프트가 요구): 모델이 방향/조건 판단의 근거로 인용한 발화 속 단어. 문자열만 통과(검증은 L3 가 한다).
+    for k in ("side_evidence", "condition_evidence"):
+        v = raw.get(k)
+        if isinstance(v, str) and v.strip():
+            p[k] = v.strip()[:40]
     return p
 
 
@@ -435,7 +452,7 @@ def main():
         summaries.append(summarize(m, rows))
 
     print_table(summaries)
-    with open(args.out, "w") as f:
+    with open(args.out, "w", encoding="utf-8") as f:
         json.dump({"cases": len(cases), "summaries": summaries, "rows": all_rows}, f, ensure_ascii=False, indent=2)
     print("\n상세 로그 → %s" % args.out)
 

@@ -50,7 +50,9 @@
           1,
           3
         ]
-      }
+      },
+      "all_failed": false,
+      "rescored": true
     }
   ],
   "rows": {
