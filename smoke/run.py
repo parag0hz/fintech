@@ -18,7 +18,11 @@ import os, sys, json, time, argparse, urllib.request, urllib.error
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-API_URL = "https://openrouter.ai/api/v1/chat/completions"
+# 기본은 OpenRouter. 로컬 vLLM(OpenAI 호환)으로 붙이려면 환경변수로 교체:
+#   LLM_API_URL=http://localhost:8000/v1/chat/completions
+# (온프레미스 4bit 양자화 실측용 — 실제 배포 환경 수치를 재기 위함)
+API_URL = os.environ.get("LLM_API_URL", "https://openrouter.ai/api/v1/chat/completions")
+IS_LOCAL = "openrouter.ai" not in API_URL
 
 # 방어자(로컬 후보) — 크기 내림차순. 격차/치명오류율 곡선을 보는 게 목적.
 DEFAULT_DEFENDERS = [
@@ -64,6 +68,8 @@ CRITICAL = ("side", "condition")
 
 
 def load_key():
+    if IS_LOCAL:
+        return os.environ.get("OPENROUTER_API_KEY", "local")   # 로컬 서버는 아무 토큰이나 받는다
     k = os.environ.get("OPENROUTER_API_KEY")
     if k:
         return k.strip()
