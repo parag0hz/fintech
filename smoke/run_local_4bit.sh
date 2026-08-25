@@ -53,7 +53,8 @@ python3 run_harness.py --defenders "$SERVED" --cases attacks_ko_threshold.jsonl 
 
 echo "▶ 5/5  벤치 — 프론티어 공격 142건 (ASR)"
 python3 run_asr.py --attacks attacks_frontier9.jsonl --defenders "$SERVED" \
-  --out "asr_local_$SERVED.json" || echo "   (run_asr 옵션이 다르면 run_harness 결과만 써도 됨)"
+  --out "asr_local_$SERVED.json" --rows-out "asr_rows_local_$SERVED.json" \
+  || echo "   (run_asr 옵션이 다르면 run_harness 결과만 써도 됨)"
 
 echo
 echo "✅ 완료. 결과 파일:"
