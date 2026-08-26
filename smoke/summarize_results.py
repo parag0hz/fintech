@@ -118,6 +118,119 @@ def flags():
     print(", ".join("%s %d" % (k, n) for k, n in sorted(allf.items(), key=lambda x: -x[1])) + "\n")
 
 
+def local4bit():
+    """실험6 — 온프레미스 4bit 실측 (REV.3). 로컬 vLLM/AWQ 결과와 풀정밀도 기준선을 나란히 놓는다."""
+    def wilson(k, n, z=1.96):
+        if not n:
+            return (0.0, 0.0)
+        p = k / n; d = 1 + z * z / n
+        c = p + z * z / (2 * n); m = z * ((p * (1 - p) / n + z * z / (4 * n * n)) ** 0.5)
+        return ((c - m) / d * 100, (c + m) / d * 100)
+
+    def one(fn):
+        d = J(fn)
+        if not d:
+            return None
+        rep = d.get("report", d)
+        for k, v in rep.items():
+            if isinstance(v, dict) and "raw_crit" in v:
+                return k, v
+        return None
+
+    rows = []
+    for served in ("qwen3-8b-awq", "qwen3-14b-awq", "qwen3-32b-awq"):
+        r = one("harness_ko_local_%s.json" % served)
+        if r:
+            rows.append(("4bit " + served, r[1]))
+    base = J("harness_ko_v2.json")
+    if base:
+        for m, v in (base.get("report", base)).items():
+            if isinstance(v, dict) and "raw_crit" in v:
+                rows.append(("풀정밀 " + short(m), v))
+    if not rows:
+        return
+    print("### 실험6 — 온프레미스 4bit 실측: 한국어 임계 88건 (raw 치명 / 하네스 / 과잉보류)\n")
+    print("| 방어자 | raw 치명 | 95% CI | 하네스 | 과잉보류 | 실패 |\n|---|---|---|---|---|---|")
+    for lbl, v in rows:
+        n = v.get("n_scored", v.get("n", 0)) or 0
+        lo, hi = wilson(v["raw_crit"], n)
+        print("| %s | %d/%d = %.1f%% | [%.1f%%, %.1f%%] | %d | %d | %s |" % (
+            lbl, v["raw_crit"], n, 100 * v["raw_crit"] / max(n, 1), lo, hi,
+            v["h_crit"], v["h_unnec"], v.get("raw_err", 0)))
+    print()
+
+    # 4bit ASR (프론티어 142건)
+    cells_rows = []
+    for served in ("qwen3-8b-awq", "qwen3-14b-awq", "qwen3-32b-awq"):
+        d = J("asr_local_%s.json" % served)
+        if not d:
+            continue
+        cells = d.get("cells") or d
+        tr = nr = th = nh = 0
+        for k, v in cells.items():
+            if isinstance(v, list) and len(v) >= 2:
+                if "raw" in k:
+                    tr += v[0]; nr += v[1]
+                elif "harness" in k:
+                    th += v[0]; nh += v[1]
+        if nr:
+            cells_rows.append((served, tr, nr, th, nh))
+    if cells_rows:
+        print("### 실험6 — 온프레미스 4bit 실측: 프론티어 공격 142건 ASR\n")
+        print("| 방어자 | raw | 하네스 |\n|---|---|---|")
+        for served, tr, nr, th, nh in cells_rows:
+            print("| 4bit %s | %d/%d = %.1f%% | %d/%d = %.1f%% |" % (
+                served, tr, nr, 100 * tr / nr, th, nh, 100 * th / max(nh, 1)))
+        print()
+
+
+def new_corpora():
+    """실험7 — 외부 앵커 코퍼스 (AgentDojo/BFCL 파생) + v2.5 회귀 확인용 기존 코퍼스."""
+    specs = [("AgentDojo 파생 인젝션 72건", "harness_adojo_v25.json"),
+             ("BFCL 파생 보류 판단 30건", "harness_irr_v25.json"),
+             ("한국어 임계 88건", "harness_ko_v25.json"),
+             ("자체작성 47건", "harness_self47_v25.json"),
+             ("프론티어 142건", "harness_fr9_v25.json")]
+    rows = []
+    for lbl, fn in specs:
+        d = J(fn)
+        if not d:
+            continue
+        rep = d.get("report", d)
+        for k, v in rep.items():
+            if isinstance(v, dict) and "raw_crit" in v:
+                rows.append((lbl, v)); break
+    if not rows:
+        return
+    print("### 실험7 — 하네스 v2.5 검증 (4bit 8B-AWQ, 5개 코퍼스)\n")
+    print("| 코퍼스 | 측정/전체 | raw 치명 | 하네스 치명 | 과잉보류 |\n|---|---|---|---|---|")
+    for lbl, v in rows:
+        n = v.get("n_scored", v.get("n", 0)) or 0
+        print("| %s | %d/%d | %d (%.1f%%) | %d (%.1f%%) | %d |" % (
+            lbl, n, v.get("n", n), v["raw_crit"], 100 * v["raw_crit"] / max(n, 1),
+            v["h_crit"], 100 * v["h_crit"] / max(n, 1), v["h_unnec"]))
+    print()
+
+
+def passk():
+    """실험8 — pass^k 신뢰성 (k 회 전부 안전한 비율)."""
+    d = J("passk_ko_threshold.json")
+    if not d:
+        return
+    k = d.get("k", 3)
+    print("### 실험8 — pass^%d 신뢰성 (%s)\n" % (k, d.get("cases", "")))
+    print("| 방어자 | mode | pass^%d(안전) | 한번이라도 치명 | 항상 치명 | 흔들린 케이스 |\n|---|---|---|---|---|---|" % k)
+    for model, r in (d.get("report") or {}).items():
+        for mode in ("raw", "harness"):
+            m = r.get(mode)
+            if not m:
+                continue
+            print("| %s | %s | %d/%d = %.1f%% | %d | %d | %d (%.1f%%) |" % (
+                short(model), mode, m["pass_k_safe"], m["n_full"], m["pass_k_safe_pct"],
+                m["ever_critical"], m["always_critical"], m["flaky"], m["flaky_pct"]))
+    print()
+
+
 if __name__ == "__main__":
     exp1(); exp2()
     asr("asr_frontier9_v1.json", "실험4 — ASR 프론티어 코퍼스, 하네스 v1")
@@ -126,5 +239,6 @@ if __name__ == "__main__":
     asr("asr_adaptive.json", "실험5 — ASR 적응형 1라운드(난이도 3), 하네스 v2 (현행 규칙으로 재채점 = in-sample)")
     asr("asr_adaptive2.json", "실험5 — ASR 적응형 2라운드(v2.1 규칙 공개), 하네스 v2 (현행 규칙 재채점; 측정 당시 값은 snapshots/v2.1 로그)")
     asr("asr_adaptive3.json", "실험5 — ASR 적응형 3라운드(v2.2 규칙 공개), 하네스 v2 (현행 규칙 재채점; 측정 당시 값은 snapshots/v2.2 로그)")
+    local4bit(); new_corpora(); passk()
     heat("asr_frontier9.json"); heat("asr_adaptive.json"); heat("asr_adaptive2.json"); heat("asr_adaptive3.json")
     flags()
