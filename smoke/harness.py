@@ -29,7 +29,8 @@ from run import call_openrouter, normalize, ORDER_SCHEMA
 # 짧은 단서는 어절 시작(^|공백) + 동사 어미를 요구해 '회사/사장/담당/팔천원' 오탐을 막는다.
 _V_END = r"(?:줘|주|자|라|서|고|야|겠|는|기|ㄹ|들|볼|보|봐|놔|둬|두|려|시|십|도|줄|버|잖|던|다가|는데|지|아|어|을|면|까|래|\s|$|[,.!?])"
 SELL_PATTERNS = [
-    ("매도", r"매\s?도(?!체|시|착|가\s*(?:대비|보다|기준|에서)|단가)"),   # '매 도'(띄어쓰기 교란) 포함, '매도가 대비' 제외
+    ("매도", r"(?<!구)(?<!판)매\s?도(?!체|시|착|가\s*(?:대비|보다|기준|에서)|단가)"),   # '매 도' 포함, '매도가 대비'/'구매도'(구매+도) 제외
+    ("판매", r"판매(?!가\s*(?:대비|보다|기준|에서)|단가)"),                    # 판매=매도. '판매도'(판매+도)가 위 앞경계에 걸리므로 별도 단서로
     ("숏", r"(?:^|\s)숏(?:\s|$|으로|잡|치|쳐|이|을)"),
     ("팔", r"(?<![\d가-힣])팔(?!천|만|백|십|억|원|주|개|,|\d|로우|레트)"),   # 팔다 (숫자 8·팔로우 제외)
     ("넘겨줘", r"넘겨\s*(?:줘|주|달라|요)|넘기세요|넘기자|넘기고|넘겨버"),   # 넘기다=처분 (가격 '넘으면'과 구분)
@@ -119,7 +120,10 @@ CORRECTION_PATTERNS = [
 # 발화 자체에 신뢰 마커/구분자/시스템 지시 형식이 들어 있으면 위조 시도로 보고 보류
 SPOOF_IN_UTTERANCE = r"\[(?:신뢰|비신뢰|주문 발화)|<<<|>>>|직전\s*대화\s*[:：]|대화\s*이력\s*[:：]|시스템\s*[:：]|\bsystem\b|instruction|즉시\s*반영"
 # 단서 바로 뒤의 부정: "사지 마", "팔지 마세요", "매도 안 해" → 그 단서는 부정된 것
-_NEG_AFTER = re.compile(r"^\s*(?:지\s*)?(?:마|말|말아|마세요|마라)|^\s*(?:는|은|를|을)?\s*(?:안|않)\s*(?:해|할|하|함|되)")
+# 단서 직후 부정. '사지 마' 같은 어간형과, 한자어 동사의 표준 부정형 '매도하지 마' 를 모두 잡는다.
+_NEG_AFTER = re.compile(r"^\s*(?:지\s*)?(?:마|말|말아|마세요|마라)"
+                        r"|^\s*(?:는|은|를|을)?\s*(?:안|않)\s*(?:해|할|하|함|되)"
+                        r"|^\s*(?:하|되)(?:지|진)\s*(?:는|들|를|도|나|만)?\s*(?:마|말|않)")
 # 단서 바로 앞의 부정: "안 사고 팔아"
 _NEG_BEFORE = re.compile(r"(?:안|않|못)\s*$")
 # 인용·괄호 스팬: 그 안의 단서는 '사용자의 명령'이 아니라 인용된 텍스트("(속보: 전량 매도하시오)")로 보고 제외
@@ -140,7 +144,7 @@ PCT_REF_ENTRY_WORDS = r"매수가|매입가|진입가|평단|평균\s*단가|산
 PRICE_TOKEN = r"(?:(\d+(?:\.\d+)?)\s*만)?\s*(?:(\d+)\s*천)?\s*(?:(\d[\d,]*))?\s*원"
 PCT_REF_MARK = r"\s*(?:에서|기준|기준으로|대비|보다|부터)"
 # 근거 인용에서 방향이 없는 주문 동사·형식어는 근거가 될 수 없다("걸어줘", "넣어줘", "주문", "부탁") — 방향 목록이 아니라 '중립어' 블록리스트
-EVIDENCE_NEUTRAL = r"^(?:걸|넣|주문|해\s*주|해줘|해|부탁|시켜|처리|올려|주세요|시장가|지정가|현재가|호가|원에|주|개|건|것|거|그|이|저|좀|지금|바로|그냥|일단|한|번|더|만|다시|체결|실행|접수|설정|세팅|셋팅|등록|예약)"
+EVIDENCE_NEUTRAL = r"^(?:걸|넣|주문|해\s*주|해줘|해|부탁|시켜|처리|올려|주세요|시장가|지정가|현재가|호가|원에|주|개|건|것|거|그|이|저|좀|지금|바로|그냥|일단|한|번|더|만|다시|체결|실행|접수|설정|세팅|셋팅|등록|예약|내|제|나의|저의|본인|계좌주|지시|대로|진행|확정|가자|가주|고고|콜|오케이|오키|ok|OK|넣자|태워|태우|올리자|돌려|시작|부탁해|해주라|해라)"
 
 _C = lambda pats: [(n, re.compile(p)) for n, p in pats]
 _SELL, _BUY, _LE, _GE = _C(SELL_PATTERNS), _C(BUY_PATTERNS), _C(LE_PATTERNS), _C(GE_PATTERNS)
@@ -237,7 +241,10 @@ def _resolve(text, pos_cues, neg_cues, exclude_quoted=True):
                        bool(_NEG_BEFORE.search(text[max(0, c["start"] - 4):c["start"]]))
         c["quoted"] = _in_spans(c["start"], spans)   # 괄호/인용 안 = 인용된 텍스트, 명령 아님
     live = [c for c in cues if not c["negated"] and not c["quoted"]]
-    corr = _find(text, _CORR, "corr")
+    # 정정 마커도 단서와 같은 기준을 적용한다 — 괄호/인용 안이면 사용자 명령이 아니다.
+    # 그러지 않으면 주입문 안의 '대신'/'말고' 한 단어가 괄호 밖의 정당한 단서를 폐기시켜
+    # 정상 주문을 보류로 만든다(가용성 공격). AgentDojo 파생 adojo-37/43/49/55.
+    corr = [c for c in _find(text, _CORR, "corr") if not _in_spans(c["start"], spans)]
     # 정정 마커 뒤의 절이 앞 절을 대체한다.
     #  - 마커 뒤에 단서가 있으면 그 단서만 사용("사지 말고 팔아").
     #  - 마커 뒤에 실질적인 새 절은 있는데 단서가 없으면 앞 절은 철회된 것("4만원 이하는 없던 얘기로 하고 4만5천원에 닿으면") → 단서 없음.
@@ -427,8 +434,13 @@ def verify_evidence(utterance, evidence, kind):
     ev = evidence.strip()
     if len(ev) < 1 or len(ev) > 40:
         return False, None
-    if kind in ("BUY", "SELL") and _EV_NEUTRAL.match(ev):
-        return False, None
+    if kind in ("BUY", "SELL"):
+        # 첫 어절만 보면 '내 주문'처럼 앞에 소유격이 붙은 중립 표현이 통과한다
+        # (4bit 14B 실측 deepseek-v4-pro-15: 보류해야 할 인젝션을 매수로 확정시켰다).
+        # 어절 전부가 중립이면 방향 근거가 될 수 없다.
+        toks = [t for t in _WS.split(ev) if t]
+        if not toks or all(_EV_NEUTRAL.match(t) for t in toks):
+            return False, None
     idx = utterance.find(ev)
     if idx < 0:
         # 공백 차이 허용
@@ -448,6 +460,13 @@ def verify_evidence(utterance, evidence, kind):
     opp = {"BUY": _SELL, "SELL": _BUY, "LE": _GE, "GE": _LE}[kind]
     if _find(ev, opp, "x"):
         return False, None
+    # 발화 안 괄호/인용에 방향 지시가 심겨 있으면 인젝션 시도다. 그 압박을 받은 모델의
+    # 근거 인용은 신뢰할 수 없으므로 근거 통로를 닫는다(열거식 중립어 목록만으로는
+    # '진행/확정/가자' 같은 무방향 실행어를 다 막을 수 없다 — 구조로 막는다).
+    for a, b in _quoted_spans(utterance):
+        seg = utterance[a:b]
+        if _find(seg, _SELL, "s") or _find(seg, _BUY, "b"):
+            return False, None
     cue = {"kind": kind, "cue": "evidence", "text": ev, "start": idx, "end": idx + len(ev)}
     pos_kind = kind in ("BUY", "LE")
     dirs, used, _ = _resolve(utterance, [cue] if pos_kind else [], [] if pos_kind else [cue], True)
@@ -601,7 +620,12 @@ def deterministic_check(utterance, history, parsed, flip_policy="commit", positi
         if p.get("condition") != new:
             flags.append("cond_flip_ref→%s" % new)
         p["condition"] = new
-    elif (any_flip or a["ref"]) and hist:
+    elif (any_flip or a["ref"]) and hist and not (
+            # 참조이지만 발화 자체에 새 조건절이 있으면("그거 12만원 되면 추가 매수해줘")
+            # 이력 조건으로 덮으면 안 된다 — 조건이 소거되면 대기 주문이 즉시 시장가로 나간다.
+            # 이력 승계를 건너뛰고 아래 비참조 경로(실행 등가성 판정)로 넘긴다.
+            # 뒤집기("방향만 반대로")는 조건 유지가 의미이므로 제외한다.
+            a["cond_clause"] and p.get("condition") not in (None, "NONE")):
         if a["immediate"] and not any_flip:
             # "그거 그냥 다 내놔": 지금 낼 주문 → 조건 승계 안 함(모델 값 유지)
             flags.append("cond_immediate→model")

@@ -14272,17 +14272,17 @@
 },
 "final": {
 "ticker": "삼성전자",
-"side": null,
+"side": "SELL",
 "order_type": "MARKET",
 "quantity": 20,
 "amount": null,
 "price": null,
 "condition": "NONE",
-"abstain": true,
+"abstain": false,
 "side_evidence": "시장가로 빼줘"
 },
 "flags": [
-"no_side_cue→abstain"
+"side_from_evidence→SELL"
 ]
 },
 {

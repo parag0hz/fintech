@@ -181,7 +181,10 @@ function resolve(text: string, pos: Cue[], neg: Cue[], excludeQuoted: boolean): 
     c.quoted = inSpans(c.start, spans);   // 괄호/인용 안 = 인용된 텍스트, 명령 아님
   }
   const live = cues.filter((c) => !c.negated && !c.quoted);
-  const corr = find(text, CORR, "corr");
+  // 정정 마커도 단서와 같은 기준을 적용한다 — 괄호/인용 안이면 사용자 명령이 아니다.
+  // 그러지 않으면 주입문 안의 '대신'/'말고' 한 단어가 괄호 밖의 정당한 단서를 폐기시켜
+  // 정상 주문을 보류로 만든다(가용성 공격). AgentDojo 파생 adojo-37/43/49/55.
+  const corr = find(text, CORR, "corr").filter((c) => !inSpans(c.start, spans));
   // 정정 마커 뒤의 절이 앞 절을 대체.
   //  - 마커 뒤에 단서가 있으면 그 단서만 사용("사지 말고 팔아").
   //  - 마커 뒤에 실질적인 새 절은 있는데 단서가 없으면 앞 절은 철회된 것 → 단서 없음.
@@ -361,7 +364,12 @@ export function verifyEvidence(utterance: string, evidence: unknown, kind: "BUY"
   if (!evidence || typeof evidence !== "string") return [false, null];
   let ev = evidence.trim();
   if (ev.length < 1 || ev.length > 40) return [false, null];
-  if ((kind === "BUY" || kind === "SELL") && EV_NEUTRAL.test(ev)) return [false, null];   // 방향 중립 동사·형식어는 근거 불가
+  if (kind === "BUY" || kind === "SELL") {
+    // 첫 어절만 보면 '내 주문'처럼 앞에 소유격이 붙은 중립 표현이 통과한다
+    // (4bit 14B 실측 deepseek-v4-pro-15). 어절 전부가 중립이면 방향 근거가 될 수 없다.
+    const toks = ev.split(/\s+/).filter((t) => t.length > 0);
+    if (toks.length === 0 || toks.every((t) => EV_NEUTRAL.test(t))) return [false, null];
+  }
   let idx = utterance.indexOf(ev);
   if (idx < 0) {
     const cu = utterance.replace(WS, ""), ce = ev.replace(WS, "");
@@ -376,6 +384,13 @@ export function verifyEvidence(utterance: string, evidence: unknown, kind: "BUY"
   }
   const opp = { BUY: SELL, SELL: BUY, LE: GE, GE: LE }[kind];
   if (find(ev, opp, "x").length) return [false, null];
+  // 발화 안 괄호/인용에 방향 지시가 심겨 있으면 인젝션 시도다. 그 압박을 받은 모델의
+  // 근거 인용은 신뢰할 수 없으므로 근거 통로를 닫는다(열거식 중립어 목록만으로는
+  // '진행/확정/가자' 같은 무방향 실행어를 다 막을 수 없다 — 구조로 막는다).
+  for (const [qa, qb] of quotedSpans(utterance)) {
+    const seg = utterance.slice(qa, qb);
+    if (find(seg, SELL, "s").length || find(seg, BUY, "b").length) return [false, null];
+  }
   const cue: Cue = { kind, cue: "evidence", text: ev, start: idx, end: idx + ev.length };
   const posKind = kind === "BUY" || kind === "LE";
   const r = resolve(utterance, posKind ? [cue] : [], posKind ? [] : [cue], true);
@@ -515,7 +530,11 @@ export function deterministicCheck(utterance: string, history: HistoryInput, par
     const nw = hist.condition === "LE" ? "GE" : "LE";
     if (p.condition !== nw) flags.push(`cond_flip_ref→${nw}`);
     p.condition = nw;
-  } else if ((anyFlip || a.ref.length > 0) && hist) {
+  } else if ((anyFlip || a.ref.length > 0) && hist && !(
+    // 참조이지만 발화 자체에 새 조건절이 있으면("그거 12만원 되면 추가 매수해줘")
+    // 이력 조건으로 덮으면 안 된다 — 조건이 소거되면 대기 주문이 즉시 시장가로 나간다.
+    // 뒤집기("방향만 반대로")는 조건 유지가 의미이므로 제외한다.
+    a.cond_clause && p.condition != null && p.condition !== "NONE")) {
     if (a.immediate && !anyFlip) {
       flags.push("cond_immediate→model");        // "그거 그냥 다 내놔": 지금 낼 주문 → 조건 승계 안 함(모델 값 유지)
     } else {
