@@ -2,7 +2,7 @@
 
 한국어 "텍스트 → 증권 주문" 파서 위에 얹는 안전 하네스(L1 문맥 신뢰 분리 · L2 강화 프롬프트 · L3 결정적 검증)의
 데모/코퍼스/대시보드 웹입니다. `smoke/harness.py`(Python 정본)를 TypeScript 로 이식했고, 규칙과 패리티 픽스처는
-`shared/harness_rules.json`, `shared/parity_fixture.json` 을 단일 소스로 사용합니다(하네스 v2.2 기준, 패리티 476/476).
+`shared/harness_rules.json`, `shared/parity_fixture.json` 을 단일 소스로 사용합니다(하네스 v2.5 기준, 패리티 512/512).
 
 - 프레임워크·번들러·CDN 없이 Node 22 + Express + 정적 ES 모듈 한 벌로 동작합니다.
 - 화면: **주문(기본, `#/hts`)** — 데스크톱 HTS 워크스테이션 화면(다크 기본) + "분석" 그룹 3개: **파서 데모**(raw vs 하네스 비교, 단서 하이라이트, 플래그 설명) · **공격 코퍼스**(필터·검색·상세·방어자별 결과) · **결과 대시보드**(KPI, 실험1/2, ASR 매트릭스, mech×target 히트맵, 플래그 빈도).
@@ -71,8 +71,8 @@ npm run sync-data             # ../smoke → web/data/  (없는 파일은 건너
 
 ```bash
 npm test
-# [parity] 476/476 통과, 0 실패
-# [unit] 11/11 통과
+# [parity] 512/512 통과, 0 실패
+# [unit] 19/19 통과
 ```
 
 `test/parity.test.ts` 가 `shared/parity_fixture.json` 의 모든 항목에 대해 `deterministicCheck(utterance, history, parsed)` 의
@@ -124,7 +124,7 @@ Railway/Fly 도 동일하게 `web/Dockerfile` 을 쓰면 됩니다(`fly launch -
 web/
   package.json  tsconfig.json  .env.example  Dockerfile  README.md
   shared/harness_rules.json      # L3 정규식·프롬프트 (export_rules.py 산출, 읽기 전용)
-  shared/parity_fixture.json     # 패리티 픽스처 414건
+  shared/parity_fixture.json     # 패리티 픽스처 512건
   src/harness.ts                 # L1 sanitizeUntrusted · L2 buildMessages · L3 analyzeUtterance/historyOrder/deterministicCheck
   src/normalize.ts               # run.py normalize/_kor_num/_extract_json/SYS/ORDER_SCHEMA 이식
   src/openrouter.ts              # OpenRouter 호출 사다리(schema→json_object→prompt, /no_think, temperature 0)
