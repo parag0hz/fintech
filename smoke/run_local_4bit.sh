@@ -20,10 +20,49 @@ echo "▶ 1/5  환경 확인"
 nvidia-smi --query-gpu=name,memory.total --format=csv,noheader || { echo "!! GPU 없음"; exit 1; }
 python3 -c "import vllm" 2>/dev/null || { echo "▶ vLLM 설치"; pip install -q "vllm>=0.8.4"; }
 
+# ── 실측에서 실제로 막혔던 환경 문제 3가지 (RTX 5090 / CUDA 13 / Python 3.13 기준) ──
+# (1) nvcc 부재: 드라이버만 있고 시스템 CUDA 툴킷이 없으면 vLLM 의 JIT 커널 컴파일이 실패한다.
+#     pip 로 들어온 nvidia-cuda-nvcc 를 CUDA_HOME 으로 잡아주면 해결된다.
+if ! command -v nvcc >/dev/null 2>&1; then
+  CU=$(python3 -c "import os,nvidia,glob;b=os.path.dirname(nvidia.__file__);c=glob.glob(b+'/cu*');print(c[0] if c else '')" 2>/dev/null || true)
+  if [ -n "${CU:-}" ] && [ -x "$CU/bin/nvcc" ]; then
+    export CUDA_HOME="$CU"; export PATH="$CUDA_HOME/bin:$PATH"
+    export LD_LIBRARY_PATH="$CUDA_HOME/lib:${LD_LIBRARY_PATH:-}"
+    echo "   CUDA_HOME=$CUDA_HOME (pip nvidia-cuda-nvcc)"
+  fi
+fi
+# (2) ninja 부재: venv 의 python 을 직접 호출하면 venv/bin 이 PATH 에 없어 ninja 를 못 찾는다.
+VENV_BIN=$(python3 -c "import sys,os;print(os.path.dirname(sys.executable))")
+case ":$PATH:" in *":$VENV_BIN:"*) ;; *) export PATH="$VENV_BIN:$PATH";; esac
+# (3) flashinfer JIT 헤더 충돌: flashinfer 가 번들한 CCCL 헤더와 nvcc 13.x 툴킷 헤더가 충돌해
+#     "CUDA compiler and CUDA toolkit headers are incompatible" 로 기동이 깨진다.
+#     어텐션은 FLASH_ATTN 을 쓰므로 샘플러만 끄면 된다.
+export VLLM_USE_FLASHINFER_SAMPLER="${VLLM_USE_FLASHINFER_SAMPLER:-0}"
+export VLLM_ATTENTION_BACKEND="${VLLM_ATTENTION_BACKEND:-FLASH_ATTN}"
+# 벤치는 수백 콜 규모라 처리량보다 기동 안정성이 중요하다 → 컴파일/그래프 캡처 생략
+EAGER="${EAGER:---enforce-eager}"
+# 로컬 eager 는 지연이 커 기본 90초 타임아웃으로는 제외가 늘어난다(run.py 가 이 값을 읽는다)
+export LLM_TIMEOUT="${LLM_TIMEOUT:-300}"
+
 echo "▶ 2/5  vLLM 서버 기동 ($MODEL, AWQ 4bit)"
+# 이전 실행의 vLLM 이 남아 있으면 GPU 메모리를 붙들고 있어 새 서버가 기동에 실패한다
+# ("Free memory on device cuda:0 (11.18/31.36 GiB) is less than desired ..."). 실제로 이 때문에
+# 벤치 전체가 전 호출 실패로 끝난 적이 있다. 종료시킨 뒤 메모리가 실제로 해제될 때까지 기다린다.
+if pgrep -f "vllm[.]entrypoints" >/dev/null 2>&1; then
+  echo "   기존 vLLM 종료 후 메모리 해제 대기"
+  pkill -f "vllm[.]entrypoints" 2>/dev/null || true
+fi
+NEED=$(python3 -c "print(int($GPU_UTIL*$(nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits)))")
+for i in $(seq 1 40); do
+  FREE=$(nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits)
+  [ "$FREE" -ge "$NEED" ] && { echo "   ✓ 여유 ${FREE}MiB (필요 ${NEED}MiB)"; break; }
+  [ "$i" = 40 ] && { echo "!! GPU 메모리 부족: 여유 ${FREE}MiB < 필요 ${NEED}MiB — GPU_UTIL 을 낮추거나 점유 프로세스를 정리하세요"; nvidia-smi; exit 1; }
+  sleep 3
+done
+
 python3 -m vllm.entrypoints.openai.api_server \
   --model "$MODEL" --served-model-name "$SERVED" \
-  --quantization awq --max-model-len "$MAXLEN" \
+  --quantization awq --max-model-len "$MAXLEN" $EAGER \
   --gpu-memory-utilization "$GPU_UTIL" --port "$PORT" \
   > vllm_"$SERVED".log 2>&1 &
 VLLM_PID=$!
