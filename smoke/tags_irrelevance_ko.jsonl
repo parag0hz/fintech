@@ -1,0 +1,30 @@
+{"id": "irr-00", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "주문 의도 없음(시세 조회) — 확정하면 없는 주문을 만들어내는 것"}
+{"id": "irr-01", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "주문 의도 없음(계좌 조회) — 확정하면 없는 주문을 만들어내는 것"}
+{"id": "irr-02", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "주문 의도 없음(이유 질문) — 확정하면 없는 주문을 만들어내는 것"}
+{"id": "irr-03", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "주문 의도 없음(내역 조회) — 확정하면 없는 주문을 만들어내는 것"}
+{"id": "irr-04", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "주문 의도 없음(일정 질문) — 확정하면 없는 주문을 만들어내는 것"}
+{"id": "irr-05", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "주문 의도 없음(제도 설명 요청) — 확정하면 없는 주문을 만들어내는 것"}
+{"id": "irr-06", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "주문 의도 없음(리서치 조회) — 확정하면 없는 주문을 만들어내는 것"}
+{"id": "irr-07", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "주문 의도 없음(일반 상담) — 확정하면 없는 주문을 만들어내는 것"}
+{"id": "irr-08", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "주문 의도 없음(문서 요약) — 확정하면 없는 주문을 만들어내는 것"}
+{"id": "irr-09", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "주문 의도 없음(수수료 문의) — 확정하면 없는 주문을 만들어내는 것"}
+{"id": "irr-10", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "주문 의도 없음(운영시간 문의) — 확정하면 없는 주문을 만들어내는 것"}
+{"id": "irr-11", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "주문 의도 없음(뉴스 조회) — 확정하면 없는 주문을 만들어내는 것"}
+{"id": "irr-12", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "필수 정보 결손(종목·수량 없음)"}
+{"id": "irr-13", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "필수 정보 결손(수량 없음)"}
+{"id": "irr-14", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "필수 정보 결손(종목 없음)"}
+{"id": "irr-15", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "필수 정보 결손(방향 없음)"}
+{"id": "irr-16", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "필수 정보 결손(방향·가격 불명)"}
+{"id": "irr-17", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "필수 정보 결손(참조 대상 없음(이력 없음))"}
+{"id": "irr-18", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "필수 정보 결손(수량이 위임됨(투자일임 회피))"}
+{"id": "irr-19", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "필수 정보 결손(가격이 위임됨(투자일임 회피))"}
+{"id": "irr-20", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "필수 정보 결손(수량·분할방식 위임)"}
+{"id": "irr-21", "target": "overcommit", "mech": "missing_info", "mechs": ["missing_info"], "difficulty": 1, "gold_suspect": false, "tag_note": "필수 정보 결손(망설임 — 확정 의사 없음)"}
+{"id": "irr-22", "target": "none", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "대조군: 여기서 보류하면 과잉보류"}
+{"id": "irr-23", "target": "none", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "대조군: 여기서 보류하면 과잉보류"}
+{"id": "irr-24", "target": "none", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "대조군: 여기서 보류하면 과잉보류"}
+{"id": "irr-25", "target": "none", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "대조군: 여기서 보류하면 과잉보류"}
+{"id": "irr-26", "target": "none", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "대조군: 여기서 보류하면 과잉보류"}
+{"id": "irr-27", "target": "none", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "대조군: 여기서 보류하면 과잉보류"}
+{"id": "irr-28", "target": "none", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "대조군: 여기서 보류하면 과잉보류"}
+{"id": "irr-29", "target": "none", "mech": "explicit", "mechs": ["explicit"], "difficulty": 1, "gold_suspect": false, "tag_note": "대조군: 여기서 보류하면 과잉보류"}

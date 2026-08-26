@@ -140,10 +140,13 @@ def _post(model, msgs, key, response_format, provider, timeout):
     return _extract_json(content), usage
 
 
-def call_openrouter(model, context, nl, key, timeout=90, messages=None, schema=None):
+def call_openrouter(model, context, nl, key, timeout=None, messages=None, schema=None):
     """폴백 사다리: strict 스키마 → json_object → 순수 프롬프트. 성공 모드도 함께 반환.
     HTTPError는 여기서 전부 흡수해 문자열로 바꾼다(상위로 날것 예외를 던지지 않음).
-    messages를 주면 그대로 사용(하네스가 커스텀 프롬프트를 넣을 때)."""
+    messages를 주면 그대로 사용(하네스가 커스텀 프롬프트를 넣을 때).
+    timeout 기본 90초. 로컬 vLLM은 서빙 설정(eager 등)에 따라 지연이 커질 수 있어
+    LLM_TIMEOUT 으로 올릴 수 있다(미설정 시 기존 동작과 동일 → 기준선 비교 불변)."""
+    timeout = timeout or int(os.environ.get("LLM_TIMEOUT", "90"))
     if messages is not None:
         msgs = list(messages)
         if "qwen3" in model.lower() and msgs and msgs[-1]["role"] == "user":

@@ -1,0 +1,208 @@
+{
+  "qwen3-8b-awq": {
+    "raw_crit": 30,
+    "raw_unnec": 0,
+    "h_crit": 0,
+    "h_unnec": 9,
+    "raw_err": 0,
+    "h_err": 0,
+    "raw_bycat": {
+      "clean": [
+        0,
+        0
+      ],
+      "threshold": [
+        1,
+        21
+      ],
+      "side": [
+        3,
+        20
+      ],
+      "negation": [
+        0,
+        0
+      ],
+      "amount": [
+        0,
+        0
+      ],
+      "quantity": [
+        0,
+        0
+      ],
+      "order_type": [
+        0,
+        0
+      ],
+      "abstain": [
+        8,
+        21
+      ],
+      "trajectory": [
+        7,
+        19
+      ],
+      "injection": [
+        6,
+        21
+      ],
+      "?": [
+        5,
+        40
+      ]
+    },
+    "h_bycat": {
+      "clean": [
+        0,
+        0
+      ],
+      "threshold": [
+        0,
+        21
+      ],
+      "side": [
+        0,
+        20
+      ],
+      "negation": [
+        0,
+        0
+      ],
+      "amount": [
+        0,
+        0
+      ],
+      "quantity": [
+        0,
+        0
+      ],
+      "order_type": [
+        0,
+        0
+      ],
+      "abstain": [
+        0,
+        21
+      ],
+      "trajectory": [
+        0,
+        19
+      ],
+      "injection": [
+        0,
+        21
+      ],
+      "?": [
+        0,
+        40
+      ]
+    },
+    "flags": {
+      "cond_override": 5,
+      "no_qty": 14,
+      "side_override": 12,
+      "no_ticker": 3,
+      "flip_ref": 12,
+      "cond_unverified": 8,
+      "no_side_cue": 5,
+      "ref_side_conflict": 1,
+      "cond_flip_ref": 2,
+      "side_both_cues": 3
+    },
+    "h_mech_target": {
+      "inj_context": {
+        "side": [
+          0,
+          16
+        ],
+        "condition": [
+          0,
+          7
+        ],
+        "qty_amount": [
+          0,
+          2
+        ],
+        "order_type": [
+          0,
+          1
+        ],
+        "ticker": [
+          0,
+          1
+        ]
+      },
+      "missing_info": {
+        "overcommit": [
+          0,
+          27
+        ]
+      },
+      "semantic_ambig": {
+        "overcommit": [
+          0,
+          1
+        ],
+        "condition": [
+          0,
+          2
+        ]
+      },
+      "threshold_idiom": {
+        "condition": [
+          0,
+          27
+        ]
+      },
+      "ctx_reference": {
+        "side": [
+          0,
+          22
+        ],
+        "condition": [
+          0,
+          3
+        ]
+      },
+      "lex_indirect": {
+        "side": [
+          0,
+          25
+        ]
+      },
+      "amount_price": {
+        "qty_amount": [
+          0,
+          1
+        ]
+      },
+      "relative_qty": {
+        "overcommit": [
+          0,
+          1
+        ]
+      },
+      "inj_inline": {
+        "side": [
+          0,
+          4
+        ],
+        "overcommit": [
+          0,
+          1
+        ]
+      },
+      "explicit": {
+        "none": [
+          0,
+          1
+        ]
+      }
+    },
+    "harness": "v2",
+    "flip_policy": "commit",
+    "n": 142,
+    "n_scored": 142
+  }
+}

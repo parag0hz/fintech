@@ -183,10 +183,14 @@ def main():
                 f.result()
 
         ordered = [rows[c["id"]] for c in cases]
-        raw_pairs = [(r["cat"], r["raw_score"]) for r in ordered]
-        h_pairs = [(r["cat"], r["h_score"]) for r in ordered]
+        # 실패 콜은 분모에서 제외한다(run_asr.py 와 같은 관행: 둘 중 하나라도 호출이 실패하면
+        # 그 케이스는 양쪽 모두 제외). hscore(None, gold) 는 committed=True 라 치명으로 잡히므로,
+        # 제외하지 않으면 서버가 불안정할수록 raw 가 부당하게 나빠 보인다.
+        scored = [r for r in ordered if not r["raw_err"] and not r["h_err"]]
+        raw_pairs = [(r["cat"], r["raw_score"]) for r in scored]
+        h_pairs = [(r["cat"], r["h_score"]) for r in scored]
         flag_counter = {}
-        for r in ordered:
+        for r in scored:
             for fl in r["h_flags"]:
                 k = fl.split("→")[0]
                 flag_counter[k] = flag_counter.get(k, 0) + 1
@@ -196,8 +200,9 @@ def main():
                          "raw_err": sum(1 for r in ordered if r["raw_err"]),
                          "h_err": sum(1 for r in ordered if r["h_err"]),
                          "raw_bycat": rbycat, "h_bycat": hbycat, "flags": flag_counter,
-                         "h_mech_target": agg_mt(ordered, tags),
-                         "harness": args.harness, "flip_policy": args.flip_policy, "n": len(cases)}
+                         "h_mech_target": agg_mt(scored, tags),
+                         "harness": args.harness, "flip_policy": args.flip_policy,
+                         "n": len(cases), "n_scored": len(scored)}
         all_rows[model] = ordered
 
     # ── 출력 ──
