@@ -23,4 +23,8 @@ COPY --from=build /app/shared ./shared
 COPY --from=build /app/public ./public
 COPY --from=build /app/data ./data
 EXPOSE 3000
+# 무중단 요건(9/7 11:00~9/11 23:59) 대비: 플랫폼이 상태를 직접 확인할 수 있게 한다
+HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
+  CMD node -e "require('http').get({host:'127.0.0.1',port:process.env.PORT||3000,path:'/api/health',timeout:4000},r=>process.exit(r.statusCode===200?0:1)).on('error',()=>process.exit(1))"
+USER node
 CMD ["node", "dist/server.js"]

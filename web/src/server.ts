@@ -55,6 +55,12 @@ function reserveCalls(n: number): boolean {
   dayCalls += n;
   return true;
 }
+// 상류(OpenRouter)가 실패하면 선차감분을 돌려준다. 환불하지 않으면 상류의 일시 장애가
+// "성공 0건인데 예산만 소진" → 회복 후에도 UTC 자정까지 전면 429 라는 하루짜리
+// 자기유발 장애로 고착된다. 심사 무중단 요건(9/7~9/11)에 직결된다.
+function refundCalls(n: number): void {
+  if (todayKey() === dayKey) dayCalls = Math.max(0, dayCalls - n);
+}
 function rateLimited(ip: string): boolean {
   const now = Date.now();
   const arr = (ipHits.get(ip) || []).filter((t) => now - t < 60_000);
@@ -84,7 +90,10 @@ function parseHistory(h: unknown): HistoryInput {
 function historyLen(h: HistoryInput): number { return JSON.stringify(h ?? "").length; }
 
 const app = express();
-app.set("trust proxy", true);
+// trust proxy=true 는 X-Forwarded-For 체인 전체를 신뢰해 req.ip 가 요청자가 보낸 값이 된다.
+// 그러면 헤더를 매번 바꾸는 것만으로 IP 분당 제한이 무력화되고, 남은 방어선인 일일 상한을
+// 한 클라이언트가 수 초에 고갈시킬 수 있다. 실제 프록시 홉 수만 신뢰한다(기본 1, 직접 노출이면 0).
+app.set("trust proxy", Math.max(0, Number(process.env.TRUST_PROXY_HOPS ?? 1)));
 app.disable("x-powered-by");
 app.use(express.json({ limit: "64kb" }));
 app.use((_req, res, next) => { res.setHeader("Cache-Control", "no-store"); next(); });
@@ -184,7 +193,21 @@ app.post("/api/parse", asyncH(async (req, res) => {
   }
   const ip = req.ip || req.socket.remoteAddress || "?";
   if (rateLimited(ip)) { res.status(429).json({ error: `요청이 너무 잦습니다. 분당 ${RATE_PER_MIN}회까지 가능합니다. 잠시 후 다시 시도해 주세요.` }); return; }
-  if (!reserveCalls(2)) { res.status(429).json({ error: `오늘의 모델 호출 상한(${DAILY_CAP}회)에 도달했습니다. 내일 다시 시도하거나 DAILY_CALL_CAP 을 올려 주세요.` }); return; }
+  if (!reserveCalls(2)) {
+    // 상한 도달 시 429 로 화면을 막지 않는다 — 심사 기간에 데모가 죽는 것이 가장 큰 위험이다.
+    // 키 없음 경로와 동일하게 예비 규칙 파서 + L3 로 200 을 돌려주고, 상한 도달만 알린다.
+    const t0 = Date.now();
+    const fb = fallbackParse(utterance, history);
+    const { final, flags, detail } = deterministicCheck(utterance, history, { ...fb }, flipPolicy, positions);
+    res.json({
+      degraded: "daily_cap", preview: true, fallback: true, model, ms: Date.now() - t0,
+      warning: `오늘의 모델 호출 상한(${DAILY_CAP}회)에 도달해 예비 규칙 파서로 응답했습니다. 하네스(L3) 판정은 동일하게 적용됩니다.`,
+      raw: { pred: fb, raw_json: null, mode: "fallback", ms: 0, err: "일일 상한 도달(예비 규칙 파서)" },
+      harness: { parsed: { ...fb }, final, flags, detail, raw_json: null, mode: "fallback", ms: Date.now() - t0, err: null, fallback: true },
+      messages: harnessMsgs, raw_messages: [], flip_policy: flipPolicy,
+    });
+    return;
+  }
 
   // raw 경로: run_harness.raw_call 과 동일 — history 도 '[배경 정보]' 한 덩어리로
   let rawCtx = context;
@@ -218,6 +241,9 @@ app.post("/api/parse", asyncH(async (req, res) => {
     return { parsed, final, flags, detail, raw_json, mode: fallback ? "fallback" : mode, ms: Date.now() - t, err, usage, fallback };
   })();
   const [raw, harness] = await Promise.all([rawP, harP]);
+  // 실패한 호출은 과금되지 않으므로 예산을 돌려준다(선차감 후 환불 없음 = 자기유발 장애).
+  const failed = (raw.err ? 1 : 0) + (harness.err ? 1 : 0);
+  if (failed) refundCalls(failed);
   const degraded = harness.fallback ? "llm_error" : undefined;
   res.json({
     model, ms: Date.now() - t0, raw, harness, messages: harnessMsgs, raw_messages: rawMsgs, flip_policy: flipPolicy,
