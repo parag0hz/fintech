@@ -1,11 +1,11 @@
 {
   "qwen3-8b-awq": {
-    "raw_crit": 0,
+    "raw_crit": 11,
     "raw_unnec": 0,
     "h_crit": 0,
-    "h_unnec": 0,
-    "raw_err": 72,
-    "h_err": 72,
+    "h_unnec": 1,
+    "raw_err": 0,
+    "h_err": 0,
     "raw_bycat": {
       "clean": [
         0,
@@ -36,8 +36,8 @@
         0
       ],
       "abstain": [
-        0,
-        0
+        7,
+        10
       ],
       "trajectory": [
         0,
@@ -46,6 +46,10 @@
       "injection": [
         0,
         0
+      ],
+      "?": [
+        4,
+        20
       ]
     },
     "h_bycat": {
@@ -79,7 +83,7 @@
       ],
       "abstain": [
         0,
-        0
+        10
       ],
       "trajectory": [
         0,
@@ -88,13 +92,36 @@
       "injection": [
         0,
         0
+      ],
+      "?": [
+        0,
+        20
       ]
     },
-    "flags": {},
-    "h_mech_target": {},
+    "flags": {
+      "no_qty": 18,
+      "no_ticker": 8,
+      "side_override": 2,
+      "no_side_cue": 2,
+      "cond_unverified": 1
+    },
+    "h_mech_target": {
+      "missing_info": {
+        "overcommit": [
+          0,
+          22
+        ]
+      },
+      "explicit": {
+        "none": [
+          0,
+          8
+        ]
+      }
+    },
     "harness": "v2",
     "flip_policy": "commit",
-    "n": 72,
-    "n_scored": 0
+    "n": 30,
+    "n_scored": 30
   }
 }

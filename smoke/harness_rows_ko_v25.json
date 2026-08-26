@@ -2280,11 +2280,11 @@
      "abstain": false
     },
     "raw_pred": {
-     "ticker": "SK하이닉스",
+     "ticker": null,
      "side": "SELL",
      "order_type": "LIMIT",
      "quantity": 300,
-     "amount": null,
+     "amount": 240000,
      "price": 240000,
      "condition": "GE",
      "abstain": false
@@ -2864,13 +2864,13 @@
      "abstain": false
     },
     "raw_pred": {
-     "ticker": null,
+     "ticker": "한화에어로스페이스",
      "side": "SELL",
      "order_type": "LIMIT",
      "quantity": null,
      "amount": 300,
-     "price": 90000,
-     "condition": "NONE",
+     "price": 900000,
+     "condition": "GE",
      "abstain": false
     },
     "raw_err": null,
