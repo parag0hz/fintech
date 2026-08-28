@@ -13,3 +13,7 @@ __pycache__/
 # transient run logs (keep results *.json, drop noisy logs)
 smoke/*.log
 .claude/
+
+# 사람 검증: 정답 파일은 라벨러에게 노출되면 안 되므로 커밋하지 않는다
+# (build_human_validation_set.py 로 언제든 같은 seed 로 재생성 가능)
+smoke/human_validation/_gold_DO_NOT_SHOW.jsonl
