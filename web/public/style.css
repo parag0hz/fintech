@@ -273,3 +273,14 @@ svg.chart .label { fill: var(--text); font-weight: 600; }
 @media (max-width:900px){.demo-grid,.why-grid,.fig-grid{grid-template-columns:1fr}}
 .dc-note{font-size:.79rem;color:var(--muted,#5a6474);background:var(--bg2,#f6f7f9);
   border-radius:7px;padding:6px 9px;margin:6px 0;line-height:1.45}
+.dc-live{font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--accent,#2f5bd0);
+  font-weight:600;margin:10px 0 2px}
+.dc-hist{margin-top:10px;padding:8px 10px;border-radius:8px;background:var(--bg2,#f6f7f9);
+  border-left:3px solid var(--line,#c8cedb);font-size:.8rem;color:var(--muted,#5a6474);line-height:1.5}
+.dc-hist-k{display:block;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted,#8b93a5);margin-bottom:3px}
+.dc-hist code{font-size:.92em}
+details.limits{margin-top:14px;border:1px solid var(--line,#d9dee8);border-radius:10px;background:var(--card,#fff)}
+details.limits summary{cursor:pointer;padding:10px 14px;font-size:.88rem;color:var(--accent,#2f5bd0);font-weight:500}
+details.limits ul{margin:0;padding:0 18px 14px 32px}
+details.limits li{font-size:.87rem;color:var(--muted,#5a6474);line-height:1.6;margin:5px 0}
