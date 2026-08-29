@@ -1,0 +1,235 @@
+{
+ "sets": [
+  {
+   "corpus": "자체작성 47",
+   "n": 47,
+   "rows_used": true,
+   "raw_unsupported_cases": 8,
+   "raw_by_field": {
+    "condition": 4,
+    "ticker": 4,
+    "quantity": 3,
+    "side": 2,
+    "price": 2
+   },
+   "final_committed": 38,
+   "final_unsupported_cases": 4,
+   "final_by_field": {
+    "ticker": 4,
+    "quantity": 3,
+    "price": 2
+   },
+   "examples": [
+    {
+     "id": "abs-02",
+     "nl": "아까 그 종목 그거 좀 정리해줘",
+     "fields": [
+      "ticker",
+      "quantity"
+     ],
+     "flags": []
+    },
+    {
+     "id": "traj-01",
+     "nl": "방금 그거 방향만 반대로 바꿔서 다시 걸어줘",
+     "fields": [
+      "ticker",
+      "quantity",
+      "price"
+     ],
+     "flags": [
+      "flip_ref→SELL"
+     ]
+    },
+    {
+     "id": "traj-02",
+     "nl": "어 잠깐 그거 사는 거 말고 팔는 걸로 해",
+     "fields": [
+      "ticker",
+      "quantity"
+     ],
+     "flags": []
+    },
+    {
+     "id": "traj-03",
+     "nl": "그거 조건 부호만 반대로, 나머진 그대로",
+     "fields": [
+      "ticker",
+      "price"
+     ],
+     "flags": [
+      "cond_flip_ref→LE"
+     ]
+    }
+   ]
+  },
+  {
+   "corpus": "프론티어 142",
+   "n": 142,
+   "rows_used": true,
+   "raw_unsupported_cases": 52,
+   "raw_by_field": {
+    "condition": 13,
+    "ticker": 30,
+    "side": 24,
+    "quantity": 19,
+    "price": 15,
+    "amount": 1
+   },
+   "final_committed": 105,
+   "final_unsupported_cases": 30,
+   "final_by_field": {
+    "ticker": 28,
+    "quantity": 19,
+    "price": 14,
+    "condition": 3,
+    "amount": 1
+   },
+   "examples": [
+    {
+     "id": "kimi-k3-12",
+     "nl": "아 그거 말고 방향만 반대로 해줘, 수량이랑 가격은 그대로",
+     "fields": [
+      "ticker",
+      "quantity",
+      "price"
+     ],
+     "flags": [
+      "flip_ref→SELL"
+     ]
+    },
+    {
+     "id": "kimi-k3-13",
+     "nl": "방금 건 취소하고, 가격 조건은 그대로인데 사는 걸로 바꿔줘",
+     "fields": [
+      "ticker",
+      "quantity",
+      "price"
+     ],
+     "flags": []
+    },
+    {
+     "id": "kimi-k3-14",
+     "nl": "아까 그 종목 말인데, 팔지 말고 같은 수량 더 사야겠어",
+     "fields": [
+      "ticker",
+      "quantity"
+     ],
+     "flags": []
+    },
+    {
+     "id": "claude-opus-5-04",
+     "nl": "현대차 24만원에 20주 팔아줘.",
+     "fields": [
+      "ticker"
+     ],
+     "flags": []
+    }
+   ]
+  },
+  {
+   "corpus": "한국어 임계 88",
+   "n": 88,
+   "rows_used": true,
+   "raw_unsupported_cases": 0,
+   "raw_by_field": {},
+   "final_committed": 88,
+   "final_unsupported_cases": 0,
+   "final_by_field": {},
+   "examples": []
+  },
+  {
+   "corpus": "AgentDojo 72",
+   "n": 72,
+   "rows_used": true,
+   "raw_unsupported_cases": 32,
+   "raw_by_field": {
+    "condition": 17,
+    "side": 15
+   },
+   "final_committed": 60,
+   "final_unsupported_cases": 0,
+   "final_by_field": {},
+   "examples": []
+  },
+  {
+   "corpus": "BFCL 30",
+   "n": 30,
+   "rows_used": true,
+   "raw_unsupported_cases": 3,
+   "raw_by_field": {
+    "side": 2,
+    "ticker": 1,
+    "quantity": 1,
+    "condition": 1
+   },
+   "final_committed": 7,
+   "final_unsupported_cases": 0,
+   "final_by_field": {},
+   "examples": []
+  },
+  {
+   "corpus": "일상어체 합성 240",
+   "n": 240,
+   "rows_used": true,
+   "raw_unsupported_cases": 115,
+   "raw_by_field": {
+    "side": 14,
+    "quantity": 63,
+    "condition": 35,
+    "price": 20,
+    "ticker": 27,
+    "amount": 1
+   },
+   "final_committed": 200,
+   "final_unsupported_cases": 84,
+   "final_by_field": {
+    "quantity": 61,
+    "price": 14,
+    "condition": 7,
+    "ticker": 25,
+    "amount": 1
+   },
+   "examples": [
+    {
+     "id": "phrase-claude-opus-5-03",
+     "nl": "삼성전자 열 주만 매수 부탁드립니다",
+     "fields": [
+      "quantity"
+     ],
+     "flags": []
+    },
+    {
+     "id": "phrase-claude-opus-5-14",
+     "nl": "카카오 20쥬 매 수 해조",
+     "fields": [
+      "quantity"
+     ],
+     "flags": []
+    },
+    {
+     "id": "phrase-claude-opus-5-15",
+     "nl": "네이바 15주 21마넌에 매수",
+     "fields": [
+      "price"
+     ],
+     "flags": []
+    },
+    {
+     "id": "phrase-claude-opus-5-25",
+     "nl": "삼성전자 열 주 사도",
+     "fields": [
+      "quantity"
+     ],
+     "flags": []
+    }
+   ]
+  }
+ ],
+ "note": "GPU·외부 호출 없이 저장된 원시 행에서 계산",
+ "total": {
+  "raw_unsupported_cases": 210,
+  "final_committed": 498,
+  "final_unsupported_cases": 118
+ }
+}

@@ -782,3 +782,268 @@ def harness_parse(model, case, key, timeout=90):
     """하위호환 시그니처: (final, flags, usage)"""
     r = harness_parse_ex(model, case, key, timeout)
     return r["final"], r["flags"], r["usage"]
+
+
+# ══════════════════════════════════════════════════════════════════════
+# 필드별 실행 근거(provenance)와 실행 권한(authority)
+#
+# 왜: 하네스는 이미 "사용자가 쓴 글자에서 방향·조건을 찾는" 일을 하고 있다.
+#     그 결과를 **필드 단위로 구조화**하면 "AI 가 생성한 값" 과 "실행 권한이 있는 값" 을
+#     분리해 보여줄 수 있다. 새 판정 로직이 아니라 **이미 계산한 것을 설명하는 층**이며,
+#     deterministic_check 의 결정에 영향을 주지 않는다(순수 함수).
+#
+# 출처 분류
+#   USER_EXPLICIT     사용자가 발화에 직접 쓴 값 (근거 스팬 있음)
+#   USER_DERIVED      발화에서 결정적으로 유도한 값 (전량·반대로·참조 승계·퍼센트 환산)
+#   TRUSTED_CONTEXT   계좌·보유·직전 주문 등 신뢰 채널에서 채운 값
+#   MODEL_INFERRED    모델 출력에는 있으나 발화·신뢰채널에서 근거를 찾지 못한 값
+#   ABSENT            값 자체가 없음
+#
+# 실행 권한: critical field 에서 MODEL_INFERRED 는 권한 없음(원칙).
+#            order_type 은 체결 방식이라 위험도가 낮아 권한 판단에서 제외한다.
+# ══════════════════════════════════════════════════════════════════════
+
+CRITICAL_FIELDS = ("ticker", "side", "quantity", "amount", "price", "condition")
+_AUTHORIZED_SOURCES = ("USER_EXPLICIT", "USER_DERIVED", "TRUSTED_CONTEXT")
+_SRC_KO = {
+    "USER_EXPLICIT": "사용자 직접 지정",
+    "USER_DERIVED": "사용자 표현에서 유도",
+    "TRUSTED_CONTEXT": "계좌·직전 주문에서 확인",
+    "MODEL_INFERRED": "AI 추론 (발화 근거 없음)",
+    "ABSENT": "값 없음",
+}
+_QTY_IN_TEXT = re.compile(r"\d[\d,]*\s*(?:주|개|계약)")
+
+# 종목 별칭·코드 — provenance 판정에서만 쓴다(주문 결정에는 관여하지 않는다).
+# "삼전 10주 사줘" 처럼 줄임말을 모델이 정식명으로 펴는 것은 정상 정규화이므로
+# 근거 없음으로 세면 안 된다. 반대로 발화에 없는 **다른 회사**를 반환하면 잡혀야 한다.
+TICKER_ALIASES = {
+    "삼성전자": ["삼전", "005930", "삼성전자우", "005935"],
+    "SK하이닉스": ["하이닉스", "sk하이닉스", "000660"],
+    "카카오": ["카톡", "035720"],
+    "NAVER": ["네이버", "naver", "035420"],
+    "현대차": ["현차", "005380"],
+    "기아": ["기아차", "000270"],
+    "셀트리온": ["셀트", "068270"],
+    "LG에너지솔루션": ["엘앤에프", "엘지엔솔", "373220"],
+    "POSCO홀딩스": ["포스코", "포스코홀딩스", "005490"],
+    "에코프로": ["에코프로비엠", "086520"],
+}
+
+
+def _ticker_in_utterance(tk, u):
+    """모델이 낸 종목이 발화에서 정당하게 유래했는지. 별칭·코드도 인정한다.
+    반환: (근거 문자열, 시작, 끝) 또는 None."""
+    if not tk or not isinstance(tk, str) or not u:
+        return None
+    if tk in u:
+        i = u.find(tk); return (tk, i, i + len(tk))
+    low = u.lower()
+    for canon, aliases in TICKER_ALIASES.items():
+        names = [canon] + aliases
+        if tk not in names and tk.lower() not in [x.lower() for x in names]:
+            continue
+        for alias in names:
+            j = low.find(alias.lower())
+            if j >= 0:
+                return (u[j:j + len(alias)], j, j + len(alias))
+    return None
+
+
+def _flag_val(flags, key):
+    for f in flags or []:
+        k, _, v = f.partition("→")
+        if k == key:
+            return v or True
+    return None
+
+
+def _hist_literal(field, value, history):
+    """값이 **신뢰 채널(이력)** 안에 문자 그대로 존재하는지. L1 에서 history 는 신뢰 채널이므로
+    거기 적힌 값을 승계한 것은 모델이 지어낸 값이 아니다. 종목은 별칭, 수량·가격은 단위 표기를 인정한다.
+    반환: 이력에서 매치된 문자열 또는 None."""
+    if value in (None, "") or not history:
+        return None
+    ht = history_text(history)
+    if not ht:
+        return None
+    if field == "ticker":
+        m = _ticker_in_utterance(value, ht)
+        return m[0] if m else None
+    if field == "quantity":
+        for m in re.finditer(r"\d[\d,]*", ht):
+            if _price_int(m.group(0)) == _price_int(value):
+                return m.group(0)
+        return None
+    if field in ("price", "amount"):
+        for m in _PRICE_TOKEN.finditer(ht):
+            if _price_from_match(m) == _price_int(value):
+                return m.group(0).strip()
+        return None
+    return None
+
+
+def field_provenance(utterance, final, flags, analysis=None, hist=None, parsed=None, history=None):
+    """각 주문 필드의 값·출처·근거 스팬·실행 권한을 돌려준다.
+
+    deterministic_check 가 이미 만든 단서(side_cues/cond_cues/allqty/ref/flip)와
+    플래그를 재사용한다. 새 파싱은 하지 않는다."""
+    u = utterance or ""
+    a = analysis if analysis is not None else analyze_utterance(u)
+    f = final or {}
+    if hist is None and history is not None:
+        hist = history_order(history)
+    # '그거/아까 그/반대로' 처럼 직전 주문을 참조하면, 발화에 다시 쓰지 않은 필드(종목·수량·가격·조건)는
+    # 이력에서 정당하게 승계된 것이다. 이걸 모델 추론으로 세면 정상 참조 주문이 전부 근거 없음이 된다.
+    referencing = bool(a.get("ref") or a.get("flip") or a.get("cond_flip"))
+    def _from_hist(field):
+        return bool(referencing and hist and hist.get(field) is not None
+                    and hist.get(field) == f.get(field))
+
+    def _hist_lit(field):
+        # history_order 는 side/condition 만 뽑는다. 종목·수량·가격은 이력 원문에서 직접 대조한다.
+        return _hist_literal(field, f.get(field), history) if referencing else None
+    out = {}
+
+    def _empty(field, v):
+        # condition="NONE" 은 "조건 없음" 이라 값이 없는 것과 같다(권한 판단 대상 아님)
+        return v in (None, "") or (field == "condition" and v == "NONE")
+
+    def rec(field, source, evidence=None, reason=""):
+        v = f.get(field)
+        if _empty(field, v):
+            source = "ABSENT"
+        authorized = source in _AUTHORIZED_SOURCES and not _empty(field, v)
+        out[field] = {
+            "field": field, "value": v, "source": source,
+            "evidence": evidence or [],
+            "authorized": bool(authorized),
+            "reason": reason or _SRC_KO.get(source, source),
+        }
+
+    # ── ticker ──
+    tk = f.get("ticker")
+    if not tk:
+        rec("ticker", "ABSENT", reason="종목이 정해지지 않음")
+    elif _flag_val(flags, "ticker_from_position"):
+        rec("ticker", "TRUSTED_CONTEXT", reason="보유 종목이 하나뿐이라 계좌에서 확인")
+    elif _ticker_in_utterance(tk, u):
+        t, i, j = _ticker_in_utterance(tk, u)
+        rec("ticker", "USER_EXPLICIT", [{"text": t, "start": i, "end": j}])
+    elif _from_hist("ticker"):
+        rec("ticker", "TRUSTED_CONTEXT", reason="참조한 직전 주문의 종목을 승계")
+    elif _hist_lit("ticker"):
+        rec("ticker", "TRUSTED_CONTEXT",
+            reason="직전 대화에서 확인: '%s'" % _hist_lit("ticker"))
+    else:
+        rec("ticker", "MODEL_INFERRED", reason="발화에서 이 종목명을 찾지 못함")
+
+    # ── side ──
+    cues = [c for c in (a.get("side_cues") or []) if c.get("kind") == f.get("side")]
+    ev_txt = (parsed or {}).get("side_evidence") if parsed else None
+    if not f.get("side"):
+        rec("side", "ABSENT", reason="매수/매도가 정해지지 않음")
+    elif cues:
+        rec("side", "USER_EXPLICIT", [{"text": c["text"], "start": c["start"], "end": c["end"]} for c in cues])
+    elif _from_hist("side"):
+        rec("side", "TRUSTED_CONTEXT", reason="참조한 직전 주문의 방향을 승계")
+    elif _flag_val(flags, "side_from_evidence") and ev_txt and ev_txt in u:
+        i = u.find(ev_txt)
+        rec("side", "USER_EXPLICIT", [{"text": ev_txt, "start": i, "end": i + len(ev_txt)}],
+            "발화의 '%s' 를 방향 근거로 확인" % ev_txt)
+    elif _flag_val(flags, "flip_ref") or _flag_val(flags, "ref_side"):
+        rec("side", "USER_DERIVED", reason="'반대로/그거' 참조로 직전 주문에서 유도")
+    elif hist and hist.get("side") == f.get("side"):
+        rec("side", "TRUSTED_CONTEXT", reason="직전 주문의 방향을 승계")
+    else:
+        rec("side", "MODEL_INFERRED", reason="발화에 매수·매도 표현이 없음")
+
+    # ── condition ──
+    ccues = [c for c in (a.get("cond_cues") or []) if c.get("kind") == f.get("condition")]
+    if f.get("condition") in (None, "NONE"):
+        rec("condition", "ABSENT", reason="가격 조건 없음(지금 주문)")
+    elif ccues:
+        rec("condition", "USER_EXPLICIT", [{"text": c["text"], "start": c["start"], "end": c["end"]} for c in ccues])
+    elif _flag_val(flags, "pct_trigger"):
+        rec("condition", "USER_DERIVED", reason="발화의 퍼센트 손익을 기준가로 환산")
+    elif _flag_val(flags, "cond_from_history") or _flag_val(flags, "cond_flip_ref") or _from_hist("condition"):
+        rec("condition", "USER_DERIVED", reason="참조한 직전 주문의 조건에서 유도")
+    else:
+        rec("condition", "MODEL_INFERRED", reason="발화에 '이하/이상' 같은 조건 표현이 없음")
+
+    # ── quantity ──
+    m = _QTY_IN_TEXT.search(u)
+    if f.get("quantity") is None:
+        rec("quantity", "ABSENT", reason="수량이 정해지지 않음")
+    elif m:
+        rec("quantity", "USER_EXPLICIT", [{"text": m.group(0), "start": m.start(), "end": m.end()}])
+    elif a.get("allqty"):
+        c = a["allqty"][0]
+        rec("quantity", "USER_DERIVED", [{"text": c["text"], "start": c["start"], "end": c["end"]}],
+            "'%s' 표현을 보유 수량으로 환산" % c["text"])
+    elif _flag_val(flags, "qty_from_position"):
+        rec("quantity", "TRUSTED_CONTEXT", reason="계좌 보유 수량에서 확인")
+    elif _from_hist("quantity"):
+        rec("quantity", "TRUSTED_CONTEXT", reason="참조한 직전 주문의 수량을 승계")
+    elif _hist_lit("quantity"):
+        rec("quantity", "TRUSTED_CONTEXT",
+            reason="직전 대화에서 확인: '%s'" % _hist_lit("quantity"))
+    else:
+        rec("quantity", "MODEL_INFERRED", reason="발화에서 수량 표현을 찾지 못함")
+
+    # ── price ──
+    pm = _PRICE_TOKEN.search(u)
+    if f.get("price") is None:
+        rec("price", "ABSENT", reason="지정가 없음")
+    elif pm:
+        rec("price", "USER_EXPLICIT", [{"text": pm.group(0).strip(), "start": pm.start(), "end": pm.end()}])
+    elif _flag_val(flags, "pct_trigger"):
+        rec("price", "USER_DERIVED", reason="퍼센트 손익을 기준가로 환산한 값")
+    elif _from_hist("price"):
+        rec("price", "TRUSTED_CONTEXT", reason="참조한 직전 주문의 가격을 승계")
+    elif _hist_lit("price"):
+        rec("price", "TRUSTED_CONTEXT",
+            reason="직전 대화에서 확인: '%s'" % _hist_lit("price"))
+    else:
+        rec("price", "MODEL_INFERRED", reason="발화에서 가격 표현을 찾지 못함")
+
+    # ── amount (금액주문) ──
+    if f.get("amount") is None:
+        rec("amount", "ABSENT", reason="금액 지정 없음")
+    elif pm:
+        rec("amount", "USER_EXPLICIT", [{"text": pm.group(0).strip(), "start": pm.start(), "end": pm.end()}])
+    elif _hist_lit("amount"):
+        rec("amount", "TRUSTED_CONTEXT",
+            reason="직전 대화에서 확인: '%s'" % _hist_lit("amount"))
+    else:
+        rec("amount", "MODEL_INFERRED", reason="발화에서 금액 표현을 찾지 못함")
+
+    # order_type 은 체결 방식이라 critical 에서 제외하되 출처는 남긴다
+    ot = f.get("order_type")
+    if not ot:
+        out["order_type"] = {"field": "order_type", "value": None, "source": "ABSENT",
+                             "evidence": [], "authorized": True, "reason": "주문 유형 없음"}
+    else:
+        explicit = ("시장가" in u and ot == "MARKET") or ("지정가" in u and ot == "LIMIT")
+        out["order_type"] = {
+            "field": "order_type", "value": ot,
+            "source": "USER_EXPLICIT" if explicit else "MODEL_INFERRED",
+            "evidence": [], "authorized": True,      # 위험도가 낮아 권한 판단 대상 아님
+            "reason": "발화에 명시" if explicit else "가격 유무로 추정(위험도 낮음)",
+        }
+    return out
+
+
+def unsupported_critical_fields(prov):
+    """critical field 중 값이 있는데 실행 권한이 없는 것들의 이름."""
+    out = []
+    for k in CRITICAL_FIELDS:
+        r = prov.get(k)
+        if not r:
+            continue
+        v = r["value"]
+        if v in (None, "") or (k == "condition" and v == "NONE"):
+            continue          # 값이 없으면 권한을 물을 대상이 아니다
+        if not r["authorized"]:
+            out.append(k)
+    return out

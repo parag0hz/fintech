@@ -10,7 +10,7 @@
 import express, { type Request, type Response, type NextFunction } from "express";
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
-import { analyzeUtterance, buildMessages, deterministicCheck, historyOrder, historyText, EMPTY_ORDER, HARNESS_SCHEMA, type HistoryInput, type Order, type FlipPolicy, type Position } from "./harness.js";
+import { analyzeUtterance, buildMessages, deterministicCheck, historyOrder, historyText, EMPTY_ORDER, HARNESS_SCHEMA, fieldProvenance, unsupportedCriticalFields, type HistoryInput, type Order, type FlipPolicy, type Position } from "./harness.js";
 import { normalize } from "./normalize.js";
 import { apiKey, callOpenRouter, rawMessages } from "./openrouter.js";
 import { fallbackParse, loadStocks } from "./fallback.js";
@@ -182,11 +182,13 @@ app.post("/api/parse", asyncH(async (req, res) => {
     const t0 = Date.now();
     const fb = fallbackParse(utterance, history);
     const { final, flags, detail } = deterministicCheck(utterance, history, { ...fb }, flipPolicy, positions);
+    const provenance = fieldProvenance(utterance, final as unknown as Record<string, unknown>, flags, { parsed: { ...fb } as unknown as Record<string, unknown>, history });
+    const unsupported = unsupportedCriticalFields(provenance);
     res.json({
       degraded: "no_key", preview: true, fallback: true, model, ms: Date.now() - t0,
       warning: "OPENROUTER_API_KEY 가 설정되지 않아 모델 대신 예비 규칙 파서를 사용했습니다(규칙 미리보기).",
       raw: { pred: fb, raw_json: null, mode: "fallback", ms: 0, err: "API 키 없음(예비 규칙 파서)" },
-      harness: { parsed: { ...fb }, final, flags, detail, raw_json: null, mode: "fallback", ms: Date.now() - t0, err: null, fallback: true },
+      harness: { parsed: { ...fb }, final, flags, detail, provenance, unsupported, raw_json: null, mode: "fallback", ms: Date.now() - t0, err: null, fallback: true },
       messages: harnessMsgs, raw_messages: [], flip_policy: flipPolicy,
     });
     return;
@@ -199,11 +201,13 @@ app.post("/api/parse", asyncH(async (req, res) => {
     const t0 = Date.now();
     const fb = fallbackParse(utterance, history);
     const { final, flags, detail } = deterministicCheck(utterance, history, { ...fb }, flipPolicy, positions);
+    const provenance = fieldProvenance(utterance, final as unknown as Record<string, unknown>, flags, { parsed: { ...fb } as unknown as Record<string, unknown>, history });
+    const unsupported = unsupportedCriticalFields(provenance);
     res.json({
       degraded: "daily_cap", preview: true, fallback: true, model, ms: Date.now() - t0,
       warning: `오늘의 모델 호출 상한(${DAILY_CAP}회)에 도달해 예비 규칙 파서로 응답했습니다. 하네스(L3) 판정은 동일하게 적용됩니다.`,
       raw: { pred: fb, raw_json: null, mode: "fallback", ms: 0, err: "일일 상한 도달(예비 규칙 파서)" },
-      harness: { parsed: { ...fb }, final, flags, detail, raw_json: null, mode: "fallback", ms: Date.now() - t0, err: null, fallback: true },
+      harness: { parsed: { ...fb }, final, flags, detail, provenance, unsupported, raw_json: null, mode: "fallback", ms: Date.now() - t0, err: null, fallback: true },
       messages: harnessMsgs, raw_messages: [], flip_policy: flipPolicy,
     });
     return;
@@ -238,7 +242,9 @@ app.post("/api/parse", asyncH(async (req, res) => {
     let fallback = false;
     if (parsed === null) { parsed = fallbackParse(utterance, history); fallback = true; }   // 모델 응답 없음 → 예비 규칙 파서 → L3
     const { final, flags, detail } = deterministicCheck(utterance, history, parsed, flipPolicy, positions);
-    return { parsed, final, flags, detail, raw_json, mode: fallback ? "fallback" : mode, ms: Date.now() - t, err, usage, fallback };
+    const provenance = fieldProvenance(utterance, final as unknown as Record<string, unknown>, flags, { parsed: parsed as unknown as Record<string, unknown>, history });
+    const unsupported = unsupportedCriticalFields(provenance);
+    return { parsed, final, flags, detail, provenance, unsupported, raw_json, mode: fallback ? "fallback" : mode, ms: Date.now() - t, err, usage, fallback };
   })();
   const [raw, harness] = await Promise.all([rawP, harP]);
   // 실패한 호출은 과금되지 않으므로 예산을 돌려준다(선차감 후 환불 없음 = 자기유발 장애).

@@ -6,7 +6,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { deterministicCheck, analyzeUtterance, sanitizeUntrusted, buildMessages, historyText, FEWSHOT } from "../src/harness.js";
+import { deterministicCheck, analyzeUtterance, sanitizeUntrusted, buildMessages, historyText, fieldProvenance, unsupportedCriticalFields, FEWSHOT } from "../src/harness.js";
 import { fallbackParse } from "../src/fallback.js";
 import { normalize, korNum, extractJson } from "../src/normalize.js";
 
@@ -210,6 +210,35 @@ t("analyzeUtterance 하이라이트 위치", () => {
   assert.equal(a.side, "SELL");
   const sell = a.side_cues.find((c) => c.kind === "SELL")!;
   assert.equal("현대차 사지 말고 30주 팔아".slice(sell.start, sell.end), "팔");
+});
+
+// 필드별 실행 근거 — harness.py ProvenanceTests 와 같은 케이스를 TS 에서도 확인한다.
+const HIST = "사용자가 '삼성전자 100주 26만원 이하면 매수'라고 조건부 매수를 걸어둔 상태.";
+const REF = "방금 그거 방향만 반대로 바꿔서 다시 걸어줘";
+const prov = (u: string, mo: Record<string, unknown>, history: any) => {
+  const { final, flags } = deterministicCheck(u, history, { ...mo } as any);
+  return fieldProvenance(u, final as unknown as Record<string, unknown>, flags, { parsed: mo, history });
+};
+
+t("provenance 근거 없는 조건은 실행 권한 없음", () => {
+  const u = "카카오 손절해야겠다 10주 시장가로";
+  const p = prov(u, { ticker: "카카오", side: "SELL", order_type: "MARKET", quantity: 10, amount: null, price: null, condition: "LE" }, null);
+  assert.deepEqual(unsupportedCriticalFields(p), ["condition"]);
+  assert.equal(p.ticker.source, "USER_EXPLICIT");
+  assert.equal(p.side.authorized, true);
+});
+
+t("provenance 이력 원문 승계는 근거로 인정", () => {
+  const p = prov(REF, { ticker: "삼성전자", side: "SELL", order_type: "LIMIT", quantity: 100, amount: null, price: 260000, condition: "GE" }, HIST);
+  assert.deepEqual(unsupportedCriticalFields(p), []);
+  assert.equal(p.ticker.source, "TRUSTED_CONTEXT");
+  assert.equal(p.price.source, "TRUSTED_CONTEXT");
+});
+
+t("provenance 이력에 없는 종목은 세탁되지 않음", () => {
+  const p = prov(REF, { ticker: "카카오", side: "SELL", order_type: "LIMIT", quantity: 100, amount: null, price: 260000, condition: "GE" }, HIST);
+  assert.ok(unsupportedCriticalFields(p).includes("ticker"));
+  assert.equal(p.ticker.source, "MODEL_INFERRED");
 });
 
 console.log(`[unit] ${upass}/${upass + ufail} 통과`);

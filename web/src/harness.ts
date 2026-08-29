@@ -608,3 +608,194 @@ export const EMPTY_ORDER: Order = {
   ticker: null, side: null, order_type: null, quantity: null,
   amount: null, price: null, condition: "NONE", abstain: true,
 };
+
+// ══════════════════════════════════════════════════════════════════════
+// 필드별 실행 근거(provenance)와 실행 권한 — smoke/harness.py 의 이식.
+// 판정 로직이 아니라 **이미 계산한 단서/플래그를 구조화하는 순수 함수**다.
+// ══════════════════════════════════════════════════════════════════════
+
+export type ProvSource =
+  | "USER_EXPLICIT" | "USER_DERIVED" | "TRUSTED_CONTEXT" | "MODEL_INFERRED" | "ABSENT";
+
+export interface FieldProv {
+  field: string; value: unknown; source: ProvSource;
+  evidence: { text: string; start: number; end: number }[];
+  authorized: boolean; reason: string;
+}
+
+export const CRITICAL_FIELDS = ["ticker", "side", "quantity", "amount", "price", "condition"] as const;
+const AUTHORIZED_SOURCES: ProvSource[] = ["USER_EXPLICIT", "USER_DERIVED", "TRUSTED_CONTEXT"];
+const SRC_KO: Record<ProvSource, string> = {
+  USER_EXPLICIT: "사용자 직접 지정",
+  USER_DERIVED: "사용자 표현에서 유도",
+  TRUSTED_CONTEXT: "계좌·직전 주문에서 확인",
+  MODEL_INFERRED: "AI 추론 (발화 근거 없음)",
+  ABSENT: "값 없음",
+};
+const QTY_IN_TEXT = /\d[\d,]*\s*(?:주|개|계약)/;
+
+// 종목 별칭·코드 — provenance 판정 전용. '삼전'→'삼성전자' 정규화를 근거 없음으로 세지 않기 위함.
+const TICKER_ALIASES: Record<string, string[]> = {
+  삼성전자: ["삼전", "005930", "삼성전자우", "005935"],
+  SK하이닉스: ["하이닉스", "sk하이닉스", "000660"],
+  카카오: ["카톡", "035720"],
+  NAVER: ["네이버", "naver", "035420"],
+  현대차: ["현차", "005380"],
+  기아: ["기아차", "000270"],
+  셀트리온: ["셀트", "068270"],
+  LG에너지솔루션: ["엘앤에프", "엘지엔솔", "373220"],
+  POSCO홀딩스: ["포스코", "포스코홀딩스", "005490"],
+  에코프로: ["에코프로비엠", "086520"],
+};
+
+function tickerInUtterance(tk: unknown, u: string): [string, number, number] | null {
+  if (typeof tk !== "string" || !tk || !u) return null;
+  if (u.includes(tk)) { const i = u.indexOf(tk); return [tk, i, i + tk.length]; }
+  const low = u.toLowerCase();
+  for (const [canon, aliases] of Object.entries(TICKER_ALIASES)) {
+    const names = [canon, ...aliases];
+    if (!names.some((n) => n === tk || n.toLowerCase() === tk.toLowerCase())) continue;
+    for (const alias of names) {
+      const j = low.indexOf(alias.toLowerCase());
+      if (j >= 0) return [u.slice(j, j + alias.length), j, j + alias.length];
+    }
+  }
+  return null;
+}
+
+const flagVal = (flags: string[], key: string): string | null => {
+  for (const f of flags || []) { const [k, v] = f.split("→"); if (k === key) return v ?? ""; }
+  return null;
+};
+
+// 값이 신뢰 채널(이력) 안에 문자 그대로 존재하는지 — harness.py `_hist_literal` 의 이식.
+function histLiteral(field: string, value: unknown, history: HistoryInput | undefined): string | null {
+  if (value == null || value === "" || history === undefined || history === null) return null;
+  const ht = historyText(history);
+  if (!ht) return null;
+  if (field === "ticker") { const m = tickerInUtterance(value, ht); return m ? m[0] : null; }
+  if (field === "quantity") {
+    const want = priceInt(value);
+    for (const m of ht.matchAll(/\d[\d,]*/g)) if (priceInt(m[0]) === want) return m[0];
+    return null;
+  }
+  if (field === "price" || field === "amount") {
+    const want = priceInt(value);
+    PRICE_TOKEN.lastIndex = 0;
+    for (const m of ht.matchAll(PRICE_TOKEN)) if (priceFromMatch(m) === want) return m[0].trim();
+    return null;
+  }
+  return null;
+}
+
+export function fieldProvenance(
+  utterance: string, final: Record<string, unknown>, flags: string[],
+  opts: { analysis?: Analysis; hist?: HistoryOrder | null; parsed?: Record<string, unknown> | null; history?: HistoryInput } = {}
+): Record<string, FieldProv> {
+  const u = utterance || "";
+  const a = opts.analysis ?? analyzeUtterance(u);
+  const f = final || {};
+  const hist = opts.hist ?? (opts.history !== undefined ? historyOrder(opts.history) : null);
+  const referencing = !!((a.ref && a.ref.length) || (a.flip && a.flip.length) || (a.cond_flip && a.cond_flip.length));
+  const histRec = hist as unknown as Record<string, unknown> | null;
+  const fromHist = (field: string) =>
+    !!(referencing && histRec && histRec[field] != null && histRec[field] === f[field]);
+  // historyOrder 는 side/condition 만 뽑는다. 종목·수량·가격은 이력 원문에서 직접 대조한다.
+  const histLit = (field: string) =>
+    referencing ? histLiteral(field, f[field], opts.history) : null;
+  const out: Record<string, FieldProv> = {};
+  const empty = (field: string, v: unknown) =>
+    v == null || v === "" || (field === "condition" && v === "NONE");
+
+  const rec = (field: string, source: ProvSource,
+               evidence: FieldProv["evidence"] = [], reason = "") => {
+    const v = f[field];
+    const src: ProvSource = empty(field, v) ? "ABSENT" : source;
+    out[field] = {
+      field, value: v ?? null, source: src, evidence,
+      authorized: AUTHORIZED_SOURCES.includes(src) && !empty(field, v),
+      reason: reason || SRC_KO[src],
+    };
+  };
+
+  // ticker
+  const tk = f.ticker;
+  const tkHit = tickerInUtterance(tk, u);
+  if (tk == null || tk === "") rec("ticker", "ABSENT", [], "종목이 정해지지 않음");
+  else if (flagVal(flags, "ticker_from_position")) rec("ticker", "TRUSTED_CONTEXT", [], "보유 종목이 하나뿐이라 계좌에서 확인");
+  else if (tkHit) rec("ticker", "USER_EXPLICIT", [{ text: tkHit[0], start: tkHit[1], end: tkHit[2] }]);
+  else if (fromHist("ticker")) rec("ticker", "TRUSTED_CONTEXT", [], "참조한 직전 주문의 종목을 승계");
+  else if (histLit("ticker")) rec("ticker", "TRUSTED_CONTEXT", [], `직전 대화에서 확인: '${histLit("ticker")}'`);
+  else rec("ticker", "MODEL_INFERRED", [], "발화에서 이 종목명을 찾지 못함");
+
+  // side
+  const sc = (a.side_cues || []).filter((c) => c.kind === f.side);
+  const evTxt = opts.parsed ? (opts.parsed.side_evidence as string | undefined) : undefined;
+  if (f.side == null) rec("side", "ABSENT", [], "매수/매도가 정해지지 않음");
+  else if (sc.length) rec("side", "USER_EXPLICIT", sc.map((c) => ({ text: c.text, start: c.start, end: c.end })));
+  else if (fromHist("side")) rec("side", "TRUSTED_CONTEXT", [], "참조한 직전 주문의 방향을 승계");
+  else if (flagVal(flags, "side_from_evidence") && evTxt && u.includes(evTxt)) {
+    const i = u.indexOf(evTxt);
+    rec("side", "USER_EXPLICIT", [{ text: evTxt, start: i, end: i + evTxt.length }], `발화의 '${evTxt}' 를 방향 근거로 확인`);
+  } else if (flagVal(flags, "flip_ref") || flagVal(flags, "ref_side"))
+    rec("side", "USER_DERIVED", [], "'반대로/그거' 참조로 직전 주문에서 유도");
+  else rec("side", "MODEL_INFERRED", [], "발화에 매수·매도 표현이 없음");
+
+  // condition
+  const cc = (a.cond_cues || []).filter((c) => c.kind === f.condition);
+  if (f.condition == null || f.condition === "NONE") rec("condition", "ABSENT", [], "가격 조건 없음(지금 주문)");
+  else if (cc.length) rec("condition", "USER_EXPLICIT", cc.map((c) => ({ text: c.text, start: c.start, end: c.end })));
+  else if (flagVal(flags, "pct_trigger")) rec("condition", "USER_DERIVED", [], "발화의 퍼센트 손익을 기준가로 환산");
+  else if (flagVal(flags, "cond_from_history") || flagVal(flags, "cond_flip_ref") || fromHist("condition"))
+    rec("condition", "USER_DERIVED", [], "참조한 직전 주문의 조건에서 유도");
+  else rec("condition", "MODEL_INFERRED", [], "발화에 '이하/이상' 같은 조건 표현이 없음");
+
+  // quantity
+  const qm = QTY_IN_TEXT.exec(u);
+  if (f.quantity == null) rec("quantity", "ABSENT", [], "수량이 정해지지 않음");
+  else if (qm) rec("quantity", "USER_EXPLICIT", [{ text: qm[0], start: qm.index, end: qm.index + qm[0].length }]);
+  else if (a.allqty && a.allqty.length) {
+    const c = a.allqty[0];
+    rec("quantity", "USER_DERIVED", [{ text: c.text, start: c.start, end: c.end }], `'${c.text}' 표현을 보유 수량으로 환산`);
+  } else if (flagVal(flags, "qty_from_position")) rec("quantity", "TRUSTED_CONTEXT", [], "계좌 보유 수량에서 확인");
+  else if (fromHist("quantity")) rec("quantity", "TRUSTED_CONTEXT", [], "참조한 직전 주문의 수량을 승계");
+  else if (histLit("quantity")) rec("quantity", "TRUSTED_CONTEXT", [], `직전 대화에서 확인: '${histLit("quantity")}'`);
+  else rec("quantity", "MODEL_INFERRED", [], "발화에서 수량 표현을 찾지 못함");
+
+  // price / amount
+  PRICE_TOKEN.lastIndex = 0;
+  const pm = PRICE_TOKEN.exec(u);
+  const pev = pm ? [{ text: pm[0].trim(), start: pm.index, end: pm.index + pm[0].length }] : [];
+  if (f.price == null) rec("price", "ABSENT", [], "지정가 없음");
+  else if (pm) rec("price", "USER_EXPLICIT", pev);
+  else if (flagVal(flags, "pct_trigger")) rec("price", "USER_DERIVED", [], "퍼센트 손익을 기준가로 환산한 값");
+  else if (fromHist("price")) rec("price", "TRUSTED_CONTEXT", [], "참조한 직전 주문의 가격을 승계");
+  else if (histLit("price")) rec("price", "TRUSTED_CONTEXT", [], `직전 대화에서 확인: '${histLit("price")}'`);
+  else rec("price", "MODEL_INFERRED", [], "발화에서 가격 표현을 찾지 못함");
+
+  if (f.amount == null) rec("amount", "ABSENT", [], "금액 지정 없음");
+  else if (pm) rec("amount", "USER_EXPLICIT", pev);
+  else if (histLit("amount")) rec("amount", "TRUSTED_CONTEXT", [], `직전 대화에서 확인: '${histLit("amount")}'`);
+  else rec("amount", "MODEL_INFERRED", [], "발화에서 금액 표현을 찾지 못함");
+
+  const ot = f.order_type;
+  const explicit = (u.includes("시장가") && ot === "MARKET") || (u.includes("지정가") && ot === "LIMIT");
+  out.order_type = {
+    field: "order_type", value: ot ?? null,
+    source: ot == null ? "ABSENT" : explicit ? "USER_EXPLICIT" : "MODEL_INFERRED",
+    evidence: [], authorized: true,                    // 체결 방식이라 위험도가 낮아 권한 판단 대상 아님
+    reason: ot == null ? "주문 유형 없음" : explicit ? "발화에 명시" : "가격 유무로 추정(위험도 낮음)",
+  };
+  return out;
+}
+
+/** critical field 중 값이 있는데 실행 권한이 없는 것들. */
+export function unsupportedCriticalFields(prov: Record<string, FieldProv>): string[] {
+  return CRITICAL_FIELDS.filter((k) => {
+    const r = prov[k];
+    if (!r) return false;
+    const v = r.value;
+    if (v == null || v === "" || (k === "condition" && v === "NONE")) return false;
+    return !r.authorized;
+  });
+}

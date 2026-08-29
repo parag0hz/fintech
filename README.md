@@ -1,12 +1,14 @@
-# text-to-order 안전 하네스
+# text-to-order 안전 하네스 — 금융 의도 무결성 게이트웨이
 
 [![CI](https://github.com/parag0hz/fintech/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/parag0hz/fintech/actions/workflows/ci.yml)
-<sub>하네스 회귀 58건 · 규칙 export 일치 · Python↔TS 패리티 512건 · 빌드 — GitHub 가 매 커밋 검증합니다.</sub>
+<sub>하네스 회귀 73건 · 규칙 export 일치 · Python↔TS 패리티 512건 · 빌드 — GitHub 가 매 커밋 검증합니다.</sub>
 
 **2026 금융 AI Challenge** 출품작 (주최 금융보안원 · 운영 데이콘)
 
 한국어 자연어를 증권 주문으로 바꾸는 **로컬 LLM 파서** 위에, 되돌릴 수 없는
 **매수↔매도 · 이하↔이상 뒤집힘**을 막는 **결정적 검증 레이어("하네스")** 를 얹었다.
+그 위에 한 겹 더 — 주문서의 **각 필드가 사용자 발화에 실제 근거를 두는지**를 필드 단위로 판정하고,
+근거 없는 값에는 실행 권한을 주지 않는 **프로버넌스 레이어**를 얹었다.
 
 > AI가 공격당해서가 아니다. 평범한 말에도 되돌릴 수 없는 주문 오류가 나고,
 > 어떤 모델도 완벽하지 않다 → 모델과 무관한 결정적 검증 레이어가 필수다.
@@ -57,6 +59,83 @@
 
 ---
 
+## 한 겹 더 — 필드별 실행 근거 (프로버넌스)
+
+하네스는 "방향이 뒤집혔는가"를 본다. 그런데 실측에서 더 조용한 실패가 나왔다.
+
+```
+사용자: "현대차 24만원에 20주 팔아줘"
+모델  : ticker=005930 (삼성전자) · side=SELL · price=240000 · quantity=20
+하네스: 방향 일치 · 조건 없음 · 8필드 모두 채워짐 → 확정
+```
+
+방향은 맞고 스키마도 완전하다. 그런데 **종목이 다르다.**
+기존 완결성 검사는 *"칸이 비었는가"* 를 볼 뿐 *"이 값이 어디서 왔는가"* 를 묻지 않았다.
+
+그래서 주문서의 6개 임계 필드(`ticker/side/quantity/amount/price/condition`)마다
+값의 출처를 판정한다.
+
+| 출처 | 뜻 | 실행 권한 |
+|---|---|---|
+| `USER_EXPLICIT` | 사용자가 직접 말했다 ("10주", "카카오") | 있음 |
+| `USER_DERIVED` | 사용자 표현에서 유도했다 ("손절" → SELL) | 있음 |
+| `TRUSTED_CONTEXT` | 계좌·직전 주문에서 확인했다 | 있음 |
+| `MODEL_INFERRED` | **AI가 만들었고 발화에 근거가 없다** | **없음** |
+
+```
+"카카오 손절해야겠다 10주 시장가로"
+  종목  카카오   USER_EXPLICIT   근거="카카오"   실행권한 O
+  방향  SELL     USER_EXPLICIT   근거="손절"     실행권한 O
+  수량  10       USER_EXPLICIT   근거="10주"     실행권한 O
+  조건  LE       MODEL_INFERRED  근거=—          실행권한 X   ← 사용자는 가격 조건을 말한 적 없다
+```
+
+직전 대화(`history`)는 L1 에서 **신뢰 채널**이므로, *"방금 그거 방향만 반대로"* 처럼
+참조하는 발화에서 이력에 문자 그대로 있는 종목·수량·가격을 승계한 것은 근거 있는 값으로 인정한다
+(`TRUSTED_CONTEXT`). 이력에 없는 **다른 종목**을 채워 넣으면 그대로 잡힌다 —
+회귀 `test_history_literal_does_not_launder_other_ticker`.
+
+**측정 결과(CPU 전용 감사, `smoke/audit_provenance.py`)** — 하네스가 확정한 주문 498건 중
+**81건(16.3%)** 이 근거 없는 임계 필드를 하나 이상 갖고 있었다. 방향은 맞고 스키마도 완전한데
+AI가 채워 넣은 값을 그대로 실행하려던 주문이다. 잔존 사례는 대부분
+①이력이 없는데 "아까 그 종목"을 받아 종목을 지어낸 경우 ②위 현대차/삼성전자 혼동
+③발화에 없는 이하/이상 조건을 붙인 경우다. 웹 데모는 이 표를 주문서 옆에 그대로 보여준다.
+
+> **왜 지금 차단하지 않는가.** 이 판정을 곧바로 보류 규칙으로 바꾸면 보류율이
+> 코퍼스에 따라 최대 수십 %p 오른다. 제출 직전에 결정 로직을 바꾸는 것은 위험하므로
+> **v1 에서는 측정하고 표시만 한다.** 차단 여부는 별도 검증 후 결정한다.
+> 근거 판정 자체도 정규식이므로 완전하지 않다 — 별칭 사전(`TICKER_ALIASES`)에
+> 없는 종목 애칭은 여전히 근거 없음으로 잡힐 수 있다.
+
+## 이미 있는 것과 무엇이 다른가
+
+**"그냥 확인 화면 띄우면 되는 거 아닌가?"** — 가장 아픈 질문이고, 근거가 실제로 있다.
+한국투자증권 공식 `kis-ai-extensions`, 토스증권 `confirmHighValueOrder`, 금투협 주문착오방지
+모범규준, Robinhood Agentic Trading 모두 실행 직전에 개입한다.
+
+**선행 35건을 원문까지 확인해 정리했다** → [`docs/COMPETITIVE_LANDSCAPE.md`](docs/COMPETITIVE_LANDSCAPE.md)
+
+핵심은 **무엇과 무엇을 대조하는가** 다.
+
+| | 대조 기준 | 대표 |
+|---|---|---|
+| 보안 가드레일 | 조직 정책 ↔ 액션 | Zenity, Operant AI |
+| 증권사 가드 | 계좌·한도·규정 ↔ 주문 | 토스 API, 금투협 규준 |
+| 확인 화면 | **사람의 기억** ↔ 주문 | KIS 훅, Robinhood, 은행 AI 이체 |
+| **여기** | **사용자 발화 원문** ↔ 주문 | — |
+
+정책상 '매도'가 허용된 액션이면 매수→매도 뒤집힘은 보안 가드레일 정의상 정상 통과한다.
+토스 주문 API 요청 스키마에는 **사용자 원문을 담는 필드 자체가 없어** 뒤집힘을 판별할 입력이 없다.
+
+**최초라고 주장하지 않는다.** 의미 일치 검증에는 직접 선행 18건이 있다
+(InferAct, Task Shield, GBV-SQL, PV-SQL, ProvenanceGuard, DidYouMean …)
+개념이 겹치는 특허도 3건 확인했다(US8635296B2 · KR20260047202A · CN121810403A) —
+상용화 시 특허 실사가 선행되어야 한다.
+찾지 못한 것은 **한국어 · 증권 주문 · 결정적 규칙 · 필드별 실행 권한 · 재현 가능한 측정**을
+동시에 만족하는 공개 사례다.
+
+---
+
 ## 핵심 결과
 
 온프레미스 4bit AWQ 실측 (RTX 5090 / vLLM), 치명오류 = 확정했는데 방향·조건이 정답과 다름:
@@ -89,6 +168,7 @@ smoke/     Python 3.9+ · 의존성 없음(표준 라이브러리만). 실험·�
   harness.py            하네스 정본 — L1 신뢰분리 / L2 프롬프트 / L3 결정적 검증
   run_harness.py        raw vs 하네스 비교        run_asr.py   공격자×방어자 ASR
   pass_k.py             pass^k 신뢰성(k회 전부 안전한 비율)
+  audit_provenance.py   필드별 실행 근거 감사 — 근거 없는 임계 필드 집계
   test_harness.py       회귀 테스트 — 하네스를 고치면 반드시 실행
   run_local_4bit.sh     온프레미스 4bit 실측 자동화(vLLM)
   attacks_*.jsonl       코퍼스 720건 (전부 자체 생성 — 대회가 데이터를 주지 않는다)
@@ -146,6 +226,7 @@ cd ../web && npm test                    # 3. TS 패리티
 |---|---|
 | [`docs/JUDGE_EVIDENCE.md`](docs/JUDGE_EVIDENCE.md) | **주장 ↔ 증거 대조표** — 모든 숫자가 어느 파일에서 나왔는지, 그리고 아직 증거가 없는 것 |
 | [`docs/JUDGE_QA.md`](docs/JUDGE_QA.md) | **적대적 예상 질문 22문항** — 답이 없는 것은 없다고 적었다 |
+| [`docs/COMPETITIVE_LANDSCAPE.md`](docs/COMPETITIVE_LANDSCAPE.md) | **선행·경쟁 35건 원문 대조** — 무엇이 이미 있고 무엇이 남았는가 |
 | [`smoke/RESULTS.md`](smoke/RESULTS.md) | 실험 1~8 전체 서사와 한계 |
 | [`smoke/tables.md`](smoke/tables.md) | 모든 표의 단일 출처(자동 생성) |
 | [`smoke/REGULATION.md`](smoke/REGULATION.md) | 규제 검토 (1차 출처 대조) |

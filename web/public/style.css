@@ -287,3 +287,13 @@ details.limits li{font-size:.87rem;color:var(--muted,#5a6474);line-height:1.6;ma
 .dc-v.warn{color:#a9660a}
 .notice-priv{margin-top:14px;font-size:.82rem;line-height:1.55;color:var(--muted,#5a6474);
   background:var(--bg2,#f6f7f9);border-left:3px solid #a9660a;border-radius:0 8px 8px 0;padding:9px 12px;max-width:66ch}
+table.prov{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:4px}
+table.prov th{text-align:left;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--muted,#8b93a5);font-weight:600;padding:4px 8px;border-bottom:1px solid var(--line,#e3e7ef)}
+table.prov td{padding:5px 8px;border-bottom:1px solid var(--line,#eef1f6);vertical-align:top}
+table.prov tr:last-child td{border-bottom:0}
+table.prov tr.prov-bad{background:#fbeaea}
+.prov-ev{color:var(--muted,#5a6474)}
+.prov-ok{color:#1f7a52}
+.prov-no{color:#cf2f39;font-weight:600}
+.prov-warn{font-size:.85rem;color:#cf2f39;margin:7px 0 0;line-height:1.5}
