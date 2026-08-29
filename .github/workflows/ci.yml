@@ -1,0 +1,54 @@
+# CPU 전용 회귀 — GPU 나 외부 LLM 호출 없이 도는 것만 돌린다.
+# 목적: "58/58 · 512/512 통과" 를 사람 주장이 아니라 GitHub 가 검증한 상태로 만든다.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  harness:
+    name: 하네스 회귀 · 규칙 export · TS 패리티
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 하네스 회귀 (네트워크·GPU 불필요)
+        working-directory: smoke
+        env:
+          PYTHONUTF8: "1"
+        run: python3 test_harness.py
+
+      - name: 규칙·픽스처 재생성
+        working-directory: smoke
+        env:
+          PYTHONUTF8: "1"
+        run: python3 export_rules.py
+
+      - name: export 결과가 커밋과 동일한지 확인
+        # 규칙을 고치고 export 를 잊으면 웹(TS)이 옛 규칙으로 돌게 된다. 그걸 막는다.
+        run: git diff --exit-code -- smoke/harness_rules.json smoke/parity_fixture.json web/shared/
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: 의존성 설치
+        working-directory: web
+        run: npm ci
+
+      - name: Python↔TS 패리티 + 유닛
+        working-directory: web
+        run: npm test
+
+      - name: 빌드
+        working-directory: web
+        run: npm run build

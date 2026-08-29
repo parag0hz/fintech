@@ -726,6 +726,8 @@ async function renderDemo(sub, ctx) {
       <a class="btn ghost" href="#/hts">직접 주문해보기</a>
     </div>
     <p class="hero-note" id="heroMode"></p>
+    <p class="notice-priv"><b>대회용 데모입니다.</b> 개인정보·계좌번호·인증정보 등 민감정보를 입력하지 마세요.
+      LLM 모드에서는 입력 문장이 외부 모델 API 처리에 사용될 수 있습니다. <b>실제 주문은 발생하지 않습니다</b>(모의 체결).</p>
   </section>
 
   <section class="demo-wrap">
@@ -753,7 +755,9 @@ async function renderDemo(sub, ctx) {
     <h2 class="sec-h">실측 결과</h2>
     <div class="fig-grid" id="figGrid"><div class="loading">불러오는 중…</div></div>
     <div id="figLimits"></div>
-    <p class="fig-note">온프레미스 4bit 로컬 실행 기준. <b>“이 평가셋에서 관측된 치명오류 건수”</b>이며
+    <p class="fig-note"><b>데모 구조:</b> 안전장치 적용 전·후를 한 화면에서 비교하려고 같은 모델을 <b>2회 독립 호출</b>합니다.
+      실제 서비스 경로는 <b>안전 검증 경로 1회</b>만 쓰며, 비교용 1차 호출은 제품 동작에 필요하지 않습니다.<br>
+      온프레미스 4bit 로컬 실행 기준. <b>“이 평가셋에서 관측된 치명오류 건수”</b>이며
       절대 안전을 뜻하지 않습니다. 자세한 조건과 한계는
       <a href="#/results">결과 대시보드</a>를 보세요.</p>
   </section>`;

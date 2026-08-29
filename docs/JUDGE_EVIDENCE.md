@@ -25,7 +25,7 @@
 | 8 | temperature 0 인데 숫자가 흔들리는 문제를 측정했다 | pass³ — 비결정성 1.1%, 단일 실행이 1~2건 과소계상 | `smoke/RESULTS.md` §9 · `smoke/pass_k.py` · `passk_ko_threshold.json` |
 | 9 | 자가생성 코퍼스의 맹점을 외부 분포로 깼다 | BULL·AgentDojo·BFCL 파생 3축. **들어올 때마다 하네스 결함이 나왔다(3연속)** | `smoke/RESULTS.md` §8 · `BULL_KO_BENCHMARK.md` · `generate_agentdojo_ko.py` · `generate_irrelevance_ko.py` |
 | 10 | **2015년 투자일임 유권해석과 유사한 구조**로 설계했다 | 금융위·금감원 「투자일임의 적용 범위」(2015.6.17) **법령해석**(법 조문 아님) 대조. 현재 MVP 는 사용자가 종목·수량·가격·시기를 **직접 지정하는 범위로 제한**했다. **실제 상용화에는 별도 준법·법률 검토가 필요하다.** | `smoke/REGULATION.md` |
-| 11 | 위임 표현을 거부해 투자일임업을 회피한다 | `DELEGATION` 규칙이 "적당히·알아서·나눠서·눈치껏·좋은 가격에"를 잡아 **`delegation→abstain` 으로 보류**(수량이 채워져 있어도). 회귀 테스트로 고정 | `smoke/harness.py` (DELEGATION) · `smoke/test_harness.py::test_delegation_refused` · `web/src/harness.ts` |
+| 11 | 판단 위임 표현은 확정하지 않아 **직접지정 범위를 유지**한다 (법적 결론이 아니라 보수적 설계) | `DELEGATION` 규칙이 "적당히·알아서·나눠서·눈치껏·좋은 가격에"를 잡아 **`delegation→abstain` 으로 보류**(수량이 채워져 있어도). 회귀 테스트로 고정 | `smoke/harness.py` (DELEGATION) · `smoke/test_harness.py::test_delegation_refused` · `web/src/harness.ts` |
 | 12 | 하네스 자체 결함을 찾아 고치는 루프가 있다 | 결함 5건 + 우회로 4건 수정, 회귀 46 → 58건 | `smoke/test_harness.py` (`test_bug*`) · `git log` |
 
 ---

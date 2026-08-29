@@ -285,3 +285,5 @@ details.limits summary{cursor:pointer;padding:10px 14px;font-size:.88rem;color:v
 details.limits ul{margin:0;padding:0 18px 14px 32px}
 details.limits li{font-size:.87rem;color:var(--muted,#5a6474);line-height:1.6;margin:5px 0}
 .dc-v.warn{color:#a9660a}
+.notice-priv{margin-top:14px;font-size:.82rem;line-height:1.55;color:var(--muted,#5a6474);
+  background:var(--bg2,#f6f7f9);border-left:3px solid #a9660a;border-radius:0 8px 8px 0;padding:9px 12px;max-width:66ch}
