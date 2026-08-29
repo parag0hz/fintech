@@ -102,6 +102,17 @@ def main():
                 print("    %-10s n=%-3d 일치 %5.1f%%  κ=%s (%s)" % (
                     f, len(pairs), 100 * raw,
                     ("%.3f" % k) if k is not None else "-", band(k)))
+            # 3개 필드를 한꺼번에 맞혔는가 — 필드별 κ 가 높아도 joint 는 훨씬 낮을 수 있다.
+            # 실제 주문은 세 필드가 동시에 맞아야 하므로 이쪽이 제품 관점의 일치도다.
+            joint = [(tuple(norm(anns[a][k].get(f)) for f in FIELDS),
+                      tuple(norm(anns[b][k].get(f)) for f in FIELDS))
+                     for k in anns[a] if k in anns[b]
+                     and all(norm(anns[a][k].get(f)) for f in FIELDS)
+                     and all(norm(anns[b][k].get(f)) for f in FIELDS)]
+            if joint:
+                jr = sum(1 for x, y in joint if x == y) / len(joint)
+                print("    %-10s n=%-3d 일치 %5.1f%%  (side·condition·abstain 3개 동시)"
+                      % ("JOINT", len(joint), 100 * jr))
 
     # 2) 사람 ↔ gold
     if gold:
@@ -123,6 +134,14 @@ def main():
                 print("    %-10s n=%-3d 일치 %5.1f%%  κ=%s (%s)" % (
                     f, len(pairs), 100 * raw,
                     ("%.3f" % kp) if kp is not None else "-", band(kp)))
+            jt = [(tuple(norm(anns[a][k_].get(f)) for f in FIELDS),
+                   tuple(norm(gold[k_]["gold"].get(f)) for f in FIELDS))
+                  for k_ in anns[a] if k_ in gold
+                  and all(norm(anns[a][k_].get(f)) for f in FIELDS)]
+            if jt:
+                jr = sum(1 for x, y in jt if x == y) / len(jt)
+                print("    %-10s n=%-3d 일치 %5.1f%%  (3개 동시 — 주문이 성립하려면 이게 맞아야 한다)"
+                      % ("JOINT", len(jt), 100 * jr))
 
         # 3) 재판정 대상
         print("\n" + "=" * 70)
