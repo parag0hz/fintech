@@ -18,7 +18,7 @@ interface Rules {
   allqty: PatList; ref: PatList; flip: PatList; cond_flip: PatList; correction: PatList;
   neg_after: string; neg_before: string; cond_clause: string;
   flip_both: string; flip_cond_only: string; marker: string; fence: string;
-  quoted_spans: string; hesitation: string;
+  quoted_spans: string; hesitation: string; delegation: string;
   spoof_in_utterance: string; history_system_prefix: string; history_cancel: string; immediacy: string;
   pct_pattern: string; pct_loss_words: string; pct_gain_words: string; pct_ref_entry_words: string;
   price_token: string; pct_ref_mark: string; evidence_neutral: string;
@@ -64,6 +64,7 @@ const FLIP_BOTH = pyRegex(RULES.flip_both);
 const FLIP_COND_ONLY = pyRegex(RULES.flip_cond_only);
 const QUOTED = pyRegex(RULES.quoted_spans, "g");
 const HESIT = pyRegex(RULES.hesitation);
+const DELEGATION = pyRegex(RULES.delegation);
 const SPOOF = pyRegex(RULES.spoof_in_utterance);
 const IMMED = pyRegex(RULES.immediacy);
 const HIST_SYS = pyRegex("^(?:" + RULES.history_system_prefix + ")");   // re.match = 문자열 시작
@@ -136,7 +137,7 @@ export interface Analysis {
   cond: Cond | null; cond_both: boolean; cond_cues: Cue[]; cond_all: Cue[];
   allqty: Cue[]; ref: Cue[]; flip: Cue[]; cond_flip: Cue[];
   cond_clause: boolean; flip_both: boolean; flip_cond_only: boolean;
-  hesitation: boolean; quoted_spans: [number, number][]; spoof: boolean; immediate: boolean;
+  hesitation: boolean; delegation: boolean; quoted_spans: [number, number][]; spoof: boolean; immediate: boolean;
   pct: PctCue[]; pct_ref_price: number | null; pct_ref_entry: boolean;
   history?: HistoryOrder | null; flip_side?: boolean; flip_cond?: boolean;
 }
@@ -224,7 +225,7 @@ export function analyzeUtterance(text: string | null | undefined, excludeQuoted 
     ref: find(t, REF, "REF"), flip: find(t, FLIP, "FLIP"),
     cond_flip: find(t, CFLIP, "CFLIP"), cond_clause: CCLAUSE.test(t),
     flip_both: FLIP_BOTH.test(t), flip_cond_only: FLIP_COND_ONLY.test(t),
-    hesitation: HESIT.test(t), quoted_spans: quotedSpans(t),
+    hesitation: HESIT.test(t), delegation: DELEGATION.test(t), quoted_spans: quotedSpans(t),
     spoof: SPOOF.test(t), immediate: IMMED.test(t),
     pct: pc.pct, pct_ref_price: pc.refPrice, pct_ref_entry: pc.refEntry,
   };
@@ -555,6 +556,8 @@ export function deterministicCheck(utterance: string, history: HistoryInput, par
   }
 
   // ── 완전성·의사 게이트 ──
+  // 수량·가격·시기의 판단을 위임한 발화 → 확정 불가(투자일임 영역). 수량이 있어도 보류한다.
+  if (a.delegation && !truthy(p.abstain)) { flags.push("delegation→abstain"); p.abstain = true; }
   if (a.hesitation && !truthy(p.abstain)) { flags.push("hesitation→abstain"); p.abstain = true; }
   // 발화에 신뢰 마커/구분자/시스템 지시 형식 → 위조 시도(사용자는 이렇게 말하지 않는다) → 보류
   if (a.spoof) { flags.push("spoof_in_utterance→abstain"); p.abstain = true; }

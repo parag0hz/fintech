@@ -2124,6 +2124,7 @@
 },
 "flags": [
 "side_override→BUY",
+"delegation→abstain",
 "no_qty→abstain"
 ]
 },
@@ -4220,6 +4221,7 @@
 },
 "flags": [
 "side_override→SELL",
+"delegation→abstain",
 "no_qty→abstain"
 ]
 },
@@ -5270,6 +5272,7 @@
 },
 "flags": [
 "side_override→BUY",
+"delegation→abstain",
 "no_qty→abstain"
 ]
 },
@@ -9292,10 +9295,11 @@
 "amount": null,
 "price": null,
 "condition": "NONE",
-"abstain": false
+"abstain": true
 },
 "flags": [
-"side_override→SELL"
+"side_override→SELL",
+"delegation→abstain"
 ]
 },
 {

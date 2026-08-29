@@ -259,6 +259,34 @@ class DeterministicTests(unittest.TestCase):
         self.assertFalse(f["condition"] == "NONE" and not f["abstain"],
                          "조건이 소거된 채 확정됨(즉시 체결 위험): flags=%s" % flags)
 
+    def test_delegation_refused(self):
+        """투자일임 회피 — 수량·가격·시기를 시스템에 위임하는 발화는 확정하지 않는다.
+
+        금융위 「투자일임의 적용 범위」(2015.6.17) 법령해석은 '고객이 직접 매매종목·수량·가격·
+        시기를 지정'하는 경우에만 투자일임업이 아니라고 회신했다. '적당히 사줘'처럼 판단을
+        넘기면 그 전제가 깨지므로, 안전 문제이자 규제 준수 문제로 보류시킨다."""
+        base = {"ticker": "현대차", "side": "BUY", "order_type": "MARKET", "quantity": 100,
+                "amount": None, "price": None, "condition": "NONE", "abstain": False}
+        for nl in ("현대차 적당히 사줘",
+                   "기아 알아서 좋은 가격에 매수해줘",
+                   "셀트리온 나눠서 사줘",
+                   "삼성전자 100주 적당히 사줘",          # 수량이 있어도 판단을 위임하면 보류
+                   "카카오 적절히 분할해서 담아줘",
+                   "NAVER 눈치껏 사둬"):
+            f, flags, _ = deterministic_check(nl, [], dict(base))
+            self.assertTrue(f["abstain"], "위임 표현을 확정함: %s (flags=%s)" % (nl, flags))
+            self.assertIn("delegation→abstain", flags, nl)
+
+    def test_delegation_no_false_positive(self):
+        """정상 주문은 위임 규칙에 걸리지 않아야 한다."""
+        base = {"ticker": "삼성전자", "side": "BUY", "order_type": "LIMIT", "quantity": 10,
+                "amount": None, "price": 70000, "condition": "LE", "abstain": False}
+        for nl in ("삼성전자 7만원 이하로 내려오면 10주 매수해줘",
+                   "삼성전자 10주 시장가로 사줘",
+                   "삼성전자 10주 지금 사줘"):
+            f, flags, _ = deterministic_check(nl, [], dict(base))
+            self.assertNotIn("delegation→abstain", flags, "정상 주문이 위임으로 오탐: %s" % nl)
+
     def test_bug2b_flip_does_not_erase_new_condition(self):
         """적응형 라운드 v2.4: any_flip 이면 cond_clause 가드가 비활성화돼
         '그거 반대로, 12만원 되면'에서 조건이 소거된 채 확정됐다(즉시 체결 위험)."""

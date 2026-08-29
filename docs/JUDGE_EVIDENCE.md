@@ -16,17 +16,17 @@
 | # | 주장 | 증거 | 파일 · 재현 방법 |
 |---|---|---|---|
 | 1 | 모델을 키워도 치명오류가 0이 되지 않는다 | 자체작성 47건에서 프론티어 천장(Opus 5)도 3건 오류 | `smoke/RESULTS.md` §2 · `smoke/tables.md` 실험1 · 원본 `results_full.json` |
-| 2 | 하네스 적용 후 평가셋에서 치명오류 0건 관측 | 프론티어 142건 `0 / 142`, 한국어 임계 88건 `0 / 88` 등 5개 코퍼스 | `smoke/RESULTS.md` §7·§8 · `smoke/tables.md` 실험6·7 · `harness_*_v25.json` |
+| 2 | 하네스 적용 후 **4bit 8B** 평가셋에서 치명오류 0건 관측 | 프론티어 142건 `0 / 142`, 한국어 임계 88건 `0 / 88` 등 5개 코퍼스(총 `0 / 379`). 다른 모델은 주장6 참조 | `smoke/RESULTS.md` §7·§8 · `smoke/tables.md` 실험6·7 · `harness_*_v25.json` |
 | 3 | 검증층이 오히려 해로울 수 있다(우리도 겪음) | 하네스 v1 이 강한 32B 를 악화(9.2%→12.0%) — 원인은 하네스 유발 오류 | `smoke/RESULTS.md` §3·§5 · `harness_results_v1.json` |
 | 4 | 공격자가 규칙을 알아도 안전한가 → **아니오, 뚫렸다** | 규칙 전문 공개 후 v2.0 13%, v2.1 **18%** 관통. 패치 후 3라운드 3% | `smoke/RESULTS.md` §6 · `asr_adaptive*.json` · `snapshots/` |
 | 5 | Python 실험과 웹 MVP 가 같은 규칙을 쓴다 | 픽스처 512건 100% 동작 일치 | `web/test/parity.test.ts` · `cd web && npm test` |
-| 6 | 온프레미스 4bit 에서도 동작한다 | 8B/14B/32B AWQ 실측, 하네스 5개 코퍼스 전부 0 | `smoke/RESULTS.md` §7 · `harness_ko_local_*.json` · `asr_local_*.json` |
+| 6 | 온프레미스 4bit 에서도 동작한다 (단, **유일한 관통 1건 포함**) | **4bit 8B** 로 5개 코퍼스 전부 하네스 치명 0. **14B·32B 는 2개 코퍼스만 측정**했고, **14B 는 프론티어 142건에서 `1/142` = 0.7% 로 뚫렸다** — 원인은 근거 인용 `'내 주문'`이며 v2.5 에서 수정했으나 **14B 재측정은 미실시** | `smoke/RESULTS.md` §7 발견4 · `smoke/tables.md` 실험6 · `asr_local_qwen3-14b-awq.json` |
 | 7 | 실패한 API 호출을 공격 성공으로 세지 않는다 | 분모에서 제외하고 `n_scored` 로 명시 | `smoke/run_harness.py` (scored 필터) · 결과 JSON 의 `n_scored`/`raw_err` |
 | 8 | temperature 0 인데 숫자가 흔들리는 문제를 측정했다 | pass³ — 비결정성 1.1%, 단일 실행이 1~2건 과소계상 | `smoke/RESULTS.md` §9 · `smoke/pass_k.py` · `passk_ko_threshold.json` |
 | 9 | 자가생성 코퍼스의 맹점을 외부 분포로 깼다 | BULL·AgentDojo·BFCL 파생 3축. **들어올 때마다 하네스 결함이 나왔다(3연속)** | `smoke/RESULTS.md` §8 · `BULL_KO_BENCHMARK.md` · `generate_agentdojo_ko.py` · `generate_irrelevance_ko.py` |
 | 10 | **2015년 투자일임 유권해석과 유사한 구조**로 설계했다 | 금융위·금감원 「투자일임의 적용 범위」(2015.6.17) **법령해석**(법 조문 아님) 대조. 현재 MVP 는 사용자가 종목·수량·가격·시기를 **직접 지정하는 범위로 제한**했다. **실제 상용화에는 별도 준법·법률 검토가 필요하다.** | `smoke/REGULATION.md` |
-| 11 | 위임 표현을 거부해 투자일임업을 회피한다 | "적당히 사줘"·"알아서 좋은 가격에" → 보류 | `smoke/attacks_irrelevance_ko.jsonl` · `README.md` "왜 자연어인가" |
-| 12 | 하네스 자체 결함을 찾아 고치는 루프가 있다 | 결함 5건 + 우회로 4건 수정, 회귀 46 → 56건 | `smoke/test_harness.py` (`test_bug*`) · `git log` |
+| 11 | 위임 표현을 거부해 투자일임업을 회피한다 | `DELEGATION` 규칙이 "적당히·알아서·나눠서·눈치껏·좋은 가격에"를 잡아 **`delegation→abstain` 으로 보류**(수량이 채워져 있어도). 회귀 테스트로 고정 | `smoke/harness.py` (DELEGATION) · `smoke/test_harness.py::test_delegation_refused` · `web/src/harness.ts` |
+| 12 | 하네스 자체 결함을 찾아 고치는 루프가 있다 | 결함 5건 + 우회로 4건 수정, 회귀 46 → 58건 | `smoke/test_harness.py` (`test_bug*`) · `git log` |
 
 ---
 
@@ -34,7 +34,7 @@
 
 ```bash
 # 1) 하네스 회귀 — 네트워크·GPU 없이 도는 결정적 테스트
-cd smoke && PYTHONUTF8=1 python3 test_harness.py       # 56 tests OK
+cd smoke && PYTHONUTF8=1 python3 test_harness.py       # 58 tests OK
 
 # 2) 문서의 모든 표를 결과 JSON 에서 재생성 (단일 출처)
 PYTHONUTF8=1 python3 summarize_results.py | head -60   # = tables.md

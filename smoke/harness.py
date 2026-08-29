@@ -130,6 +130,13 @@ _NEG_BEFORE = re.compile(r"(?:안|않|못)\s*$")
 QUOTED_SPANS = r"\([^)]*\)|\[[^\]]*\]|「[^」]*」|『[^』]*』|《[^》]*》|<[^>]*>|\"[^\"]*\"|“[^”]*”|‘[^’]*’|'[^']*'"
 # 망설임: 주문 의사가 확정되지 않은 발화 → 보류
 HESITATION = r"(?:할|살|팔)까\s*말까|할지\s*말지|망설|고민\s*중|고민중|어떨까|해야\s*하나|해야\s*할까"
+# 투자일임 회피 — 수량·가격·시기의 판단을 시스템에 넘기는 표현.
+# 금융위 「투자일임의 적용 범위」(2015.6.17) 법령해석은 고객이 종목·수량·가격·시기를 직접
+# 지정하는 경우에만 투자일임업이 아니라고 회신했다. 위임하면 그 전제가 깨지므로 안전 문제이자
+# 규제 준수 문제로 확정하지 않는다(수량이 채워져 있어도 마찬가지).
+DELEGATION = (r"적당(?:히|한)|적절(?:히|한)|알아서|눈치껏|알잘딱|"
+              r"나눠서|나누어서|분할(?:해서|로)|조금씩|쪼개서|"
+              r"좋은\s*(?:가격|타이밍|때)|괜찮은\s*(?:가격|때)")
 # 즉시성: "그냥/지금/바로 다 내놔" — 참조 주문의 조건을 승계하지 않는다(지금 낼 주문)
 IMMEDIACY = r"지금|당장|바로|즉시|그냥|시장가|현재가|호가\s*그대로"
 
@@ -153,6 +160,7 @@ _CFLIP = _C(COND_FLIP_PATTERNS)
 _CCLAUSE = re.compile(COND_CLAUSE)
 _QUOTED = re.compile(QUOTED_SPANS)
 _HESIT = re.compile(HESITATION)
+_DELEGATION = re.compile(DELEGATION)
 _SPOOF = re.compile(SPOOF_IN_UTTERANCE)
 _IMMED = re.compile(IMMEDIACY)
 _PCT = re.compile(PCT_PATTERN)
@@ -288,6 +296,7 @@ def analyze_utterance(text, exclude_quoted=True):
         "cond_flip": _find(text, _CFLIP, "CFLIP"), "cond_clause": bool(_CCLAUSE.search(text)),
         "flip_both": bool(_FLIP_BOTH.search(text)), "flip_cond_only": bool(_FLIP_COND_ONLY.search(text)),
         "hesitation": bool(_HESIT.search(text)), "quoted_spans": _quoted_spans(text),
+        "delegation": bool(_DELEGATION.search(text)),
         "spoof": bool(_SPOOF.search(text)), "immediate": bool(_IMMED.search(text)),
         "pct": pct, "pct_ref_price": pct_ref, "pct_ref_entry": pct_ref_entry,
     }
@@ -653,6 +662,9 @@ def deterministic_check(utterance, history, parsed, flip_policy="commit", positi
             flags.append("cond_unverified→confirm"); p["abstain"] = True
 
     # ── 완전성·의사 게이트 ──
+    if a.get("delegation") and not p.get("abstain"):
+        # 판단을 위임한 발화 → 확정 불가(투자일임 영역). 수량이 있어도 보류한다.
+        flags.append("delegation→abstain"); p["abstain"] = True
     if a["hesitation"] and not p.get("abstain"):
         flags.append("hesitation→abstain"); p["abstain"] = True
     if a["spoof"]:

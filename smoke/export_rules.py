@@ -19,7 +19,7 @@ RULES = {
     "cond_flip": H.COND_FLIP_PATTERNS, "correction": H.CORRECTION_PATTERNS,
     "neg_after": H._NEG_AFTER.pattern, "neg_before": H._NEG_BEFORE.pattern,
     "cond_clause": H.COND_CLAUSE, "flip_both": H._FLIP_BOTH.pattern, "flip_cond_only": H._FLIP_COND_ONLY.pattern,
-    "quoted_spans": H.QUOTED_SPANS, "hesitation": H.HESITATION, "spoof_in_utterance": H.SPOOF_IN_UTTERANCE,
+    "quoted_spans": H.QUOTED_SPANS, "hesitation": H.HESITATION, "delegation": H.DELEGATION, "spoof_in_utterance": H.SPOOF_IN_UTTERANCE,
     "immediacy": H.IMMEDIACY,
     "pct_pattern": H.PCT_PATTERN, "pct_loss_words": H.PCT_LOSS_WORDS, "pct_gain_words": H.PCT_GAIN_WORDS,
     "pct_ref_entry_words": H.PCT_REF_ENTRY_WORDS, "price_token": H.PRICE_TOKEN, "pct_ref_mark": H.PCT_REF_MARK,
