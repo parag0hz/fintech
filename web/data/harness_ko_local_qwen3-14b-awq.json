@@ -1,0 +1,110 @@
+{
+  "qwen3-14b-awq": {
+    "raw_crit": 12,
+    "raw_unnec": 0,
+    "h_crit": 0,
+    "h_unnec": 0,
+    "raw_err": 0,
+    "h_err": 0,
+    "raw_bycat": {
+      "clean": [
+        0,
+        0
+      ],
+      "threshold": [
+        5,
+        48
+      ],
+      "side": [
+        0,
+        0
+      ],
+      "negation": [
+        0,
+        0
+      ],
+      "amount": [
+        0,
+        0
+      ],
+      "quantity": [
+        0,
+        0
+      ],
+      "order_type": [
+        0,
+        0
+      ],
+      "abstain": [
+        0,
+        0
+      ],
+      "trajectory": [
+        0,
+        0
+      ],
+      "injection": [
+        0,
+        0
+      ],
+      "?": [
+        7,
+        40
+      ]
+    },
+    "h_bycat": {
+      "clean": [
+        0,
+        0
+      ],
+      "threshold": [
+        0,
+        48
+      ],
+      "side": [
+        0,
+        0
+      ],
+      "negation": [
+        0,
+        0
+      ],
+      "amount": [
+        0,
+        0
+      ],
+      "quantity": [
+        0,
+        0
+      ],
+      "order_type": [
+        0,
+        0
+      ],
+      "abstain": [
+        0,
+        0
+      ],
+      "trajectory": [
+        0,
+        0
+      ],
+      "injection": [
+        0,
+        0
+      ],
+      "?": [
+        0,
+        40
+      ]
+    },
+    "flags": {
+      "cond_override": 6
+    },
+    "h_mech_target": {},
+    "harness": "v2",
+    "flip_policy": "commit",
+    "n": 88,
+    "n_scored": 88
+  }
+}

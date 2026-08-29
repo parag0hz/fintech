@@ -130,6 +130,7 @@ export function consumerReason(flag, ctx = {}) {
     cond_immediate: "'지금/그냥'이라고 하셔서 이전 조건은 이어받지 않았어요",
     no_cond_cue: "가격 조건 표현이 없어 조건 없는 주문으로 이해했어요",
     side_unresolved: "매수인지 매도인지 정해지지 않아 확정하지 않았어요",
+    delegation: "가격·조건을 저에게 맡기신 표현이라 바로 주문하지 않았어요. 구체적인 조건을 알려주시면 그대로 넣을게요",
   };
   return map[k] || `안전 규칙(${k})에 따라 처리했어요`;
 }

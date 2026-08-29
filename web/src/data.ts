@@ -293,6 +293,53 @@ function fullTagMap(stem: string): Map<string, Tag> {
   return m;
 }
 
+/** 심사위원 첫 화면의 헤드라인 수치 — 결과 JSON 에서 직접 읽는다.
+ *  숫자를 프론트엔드에 하드코딩하면 RESULTS.md/tables.md 와 다시 어긋나므로(과거에 실제로 발생)
+ *  단일 출처를 유지한다. 정본: smoke/asr_local_*.json · smoke/harness_ko_local_*.json
+ *  (같은 파일에서 smoke/summarize_results.py 가 tables.md 를 만든다). */
+export function headlineNumbers() {
+  const asrLocal = (served: string) => {
+    const d = loadJson<{ cells?: Record<string, [number, number, number]> }>(`asr_local_${served}.json`);
+    const cells = d?.cells;
+    if (!cells) return null;
+    let rawC = 0, rawN = 0, harC = 0, harN = 0;
+    for (const [k, v] of Object.entries(cells)) {
+      if (!Array.isArray(v) || v.length < 2) continue;
+      if (k.includes("raw")) { rawC += v[0]; rawN += v[1]; }
+      else if (k.includes("harness")) { harC += v[0]; harN += v[1]; }
+    }
+    return rawN ? { raw: { crit: rawC, n: rawN }, harness: { crit: harC, n: harN } } : null;
+  };
+  const koLocal = (served: string) => {
+    const d = loadJson<Record<string, unknown>>(`harness_ko_local_${served}.json`);
+    if (!d) return null;
+    const rep = (d.report ?? d) as Record<string, { raw_crit: number; h_crit: number; n: number; n_scored?: number }>;
+    for (const v of Object.values(rep)) {
+      if (v && typeof v === "object" && "raw_crit" in v) {
+        const n = v.n_scored ?? v.n;
+        return { raw: { crit: v.raw_crit, n }, harness: { crit: v.h_crit, n } };
+      }
+    }
+    return null;
+  };
+  // Wilson 95% 상한 — 0건일 때 "0%"가 아니라 상한을 함께 보여주기 위한 값
+  const upper95 = (k: number, n: number) => {
+    if (!n) return null;
+    const z = 1.96, p = k / n, d = 1 + (z * z) / n;
+    const c = p + (z * z) / (2 * n), m = z * Math.sqrt((p * (1 - p)) / n + (z * z) / (4 * n * n));
+    return Math.round(((c + m) / d) * 1000) / 10;
+  };
+  return {
+    frontier142: {
+      "8b": asrLocal("qwen3-8b-awq"), "14b": asrLocal("qwen3-14b-awq"), "32b": asrLocal("qwen3-32b-awq"),
+    },
+    koThreshold88: {
+      "8b": koLocal("qwen3-8b-awq"), "14b": koLocal("qwen3-14b-awq"), "32b": koLocal("qwen3-32b-awq"),
+    },
+    upper95,
+  };
+}
+
 export function buildResults() {
   const files = listFiles();
   const sources = resultSources();
@@ -400,5 +447,6 @@ export function buildResults() {
     exp2: { models: exp2, versions: exp2Versions, totals: exp2Totals, cats: ["clean", "threshold", "side", "negation", "amount", "quantity", "order_type", "abstain", "trajectory", "injection"] },
     asr, legacy,
     heat, flags,
+    headline: headlineNumbers(),
   };
 }

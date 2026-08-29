@@ -13,6 +13,8 @@ const PATTERNS = [
   /^attacks\.jsonl$/, /^attacks_frontier9\.jsonl$/, /^attacks_adaptive[^/]*\.jsonl$/,
   /^tags_[^/]+\.jsonl$/, /^results_full\.json$/, /^results_q25\.json$/,
   /^harness_results(_v1)?\.json$/, /^harness_rows(_v1)?\.json$/, /^asr_[^/]+\.json$/,
+  // 온프레미스 4bit 실측 — 심사위원 첫 화면의 헤드라인 수치가 이 파일에서 나온다(하드코딩 금지)
+  /^harness_ko_local_[^/]+\.json$/, /^harness_(adojo|irr|ko|self47|fr9)_v25\.json$/,
 ];
 const want = (f) => PATTERNS.some((r) => r.test(f));
 
