@@ -671,25 +671,46 @@ function verdictLine(raw, fin, flags) {
   const find = (k) => f.find((x) => x.split("→")[0] === k);
   const val = (k) => (find(k) || "").split("→")[1];
 
-  // ① L3 가 발화의 명시 단서로 강제 — 이때만 "말씀하신 표현" 이 사실이다
+  // ① 주문을 멈췄다면 **왜 멈췄는지**가 가장 중요한 정보다.
+  //    override 설명이 먼저 나오면("말씀하신 매수 표현을 따랐습니다") 정작 보류 사유가 가려진다.
+  //    픽스처에 side_override + no_qty→abstain 같은 조합이 38건 있다.
+  if (fin && fin.abstain) {
+    if (find("delegation"))
+      return "가격·조건 판단을 시스템에 맡기신 표현이라 <b>바로 주문하지 않고</b> 조건을 다시 여쭙니다";
+    if (find("cond_unverified") || find("cond_stop_unverified"))
+      return "검증용 해석에 가격 조건이 붙었지만 <b>발화에서 그 근거를 찾지 못해</b> 확정하지 않았습니다";
+    if (find("no_qty")) return "수량을 말씀하지 않으셔서 <b>확정하지 않았습니다</b>";
+    if (find("no_ticker")) return "어떤 종목인지 알 수 없어 <b>확정하지 않았습니다</b>";
+    if (find("no_side_cue") || find("no_side") || find("side_unresolved"))
+      return "매수인지 매도인지 표현이 없어 <b>확정하지 않았습니다</b> (AI가 방향을 지어내지 못하게 막았습니다)";
+    if (find("side_both_cues")) return "매수와 매도 표현이 함께 있어 <b>어느 쪽인지 확인이 필요합니다</b>";
+    if (find("ref_side_conflict")) return "직전 주문과 방향이 달라 보여 <b>확인이 필요합니다</b>";
+    if (find("multi_history_ref")) return "이전 주문이 여러 개라 <b>어느 것을 말씀하시는지 확인이 필요합니다</b>";
+    if (find("hesitation")) return "아직 결정하지 않으신 것 같아 <b>주문을 만들지 않았습니다</b>";
+    if (find("spoof_in_utterance")) return "주문 문장에 시스템 명령 형식이 섞여 있어 <b>확정하지 않았습니다</b>";
+    // 보류 사유 플래그가 없는 경우(= 모델 스스로 보류한 경우). override 설명은
+    // 왜 멈췄는지를 말해주지 않으므로 여기서는 제외한다.
+    for (const fl of f) {
+      if (/_override$/.test(fl.split("→")[0])) continue;
+      const t = consumerReasonSafe(fl, fin); if (t) return esc(t);
+    }
+    return "주문 의사가 분명하지 않아 <b>확정하지 않았습니다</b>";
+  }
+
+  // ② 통과한 경우 — L3 가 발화의 명시 단서로 강제했을 때만 "말씀하신 표현" 이라고 말할 수 있다.
+  //    (final 값은 하네스 쪽 모델에서 온 것일 수 있으므로 raw 와 단순 비교해 단정하면 안 된다)
   if (find("side_override")) {
     const v = val("side_override");
     return raw && raw.side && raw.side !== v
-      ? `AI는 <b>${sideTxt(raw.side)}</b>로 읽었지만, 말씀하신 표현은 <b>${sideTxt(v)}</b>였습니다`
+      ? `1차 해석은 <b>${sideTxt(raw.side)}</b>였지만, 말씀하신 표현은 <b>${sideTxt(v)}</b>였습니다`
       : `말씀하신 <b>${sideTxt(v)}</b> 표현을 그대로 따랐습니다`;
   }
   if (find("cond_override")) {
     const v = val("cond_override");
     return raw && raw.condition !== v
-      ? `AI는 <b>${condTxt(raw.condition)}</b>으로 읽었지만, 말씀하신 표현은 <b>${condTxt(v)}</b>였습니다`
+      ? `1차 해석은 <b>${condTxt(raw.condition)}</b>이었지만, 말씀하신 표현은 <b>${condTxt(v)}</b>였습니다`
       : `말씀하신 <b>${condTxt(v)}</b> 표현을 그대로 따랐습니다`;
   }
-  // ② 근거를 확인하지 못해 멈춘 경우 — 사용자가 말했다고 단정하지 않는다
-  if (find("cond_unverified") || find("cond_stop_unverified"))
-    return "AI 해석에 가격 조건이 붙었지만 <b>발화에서 그 근거를 찾지 못해</b> 확정하지 않았습니다";
-  if (find("delegation"))
-    return "가격·조건 판단을 시스템에 맡기신 표현이라 <b>바로 주문하지 않고</b> 조건을 다시 여쭙니다";
-  // ③ 나머지는 소비자 문장으로 (플래그 문자열은 노출하지 않는다)
   for (const fl of f) { const t = consumerReasonSafe(fl, fin); if (t) return esc(t); }
   return null;
 }
@@ -761,10 +782,17 @@ async function renderDemo(sub, ctx) {
       const act = actionOf(fin, r.degraded);
       const flags = r.harness?.flags || [];
       const verdict = verdictLine(raw, fin, flags);
+      // /api/parse 는 raw 와 하네스 경로에서 **LLM 을 각각 따로 호출**한다.
+      // 둘의 해석이 의미 있게 다를 때만 "재해석" 줄을 보여준다 — 둘 다 "AI 해석"이라 부르면
+      // 한 화면에서 모순처럼 보인다(실제로 그런 사례가 있었다).
+      const hp = r.harness?.parsed;
+      const reparsed = !!(hp && raw && (hp.side !== raw.side || hp.condition !== raw.condition));
       box.innerHTML = `
         <div class="dc-live">현재 실행 · ${esc((r.harness?.model) || r.model || "모델")}</div>
-        <div class="dc-step"><span class="dc-k">AI가 이해한 내용</span>
-          <div class="dc-v ${fin && fin.abstain ? "bad" : ""}">${esc(orderLine(raw))}</div></div>
+        <div class="dc-step"><span class="dc-k">1차 AI 해석</span>
+          <div class="dc-v">${esc(orderLine(raw))}</div></div>
+        ${reparsed ? `<div class="dc-step"><span class="dc-k">안전 검증용 재해석</span>
+          <div class="dc-v warn">${esc(orderLine(hp))}</div></div>` : ""}
         <div class="dc-step"><span class="dc-k">안전장치의 검증</span>
           <div class="dc-v">${verdict || "말씀하신 내용과 일치해 그대로 통과시켰습니다"}</div></div>
         <div class="dc-step"><span class="dc-k">최종 행동</span>

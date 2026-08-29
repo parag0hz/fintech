@@ -284,3 +284,4 @@ details.limits{margin-top:14px;border:1px solid var(--line,#d9dee8);border-radiu
 details.limits summary{cursor:pointer;padding:10px 14px;font-size:.88rem;color:var(--accent,#2f5bd0);font-weight:500}
 details.limits ul{margin:0;padding:0 18px 14px 32px}
 details.limits li{font-size:.87rem;color:var(--muted,#5a6474);line-height:1.6;margin:5px 0}
+.dc-v.warn{color:#a9660a}
